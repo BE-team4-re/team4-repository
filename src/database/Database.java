@@ -10,10 +10,11 @@ public class Database {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(
+
                 "jdbc:mysql://localhost:3306/miniproject4",
                 "root",
                 "root"
-//              , DBPW.MOK.getPw()
+
             );
             System.out.println("데이터베이스 연결 성공");
         }catch (ClassNotFoundException | SQLException e){
