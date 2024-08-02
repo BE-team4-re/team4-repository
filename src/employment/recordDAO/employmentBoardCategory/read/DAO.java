@@ -1,4 +1,4 @@
-package src.employment.recordDAO;
+package src.employment.recordDAO.employmentBoardCategory.read;
 
 
 import java.sql.Statement;
@@ -15,7 +15,7 @@ import src.database.Database;
 import src.employment.board.BoardCategory;
 
 
-public class EmploymentBoardCategoryDAO {
+public class DAO {
 	
 	private Database db = new Database();
 	
@@ -23,12 +23,8 @@ public class EmploymentBoardCategoryDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	public EmploymentBoardCategoryDAO() {
-		conn = db.connect();
-	}
-	
 	// select * from employment_board_category
-	public List<BoardCategory> selectAllEmploymentBoardCategoryFromDB() {
+	public List<BoardCategory> read() {
 		
 		List<BoardCategory> EmploymentBoardCategoryList = new ArrayList<>();
 		String sql = ""+
@@ -36,6 +32,7 @@ public class EmploymentBoardCategoryDAO {
 
 		try {
 			
+			conn = db.connect();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -71,51 +68,6 @@ public class EmploymentBoardCategoryDAO {
 				e.printStackTrace();
 			}
 		}
-		
-		return EmploymentBoardCategoryList;
-		
-	}
-	
-	// insert into employment_board_category ... values ...
-	public void insertEmploymentBoardCategoryToDB(int maincategoryId, int subcategoryId, String categoryName) {
-		
-		// employment_board_id -> 자동 증가 컬럼.
-		String sql = ""+
-		"insert into employment_board_category ("
-		+ "maincategory_id,"
-		+ "subcategory_id,"
-		+ "category_name"
-		+ ") values ("
-		+ "?, ?, ?"
-		+ ");";
-		
-		try {
-					
-			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, maincategoryId);
-			pstmt.setInt(2, subcategoryId);
-			pstmt.setString(3, categoryName);
-			
-			int rows = pstmt.executeUpdate();
-			if (rows == 1) {
-				System.out.println("성공적으로 저장되었습니다.");
-			} else {
-				System.out.println("저장에 실패하였습니다.");
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {					
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		return EmploymentBoardCategoryList;		
 	}
 }
