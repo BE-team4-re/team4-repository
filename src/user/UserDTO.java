@@ -1,7 +1,10 @@
 package src.user;
 
+import src.admin.User;
+
 public class UserDTO {
 
+    // 필드 선언
     private String userId;
     private String userPw;
     private String userName;
@@ -9,8 +12,8 @@ public class UserDTO {
     private String userPhone;
     private String userBirth;
     private String userEmail;
-    private int status;
 
+    // 생성자 생성
     public UserDTO(String userId, String userPw, String userName, String userGender,
         String userPhone, String userBirth, String userEmail) {
         this.userId = userId;
@@ -49,9 +52,4 @@ public class UserDTO {
     public String getUserEmail() {
         return userEmail;
     }
-
-    public int getStatus() {
-        return status;
-    }
-
 }
