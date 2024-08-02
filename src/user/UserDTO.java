@@ -1,6 +1,6 @@
 package src.user;
 
-public class User {
+public class UserDTO {
 
     private String userId;
     private String userPw;
@@ -9,10 +9,10 @@ public class User {
     private String userPhone;
     private String userBirth;
     private String userEmail;
-    private String userStatus;
+    private int status;
 
-    public User(String userId, String userPw, String userName, String userGender,
-                String userPhone, String userBirth, String userEmail) {
+    public UserDTO(String userId, String userPw, String userName, String userGender,
+        String userPhone, String userBirth, String userEmail) {
         this.userId = userId;
         this.userPw = userPw;
         this.userName = userName;
@@ -21,6 +21,7 @@ public class User {
         this.userBirth = userBirth;
         this.userEmail = userEmail;
     }
+
     public String getUserId() {
         return userId;
     }
@@ -49,7 +50,8 @@ public class User {
         return userEmail;
     }
 
-    public String getUserStatus() {
-        return userStatus;
+    public int getStatus() {
+        return status;
     }
+
 }
