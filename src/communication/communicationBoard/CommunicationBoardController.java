@@ -1,11 +1,13 @@
 package src.communication.communicationBoard;
 
 import src.communication.communicationBoard.dto.CreateCommunicationBoardDto;
+import src.communication.communicationBoard.dto.PagenationCommunicationBoardDto;
 import src.communication.communicationBoard.dto.UpdateCommunicationBoardDto;
 import src.communication.communicationCategory.CommunicationCategoryService;
 import src.communication.communicationCategory.dto.FindCommunicationBoardCategoryDto;
 import src.util.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -124,6 +126,53 @@ public class CommunicationBoardController {
         Response<Integer> response = communicationBoardService.delete(communicationBoardId);
         if(response.isSuccess()) System.out.println(response.getMessage());
         else System.out.println(response.getMessage());
+    }
+
+    public void searchCommunicationBoard(){
+        Response<List<FindCommunicationBoardCategoryDto>> commnicationBoardCategotyList = communicationCategoryService.findAll();
+        AtomicInteger count = new AtomicInteger(1);
+        int categoryId = 0;
+        int selectPage = 1;
+        if(commnicationBoardCategotyList.isSuccess()){
+            System.out.println("===================================");
+            System.out.print("1. 전체게시물");
+            commnicationBoardCategotyList.getData().stream()
+                    .forEach(category -> {
+                        count.getAndIncrement();
+                        System.out.print(" "+ count+". " +category.communicationBoardCategory());
+                    });
+            System.out.println();
+            System.out.println("===================================");
+            System.out.print("보고싶은 게시물을 선택해주세요. -> ");
+            int selectNum = Integer.valueOf(sc.nextLine());
+            if(selectNum == 1) categoryId = 0;
+            else if(selectNum == 2) categoryId = 1;
+            else if(selectNum == 3) categoryId = 2;
+            while(true){
+                Response<PagenationCommunicationBoardDto> communicationBoard = communicationBoardService.searchCommunicationBoard(categoryId,selectPage,"");
+                List<Integer> page = new ArrayList<>();
+                for(int i = 1; i <= communicationBoard.getData().totalPage(); i++) page.add(i);
+                if(selectNum == 1) System.out.println("========= 전체 게시물 =========");
+                else System.out.println("=====" + commnicationBoardCategotyList.getData().get(categoryId - 1).communicationBoardCategory() + "=========");
+                System.out.println("번호       내용           작성자 ");
+                communicationBoard.getData().communicationBoardList().stream()
+                    .forEach(commu -> System.out.println(commu.communicationBoardId()+". "+ commu.title() + "  " + commu.userId()));
+                int pageCount = 0;
+                for(int i = page.get(0); i <= page.size(); i++){
+                    pageCount++;
+                    if(pageCount == 5) {
+                        System.out.println(i + "   [다음]");
+                        break;
+                    }
+                    if(i == page.size()) System.out.println(i);
+                    else if(i == page.get(0)) System.out.print("["+i+"], ");
+                    else System.out.print(i+", ");
+                }
+                System.out.println("1. 다른 페이지 2. 검색 3. 나가기");
+                int nextInt = Integer.valueOf(sc.nextLine());
+                if(nextInt == 3) break;
+            }
+        }
     }
 
 }
