@@ -9,6 +9,7 @@ public class EmploymentBoardVO {
 	private String hiringProcess;
 	private String qualifications;
 	private String preferred;
+	private String companyName;
 	private int mainCategory1Id;
 	private int mainCategory2Id;
 	private int subCategory1Id;
@@ -36,6 +37,7 @@ public class EmploymentBoardVO {
 	public String getPreferred() {
 		return preferred;
 	}
+	public String getCompanyName() {return companyName;}
 	public int getMainCategory1Id() {
 		return mainCategory1Id;
 	}
@@ -51,7 +53,7 @@ public class EmploymentBoardVO {
 	
 	public EmploymentBoardVO(
 			int employmentBoardId, String title, String empJobType, String career,
-			String hiringProcess, String qualifications, String preferred, int mainCategory1Id,
+			String hiringProcess, String qualifications, String preferred, String companyName, int mainCategory1Id,
 			int mainCategory2Id, int subCategory1Id, int subCategory2Id
 			) {
 		this.employmentBoardId = employmentBoardId;
@@ -61,6 +63,7 @@ public class EmploymentBoardVO {
 		this.hiringProcess = hiringProcess;
 		this.qualifications = qualifications;
 		this.preferred = preferred;
+		this.companyName = companyName;
 		this.mainCategory1Id = mainCategory1Id;
 		this.mainCategory2Id = mainCategory2Id;
 		this.subCategory1Id = subCategory1Id;
