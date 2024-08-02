@@ -22,3 +22,6 @@ out/
 *.zip
 *.tar.gz
 *.rar
+
+./.project
+./.classpath
