@@ -1,17 +1,16 @@
-package src.employment.board;
-
-import src.employment.board.BoardObject;
-import src.employment.recordDAO.*;
+package src.employment.frame.contents;
 
 import java.util.List;
-import java.util.ArrayList;
 
-public class BoardPrinter {
+import src.employment.board.BoardObject;
+import src.employment.recordDAO.employmentBoard.read.DAO;
+
+public class AllBoards {
 	
-	// console 틀을 보여주는 메서드
-	public void printBoard() {
-		EmploymentBoardDAO dao = new EmploymentBoardDAO();
-		List<BoardObject> daoList = dao.selectAllEmploymentBoardsFromDB();
+	// 채용 공고를 조건없이 모두 보여줌
+	public void printAllBoards() {
+		DAO dao = new DAO();
+		List<BoardObject> daoList = dao.read();
 		for (BoardObject board: daoList) {			
 			System.out.printf(""
 					+ "글번호:%d | "

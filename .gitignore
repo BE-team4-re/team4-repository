@@ -23,5 +23,6 @@ out/
 *.tar.gz
 *.rar
 
-./.project
-./.classpath
+.project
+.classpath
+src/database/*
