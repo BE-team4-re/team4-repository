@@ -1,7 +1,5 @@
 package src.user;
 
-import src.admin.User;
-
 public class UserDTO {
 
     // 필드 선언

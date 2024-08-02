@@ -22,20 +22,17 @@ public class Frame {
 	
 	// 메서드를 인자로 받음. -> 람다 형태로 주어져야 함.
 	public void printFrame(String frameTitle, Callable callable, List<Button> buttons) {
-		Scanner sc = new Scanner(System.in);
-		while (true) {
-			System.out.println("#########################################################################");
-			System.out.printf("##########\t\t\t%s\t\t\t##########\n", frameTitle);
-			System.out.println("#########################################################################");
-			System.out.println("-------------------------------------------------------------------------");
-			callable.execute();
-			System.out.println("-------------------------------------------------------------------------");
-			for (Button button: buttons) {
-				button.printButton();
-			}
-			System.out.print("입력하세요: ");
-			String command = sc.nextLine();
-			System.out.println("#########################################################################");
+		
+		System.out.println("#########################################################################");
+		System.out.printf("##########\t\t\t%s\t\t\t##########\n", frameTitle);
+		System.out.println("#########################################################################");
+		System.out.println("-------------------------------------------------------------------------");
+		callable.execute();
+		System.out.println("-------------------------------------------------------------------------");
+		for (Button button: buttons) {
+			button.printButton();
 		}
+		System.out.println("#########################################################################");
+		
 	}
 }

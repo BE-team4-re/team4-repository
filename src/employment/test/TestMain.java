@@ -2,6 +2,7 @@ package src.employment.test;
 
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 import src.employment.frame.Frame;
@@ -25,13 +26,16 @@ public class TestMain {
 		buttonList.add(u);
 		buttonList.add(d);
 		buttonList.add(b);
+
+		Scanner sc = new Scanner(System.in);
+		System.out.print("입력하세요: ");
+		String command = sc.nextLine();
 		
 		while (true) {
-			if (userInputCommand == null) {				
+			if (userInputCommand == null) {
 				bf.printFrame("메인 게시판 입니다.", () -> ab.printAllBoards(), buttonList);
 			}
+			
 		}
-
 	}
-
 }
