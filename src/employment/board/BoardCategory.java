@@ -29,5 +29,4 @@ public class BoardCategory {
 		this.subCategoryId = subCategoryId;
 		this.categoryName = categoryName;
 	}
-
 }
