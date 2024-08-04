@@ -31,14 +31,12 @@ public class DAO {
 			pstmt.setInt(1, bno);
 			
 			int rows = pstmt.executeUpdate();
-			
+
 			if (rows == 1) {
-				if (rows == 1) {
-					// System.out.println("성공적으로 저장되었습니다.");
-					responseCode = 1;
-				} else {
-					// System.out.println("저장에 실패하였습니다.");
-				}
+				// System.out.println("성공적으로 저장되었습니다.");
+				responseCode = 1;
+			} else {
+				// System.out.println("저장에 실패하였습니다.");
 			}
 			
 		} catch (SQLException e) {

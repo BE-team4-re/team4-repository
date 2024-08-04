@@ -1,7 +1,6 @@
 package src.employment.recordDAO.employmentBoardCategory.read;
 
 
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,7 +11,7 @@ import java.util.List;
 
 import src.database.Database;
 
-import src.employment.board.BoardCategory;
+import src.employment.board.BoardCategoryDTO;
 
 
 public class DAO {
@@ -24,9 +23,9 @@ public class DAO {
 	private ResultSet rs = null;
 	
 	// select * from employment_board_category
-	public List<BoardCategory> read() {
+	public List<BoardCategoryDTO> read() {
 		
-		List<BoardCategory> EmploymentBoardCategoryList = new ArrayList<>();
+		List<BoardCategoryDTO> employmentBoardCategoryDTOList = new ArrayList<>();
 		String sql = ""+
 		"select * from employment_board_category";
 
@@ -43,11 +42,11 @@ public class DAO {
 				int subcategoryId = rs.getInt("subcategory_id");
 				String categoryName = rs.getString("category_name");
 				
-				BoardCategory boardCategory = new BoardCategory(
+				BoardCategoryDTO boardCategoryDTO = new BoardCategoryDTO(
 					categoryId, maincategoryId, subcategoryId, categoryName
 				);
 				
-				EmploymentBoardCategoryList.add(boardCategory);
+				employmentBoardCategoryDTOList.add(boardCategoryDTO);
 				
 			}
 			
@@ -68,6 +67,6 @@ public class DAO {
 				e.printStackTrace();
 			}
 		}
-		return EmploymentBoardCategoryList;		
+		return employmentBoardCategoryDTOList;
 	}
 }

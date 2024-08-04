@@ -2,9 +2,9 @@ package src.employment.frame.buttons.update;
 
 import src.employment.frame.buttons.Button;
 
-public class Title extends Button {
+public class QualificationsButton extends Button {
 	@Override
 	public void printButton() {
-		System.out.println("1. 제목 (t)");
+		System.out.println("자격요건 (q)");
 	}
 }

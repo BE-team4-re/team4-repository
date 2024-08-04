@@ -2,9 +2,9 @@ package src.employment.frame.buttons.update;
 
 import src.employment.frame.buttons.Button;
 
-public class HiringProcess extends Button {
+public class CareerButton extends Button {
 	@Override
 	public void printButton() {
-		System.out.println("4. 채용절차 (h)");
+		System.out.println("요구학력 (c)");
 	}
 }

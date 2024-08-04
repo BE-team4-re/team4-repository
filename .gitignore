@@ -26,3 +26,4 @@ out/
 .project
 .classpath
 src/database/*
+.idea/

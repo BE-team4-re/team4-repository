@@ -2,9 +2,9 @@ package src.employment.frame.buttons.update;
 
 import src.employment.frame.buttons.Button;
 
-public class Preferred extends Button {
+public class MainCategory1IdButton extends Button {
 	@Override
 	public void printButton() {
-		System.out.println("6. 우대사항 (p)");
+		System.out.println("메인카테고리1 (1)");
 	}
 }

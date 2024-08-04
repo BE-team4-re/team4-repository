@@ -2,17 +2,11 @@ package src.employment.recordDAO.employmentBoardCategory.create;
 
 
 import java.sql.Statement;
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import src.database.Database;
-
-import src.employment.board.BoardCategory;
 
 
 public class DAO {
