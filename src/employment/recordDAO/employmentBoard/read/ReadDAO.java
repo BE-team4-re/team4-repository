@@ -16,7 +16,7 @@ import src.util.Response;
 
 public class ReadDAO {
 
-	private Database db = new Database();
+	private final Database db = new Database();
 	
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -92,8 +92,7 @@ public class ReadDAO {
 
 		Response<BoardDTO> response = null;
 
-		String sql = ""+
-		"select * from employment_board where employment_board_id=?";
+		String sql = "select * from employment_board where employment_board_id=?";
 
 		try {
 

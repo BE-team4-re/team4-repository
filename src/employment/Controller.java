@@ -2,9 +2,9 @@ package src.employment;
 
 
 import src.employment.board.BoardCategoryEnum;
-import src.employment.frame.Buttons;
-import src.employment.frame.buttons.*;
-import src.employment.frame.contents.PrintBoard;
+import src.employment.elements.Buttons;
+import src.employment.elements.buttons.*;
+import src.employment.elements.contents.PrintBoard;
 
 
 import java.util.ArrayList;
@@ -29,12 +29,12 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
             PrintBoard pb = new PrintBoard();
-            int pageSize = pb.printAllBoards(pageIdx);
+            pb.printAllBoards(pageIdx);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
-            buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.byJob);
+            buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.prevPage);
             buttonList.add(Buttons.nextPage);
             buttonList.add(Buttons.first);
@@ -46,22 +46,20 @@ public class Controller {
             userInput = sc.nextLine();
             switch (userInput) {
                 case "R" -> {
+                    breakFlag = true;
                     printByRegion();
                 }
                 case "J" -> {
+                    breakFlag = true;
                     printByJob();
                 }
                 case ">" -> {
-                    if (pageIdx > pageSize) {
-                        System.out.println("초과함");
-                        pageIdx = pageSize;
-                    } else {
-                        System.out.println("늘어남");
+                    if (PrintBoard.maxPage > pageIdx) {
                         pageIdx++;
                     }
                 }
                 case "<" -> {
-                    if (0 >= pageIdx) {
+                    if (1 >= pageIdx) {
                         pageIdx = 1;
                     } else {
                         pageIdx--;
@@ -93,7 +91,7 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
             PrintBoard pb = new PrintBoard();
-            int pageSize = pb.printAllBoardsByRegion(pageIdx);
+            pb.printAllBoardsByRegion(pageIdx);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
@@ -112,32 +110,35 @@ public class Controller {
             userInput = sc.nextLine();
             switch (userInput) {
                 case "J" -> {
+                    breakFlag = true;
                     printByJob();
                 }
                 case "D" -> {
+                    breakFlag = true;
                     printByJobDetail();
                 }
                 case "L" -> {
+                    breakFlag = true;
                     printByRegionDetail();
                 }
                 case "S" -> {
+                    breakFlag = true;
                     printByRegionDetailAndJobDetail();
                 }
                 case ">" -> {
-                    if (pageIdx > pageSize) {
-                        pageIdx = pageSize;
-                    } else {
+                    if (PrintBoard.maxPage > pageIdx) {
                         pageIdx++;
                     }
                 }
                 case "<" -> {
-                    if (0 >= pageIdx) {
+                    if (1 >= pageIdx) {
                         pageIdx = 1;
                     } else {
                         pageIdx--;
                     }
                 }
                 case "b" -> {
+                    breakFlag = true;
                     printMain();
                 }
                 case "Q" -> {
@@ -163,12 +164,12 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역
             PrintBoard pb = new PrintBoard();
-            int pageSize = pb.printAllBoardsByJob(pageIdx);
+            pb.printAllBoardsByJob(pageIdx);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
-            buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.byJobDetail);
+            buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
@@ -182,32 +183,35 @@ public class Controller {
             userInput = sc.nextLine();
             switch (userInput) {
                 case "R" -> {
+                    breakFlag = true;
                     printByRegion();
                 }
                 case "D" -> {
+                    breakFlag = true;
                     printByJobDetail();
                 }
                 case "L" -> {
+                    breakFlag = true;
                     printByRegionDetail();
                 }
                 case "S" -> {
+                    breakFlag = true;
                     printByRegionDetailAndJobDetail();
                 }
                 case ">" -> {
-                    if (pageIdx > pageSize) {
-                        pageIdx = pageSize;
-                    } else {
+                    if (PrintBoard.maxPage > pageIdx) {
                         pageIdx++;
                     }
                 }
                 case "<" -> {
-                    if (0 >= pageIdx) {
+                    if (1 >= pageIdx) {
                         pageIdx = 1;
                     } else {
                         pageIdx--;
                     }
                 }
                 case "b" -> {
+                    breakFlag = true;
                     printMain();
                 }
                 case "Q" -> {
@@ -225,6 +229,15 @@ public class Controller {
         String userInput = "";
         int pageIdx = 1;
         boolean breakFlag = false;
+        System.out.print("조회할 지역을 입력하세요: ");
+        String UserInput = sc.nextLine();
+        BoardCategoryEnum[] values = BoardCategoryEnum.values();
+        int subId = 0;
+        for (BoardCategoryEnum value: values) {
+            if (value.getCategoryName().equals(UserInput)) {
+                subId = value.getSubId();
+            }
+        }
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
@@ -232,23 +245,15 @@ public class Controller {
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
-            System.out.print("조회할 지역을 입력하세요: ");
-            String UserInput = sc.nextLine();
-            BoardCategoryEnum[] values = BoardCategoryEnum.values();
-            int subId = 0;
-            for (BoardCategoryEnum value: values) {
-                if (value.getCategoryName().equals(UserInput)) {
-                    subId = value.getSubId();
-                }
-            }
             PrintBoard pb = new PrintBoard();
-            int pageSize = pb.printAllBoardsByRegionDetail(pageIdx, subId);
+            pb.printAllBoardsByRegionDetail(pageIdx, subId);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
             buttonList.add(Buttons.byJob);
-            buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.byJobDetail);
+            buttonList.add(Buttons.byRegion);
+            buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
             buttonList.add(Buttons.nextPage);
@@ -261,32 +266,39 @@ public class Controller {
             userInput = sc.nextLine();
             switch (userInput) {
                 case "J" -> {
+                    breakFlag = true;
                     printByJob();
                 }
-                case "R" -> {
-                    printByRegion();
-                }
                 case "D" -> {
+                    breakFlag = true;
                     printByJobDetail();
                 }
+                case "R" -> {
+                    breakFlag = true;
+                    printByRegion();
+                }
+                case "L" -> {
+                    breakFlag = true;
+                    printByRegionDetail();
+                }
                 case "S" -> {
+                    breakFlag = true;
                     printByRegionDetailAndJobDetail();
                 }
                 case ">" -> {
-                    if (pageIdx > pageSize) {
-                        pageIdx = pageSize;
-                    } else {
+                    if (PrintBoard.maxPage > pageIdx) {
                         pageIdx++;
                     }
                 }
                 case "<" -> {
-                    if (0 >= pageIdx) {
+                    if (1 >= pageIdx) {
                         pageIdx = 1;
                     } else {
                         pageIdx--;
                     }
                 }
                 case "b" -> {
+                    breakFlag = true;
                     printMain();
                 }
                 case "Q" -> {
@@ -304,6 +316,15 @@ public class Controller {
         String userInput = "";
         int pageIdx = 1;
         boolean breakFlag = false;
+        System.out.print("조회할 직무를 입력하세요: ");
+        String UserInput = sc.nextLine();
+        BoardCategoryEnum[] values = BoardCategoryEnum.values();
+        int subId = 0;
+        for (BoardCategoryEnum value: values) {
+            if (value.getCategoryName().equals(UserInput)) {
+                subId = value.getSubId();
+            }
+        }
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
@@ -311,21 +332,13 @@ public class Controller {
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
-            System.out.print("조회할 직무를 입력하세요: ");
-            String UserInput = sc.nextLine();
-            BoardCategoryEnum[] values = BoardCategoryEnum.values();
-            int subId = 0;
-            for (BoardCategoryEnum value: values) {
-                if (value.getCategoryName().equals(UserInput)) {
-                    subId = value.getSubId();
-                }
-            }
             PrintBoard pb = new PrintBoard();
-            int pageSize = pb.printAllBoardsByJobDetail(pageIdx, subId);
+            pb.printAllBoardsByJobDetail(pageIdx, subId);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
             buttonList.add(Buttons.byJob);
+            buttonList.add(Buttons.byJobDetail);
             buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
@@ -340,32 +353,39 @@ public class Controller {
             userInput = sc.nextLine();
             switch (userInput) {
                 case "J" -> {
+                    breakFlag = true;
                     printByJob();
                 }
+                case "D" -> {
+                    breakFlag = true;
+                    printByJobDetail();
+                }
                 case "R" -> {
+                    breakFlag = true;
                     printByRegion();
                 }
                 case "L" -> {
+                    breakFlag = true;
                     printByRegionDetail();
                 }
                 case "S" -> {
+                    breakFlag = true;
                     printByRegionDetailAndJobDetail();
                 }
                 case ">" -> {
-                    if (pageIdx > pageSize) {
-                        pageIdx = pageSize;
-                    } else {
+                    if (PrintBoard.maxPage > pageIdx) {
                         pageIdx++;
                     }
                 }
                 case "<" -> {
-                    if (0 >= pageIdx) {
+                    if (1 >= pageIdx) {
                         pageIdx = 1;
                     } else {
                         pageIdx--;
                     }
                 }
                 case "b" -> {
+                    breakFlag = true;
                     printMain();
                 }
                 case "Q" -> {
@@ -383,6 +403,22 @@ public class Controller {
         String userInput = "";
         int pageIdx = 1;
         boolean breakFlag = false;
+        System.out.print("조회할 지역을 입력하세요: ");
+        String UserInput1 = sc.nextLine();
+        System.out.println();
+        System.out.print("조회할 직무를 입력하세요: ");
+        String UserInput2 = sc.nextLine();
+        BoardCategoryEnum[] values = BoardCategoryEnum.values();
+        int subId1 = 1;
+        int subId2 = 19;
+        for (BoardCategoryEnum value: values) {
+            if (value.getCategoryName().equals(UserInput1)) {
+                subId1 = value.getSubId();
+            }
+            if (value.getCategoryName().equals(UserInput2)) {
+                subId2 = value.getSubId();
+            }
+        }
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
@@ -390,31 +426,16 @@ public class Controller {
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
-            System.out.print("조회할 지역을 입력하세요: ");
-            String UserInput1 = sc.nextLine();
-            System.out.println();
-            System.out.print("조회할 직무를 입력하세요: ");
-            String UserInput2 = sc.nextLine();
-            BoardCategoryEnum[] values = BoardCategoryEnum.values();
-            int subId1 = 1;
-            int subId2 = 19;
-            for (BoardCategoryEnum value: values) {
-                if (value.getCategoryName().equals(UserInput1)) {
-                    subId1 = value.getSubId();
-                }
-                if (value.getCategoryName().equals(UserInput2)) {
-                    subId2 = value.getSubId();
-                }
-            }
             PrintBoard pb = new PrintBoard();
-            int pageSize = pb.printAllBoardsByRegionDetailAndJobDetail(pageIdx, subId1, subId2);
+            pb.printAllBoardsByRegionDetailAndJobDetail(pageIdx, subId1, subId2);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
-            buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.byJob);
-            buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byJobDetail);
+            buttonList.add(Buttons.byRegion);
+            buttonList.add(Buttons.byRegionDetail);
+            buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
             buttonList.add(Buttons.nextPage);
             buttonList.add(Buttons.back);
@@ -426,32 +447,39 @@ public class Controller {
             userInput = sc.nextLine();
             switch (userInput) {
                 case "R" -> {
+                    breakFlag = true;
                     printByRegion();
                 }
                 case "J" -> {
+                    breakFlag = true;
                     printByJob();
                 }
                 case "L" -> {
+                    breakFlag = true;
                     printByRegionDetail();
                 }
+                case "S" -> {
+                    breakFlag = true;
+                    printByRegionDetailAndJobDetail();
+                }
                 case "D" -> {
+                    breakFlag = true;
                     printByJobDetail();
                 }
                 case ">" -> {
-                    if (pageIdx > pageSize) {
-                        pageIdx = pageSize;
-                    } else {
+                    if (PrintBoard.maxPage > pageIdx) {
                         pageIdx++;
                     }
                 }
                 case "<" -> {
-                    if (0 >= pageIdx) {
+                    if (1 >= pageIdx) {
                         pageIdx = 1;
                     } else {
                         pageIdx--;
                     }
                 }
                 case "b" -> {
+                    breakFlag = true;
                     printMain();
                 }
                 case "Q" -> {

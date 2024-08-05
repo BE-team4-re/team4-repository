@@ -1,6 +1,7 @@
-package src.employment.frame.contents;
+package src.employment.elements.contents;
 
 
+import src.employment.EmploymentBoardMain;
 import src.employment.board.BoardCategoryEnum;
 import src.employment.board.BoardDTO;
 import src.employment.recordDAO.employmentBoard.read.ReadDAO;
@@ -8,19 +9,30 @@ import src.util.Response;
 
 import java.util.*;
 
-import static src.employment.test.TestMain.BoardList;
-
 
 public class PrintBoard {
-
+	public static int maxPage = 0;
+	public static int maxPageMod = 0;
 	private List<BoardDTO> printBoardOnePage(int pageIdx, List<BoardDTO> boardList) {
-		List<BoardDTO> onePage = new ArrayList<>();
-
-		for (int i = 0; i < 10 && !boardList.isEmpty(); i++) {
-			int lastIndex = boardList.size() - 1;
-			onePage.add(boardList.remove(lastIndex));
+		int listSize = boardList.size();
+		maxPage = listSize / 10;
+		maxPageMod = listSize % 10;
+		if (maxPageMod != 0) {
+			maxPage ++;
 		}
+		int startIdx = (pageIdx - 1) * 10;
+		int endIdx = (pageIdx * 10) - 1;
 
+		List<BoardDTO> page = new ArrayList<>();
+		for (int i = startIdx; i <= endIdx; i++) {
+			try {
+				BoardDTO board = boardList.get(i);
+				page.add(board);
+			} catch (IndexOutOfBoundsException e) {
+				break;
+			}
+		}
+		return page;
 	}
 
 	public String convertCategoryIdToName(int id) {
@@ -34,20 +46,18 @@ public class PrintBoard {
 	}
 
 	// 채용 공고를 조건없이 모두 보여줌
-	public int printAllBoards(int pageIdx) {
-		int pageSize = 0;
-		ReadDAO readDao = new ReadDAO();
-		if (BoardList == null) { // null 인 경우는 페이지를 맨 처음 켰을때만,
+	public void printAllBoards(int pageIdx) {
+		if (EmploymentBoardMain.BoardList == null) {
+			ReadDAO readDao = new ReadDAO();
 			Response<List<BoardDTO>> response = readDao.readAll();
-			BoardList = response.getData();
+			EmploymentBoardMain.BoardList = response.getData();
 		}
-		if (BoardList.isEmpty()) {
+		if (EmploymentBoardMain.BoardList.isEmpty()) {
 			System.out.println("등록된 채용 게시물이 없습니다.");
 		} else {
-			List<BoardDTO> onePage = printBoardOnePage(pageIdx, BoardList);
+			List<BoardDTO> onePage = printBoardOnePage(pageIdx, EmploymentBoardMain.BoardList);
 			for (BoardDTO board: onePage) {
-				System.out.printf(""
-								+ "글번호:%d | "
+				System.out.printf("글번호:%d | "
 								+ "제목:%s | "
 								+ "근무형태:%s | "
 								+ "요구학력:%s | "
@@ -74,7 +84,6 @@ public class PrintBoard {
 				);
 			}
 		}
-		return pageSize;
 	}
 
 	// id로 얻어온 단일 채용 공고를 보여줌.
@@ -82,8 +91,7 @@ public class PrintBoard {
 		ReadDAO readDao = new ReadDAO();
 		Response<BoardDTO> response = readDao.read(bid);
 		BoardDTO board = response.getData();
-		System.out.printf(""
-						+ "글번호:%d | "
+		System.out.printf("글번호:%d | "
 						+ "제목:%s | "
 						+ "근무형태:%s | "
 						+ "요구학력:%s | "
@@ -111,8 +119,7 @@ public class PrintBoard {
 	}
 
 	// `지역별` 선택시 조회.
-	public int printAllBoardsByRegion(int pageIdx) {
-		int pageSize = 0;
+	public void printAllBoardsByRegion(int pageIdx) {
 		ReadDAO readDao = new ReadDAO();
 		Response<List<BoardDTO>> response = readDao.readByRegion();
 		List<BoardDTO> boardList = response.getData();
@@ -121,8 +128,7 @@ public class PrintBoard {
 		} else {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
-				System.out.printf(""
-								+ "글번호:%d | "
+				System.out.printf("글번호:%d | "
 								+ "제목:%s | "
 								+ "근무형태:%s | "
 								+ "요구학력:%s | "
@@ -149,12 +155,10 @@ public class PrintBoard {
 				);
 			}
 		}
-		return pageSize;
 	}
 
 	// 상세 지역으로 조회.
-	public int printAllBoardsByRegionDetail(int pageIdx, int subCategory1Id) {
-		int pageSize = 0;
+	public void printAllBoardsByRegionDetail(int pageIdx, int subCategory1Id) {
 		ReadDAO readDao = new ReadDAO();
 		Response<List<BoardDTO>> response = readDao.readByRegionDetail(subCategory1Id);
 		List<BoardDTO> boardList = response.getData();
@@ -163,8 +167,7 @@ public class PrintBoard {
 		} else {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
-				System.out.printf(""
-								+ "글번호:%d | "
+				System.out.printf("글번호:%d | "
 								+ "제목:%s | "
 								+ "근무형태:%s | "
 								+ "요구학력:%s | "
@@ -191,12 +194,10 @@ public class PrintBoard {
 				);
 			}
 		}
-		return pageSize;
 	}
 	
 	// `직무별` 선택시 조회.
-	public int printAllBoardsByJob(int pageIdx) {
-		int pageSize = 0;
+	public void printAllBoardsByJob(int pageIdx) {
 		ReadDAO readDao = new ReadDAO();
 		Response<List<BoardDTO>> response = readDao.readByJob();
 		List<BoardDTO> boardList = response.getData();
@@ -205,8 +206,7 @@ public class PrintBoard {
 		} else {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
-				System.out.printf(""
-								+ "글번호:%d | "
+				System.out.printf("글번호:%d | "
 								+ "제목:%s | "
 								+ "근무형태:%s | "
 								+ "요구학력:%s | "
@@ -233,12 +233,10 @@ public class PrintBoard {
 				);
 			}
 		}
-		return pageSize;
 	}
 
 	// 상세 직무로 조회.
-	public int printAllBoardsByJobDetail(int pageIdx, int subCategory2Id) {
-		int pageSize = 0;
+	public void printAllBoardsByJobDetail(int pageIdx, int subCategory2Id) {
 		ReadDAO readDao = new ReadDAO();
 		Response<List<BoardDTO>> response = readDao.readByJobDetail(subCategory2Id);
 		List<BoardDTO> boardList = response.getData();
@@ -247,8 +245,7 @@ public class PrintBoard {
 		} else {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
-				System.out.printf(""
-								+ "글번호:%d | "
+				System.out.printf("글번호:%d | "
 								+ "제목:%s | "
 								+ "근무형태:%s | "
 								+ "요구학력:%s | "
@@ -275,12 +272,10 @@ public class PrintBoard {
 				);
 			}
 		}
-		return pageSize;
 	}
 
 	// 상세 지역과 상세 직무로 조회.
-	public int printAllBoardsByRegionDetailAndJobDetail(int pageIdx, int subCategory1Id, int subCategory2Id) {
-		int pageSize = 0;
+	public void printAllBoardsByRegionDetailAndJobDetail(int pageIdx, int subCategory1Id, int subCategory2Id) {
 		ReadDAO readDao = new ReadDAO();
 		Response<List<BoardDTO>> response = readDao.readByRegionDetailAndJobDetail(subCategory1Id, subCategory2Id);
 		List<BoardDTO> boardList = response.getData();
@@ -289,8 +284,7 @@ public class PrintBoard {
 		} else {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
-				System.out.printf(""
-								+ "글번호:%d | "
+				System.out.printf("글번호:%d | "
 								+ "제목:%s | "
 								+ "근무형태:%s | "
 								+ "요구학력:%s | "
@@ -317,6 +311,5 @@ public class PrintBoard {
 				);
 			}
 		}
-		return pageSize;
 	}
 }

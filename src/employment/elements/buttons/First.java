@@ -1,4 +1,4 @@
-package src.employment.frame.buttons;
+package src.employment.elements.buttons;
 
 public class First extends Button {
     @Override

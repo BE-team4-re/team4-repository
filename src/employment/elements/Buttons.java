@@ -1,7 +1,7 @@
-package src.employment.frame;
+package src.employment.elements;
 
-import src.employment.frame.buttons.*;
-import src.employment.frame.buttons.read.*;
+import src.employment.elements.buttons.*;
+import src.employment.elements.buttons.read.*;
 
 public class Buttons {
     public static TitleButton titleButton = new TitleButton();

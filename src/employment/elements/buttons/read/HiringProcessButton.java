@@ -1,6 +1,6 @@
-package src.employment.frame.buttons.read;
+package src.employment.elements.buttons.read;
 
-import src.employment.frame.buttons.Button;
+import src.employment.elements.buttons.Button;
 
 public class HiringProcessButton extends Button {
 	@Override

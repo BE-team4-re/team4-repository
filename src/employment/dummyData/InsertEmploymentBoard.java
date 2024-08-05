@@ -1,8 +1,8 @@
-package src.employment.test;
+package src.employment.dummyData;
 
 import src.employment.recordDAO.employmentBoard.create.CreateDAO;
 
-public class TestInsertEmploymentBoard {
+public class InsertEmploymentBoard {
 
     public static void main(String[] args) {
         // 테스트용 더미 데이터를 넣는 코드.

@@ -1,6 +1,6 @@
 package src.user;
 
-import src.employment.test.TestMain;
+import src.employment.EmploymentBoardMain;
 
 import java.util.Scanner;
 
@@ -154,7 +154,7 @@ public class Controller {
             switch (menu) {
                 case "1":
                     // 채용공고 게시판 이동
-                    TestMain.EmploymentBoardMainEntrance();
+                    EmploymentBoardMain.entrance();
                     break;
                 case "2":
                     // 커뮤니티 이동

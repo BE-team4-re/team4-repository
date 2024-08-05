@@ -10,7 +10,7 @@ import src.database.Database;
 import src.employment.board.BoardDTO;
 import src.util.Response;
 
-import static src.employment.test.TestMain.BoardList;
+import static src.employment.EmploymentBoardMain.BoardList;
 
 
 public class UpdateDAO {

@@ -1,15 +1,14 @@
-package src.employment.test;
+package src.employment;
 
 
 import java.util.List;
 
-import src.employment.Controller;
 import src.employment.board.BoardDTO;
 
 
-public class TestMain {
+public class EmploymentBoardMain {
 	public static List<BoardDTO> BoardList = null;
-	public static void EmploymentBoardMainEntrance() {
+	public static void entrance() {
 		Controller controller = new Controller();
 		controller.printMain();
 	}

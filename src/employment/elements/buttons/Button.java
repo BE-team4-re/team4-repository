@@ -1,4 +1,4 @@
-package src.employment.frame.buttons;
+package src.employment.elements.buttons;
 
 public abstract class Button {
 	public abstract void printButton();

@@ -1,11 +1,11 @@
-package src.employment.test;
+package src.employment.dummyData;
 
 
 import src.employment.board.BoardCategoryEnum;
 import src.employment.recordDAO.employmentBoardCategory.create.*;
 
 
-public class TestInsertBoardCategory<T> {
+public class InsertBoardCategory<T> {
 	
 	public static void main(String[] args) {
 		
