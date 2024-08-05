@@ -5,7 +5,7 @@ import src.employment.board.BoardCategoryEnum;
 import src.employment.recordDAO.employmentBoardCategory.create.*;
 
 
-public class InsertBoardCategory<T> {
+public class InsertBoardCategory {
 	
 	public static void main(String[] args) {
 		

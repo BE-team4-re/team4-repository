@@ -62,7 +62,7 @@ public class ReadDAO {
 				
 			}
 
-			response = new Response<List<BoardDTO>>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
+			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,10 +123,10 @@ public class ReadDAO {
 						subCategory1Id, subCategory2Id, companyName
 				);
 
-				response = new Response<BoardDTO>(true, "성공적으로 가져왔습니다.", board);
+				response = new Response<>(true, "성공적으로 가져왔습니다.", board);
 			} else {
 				// System.out.println("가져오는데 실패하였습니다.");
-				response = new Response<BoardDTO>(true, "가져오는데 실패하였습니다.", null);
+				response = new Response<>(true, "가져오는데 실패하였습니다.", null);
 			}
 
 		} catch (SQLException e) {
@@ -187,7 +187,7 @@ public class ReadDAO {
 				);
 				EmploymentBoardList.add(board);
 			}
-			response = new Response<List<BoardDTO>>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
+			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -247,7 +247,7 @@ public class ReadDAO {
 				);
 				EmploymentBoardList.add(board);
 			}
-			response = new Response<List<BoardDTO>>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
+			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -308,7 +308,7 @@ public class ReadDAO {
 				);
 				EmploymentBoardList.add(board);
 			}
-			response = new Response<List<BoardDTO>>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
+			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -370,7 +370,7 @@ public class ReadDAO {
 				);
 				EmploymentBoardList.add(board);
 			}
-			response = new Response<List<BoardDTO>>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
+			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -431,7 +431,7 @@ public class ReadDAO {
 				);
 				EmploymentBoardList.add(board);
 			}
-			response = new Response<List<BoardDTO>>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
+			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
