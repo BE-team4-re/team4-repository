@@ -1,6 +1,6 @@
 package src.employment.board;
 
-public class BoardCategory {
+public class BoardCategoryDTO {
 	private int categoryId;
 	private int mainCategoryId;
 	private int subCategoryId;
@@ -23,7 +23,7 @@ public class BoardCategory {
 	}
 
 	// 생성자에서 모든 값을 set 하고, setter 는 사용하지 않음. 
-	public BoardCategory(int categoryId, int mainCategoryId, int subCategoryId, String categoryName) {
+	public BoardCategoryDTO(int categoryId, int mainCategoryId, int subCategoryId, String categoryName) {
 		this.categoryId = categoryId;
 		this.mainCategoryId = mainCategoryId;
 		this.subCategoryId = subCategoryId;

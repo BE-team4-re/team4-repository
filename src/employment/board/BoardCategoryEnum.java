@@ -20,7 +20,8 @@ public enum BoardCategoryEnum {
 	CATEGORY_ID_16(1, 16, "경북"),
 	CATEGORY_ID_17(1, 17, "경남"),
 	CATEGORY_ID_18(1, 18, "제주"),
-	CATEGORY_ID_19(19, 19, "직무별"),
+
+	CATEGORY_ID_19(2, 19, "직무별"),
 	CATEGORY_ID_20(19, 20, "개발PM"),
 	CATEGORY_ID_21(19, 21, "게임개발"),
 	CATEGORY_ID_22(19, 22, "데이터분석가"),
@@ -29,6 +30,8 @@ public enum BoardCategoryEnum {
 	CATEGORY_ID_25(19, 25, "정보보안"),
 	CATEGORY_ID_26(19, 26, "앱개발"),
 	CATEGORY_ID_27(19, 27, "풀스택");
+
+
 	
 	private final int mainId;
 	private final int subId;

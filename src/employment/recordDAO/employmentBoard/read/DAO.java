@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.ArrayList;
 
-import src.employment.board.BoardObject;
+import src.employment.board.BoardDTO;
 
 import src.database.Database;
 
@@ -22,9 +22,9 @@ public class DAO {
 	private ResultSet rs = null;
 	
 	// select * from employment_board
-	public List<BoardObject> read() {
+	public List<BoardDTO> read() {
 		
-		List<BoardObject> EmploymentBoardList = new ArrayList<>();
+		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 		String sql = ""+
 		"select * from employment_board";
 
@@ -48,7 +48,7 @@ public class DAO {
 				int subCategory2Id = rs.getInt("sub_category2_id");
 				String companyName = rs.getString("company_name");
 				
-				BoardObject board = new BoardObject(
+				BoardDTO board = new BoardDTO(
 					employmentBoardId, title, jobType, career, hiringProcess,
 					qualifications, preferred, mainCategory1Id, mainCategory2Id,
 					subCategory1Id, subCategory2Id, companyName

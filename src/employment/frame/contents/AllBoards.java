@@ -2,7 +2,7 @@ package src.employment.frame.contents;
 
 import java.util.List;
 
-import src.employment.board.BoardObject;
+import src.employment.board.BoardDTO;
 import src.employment.recordDAO.employmentBoard.read.DAO;
 
 public class AllBoards {
@@ -10,8 +10,8 @@ public class AllBoards {
 	// 채용 공고를 조건없이 모두 보여줌
 	public void printAllBoards() {
 		DAO dao = new DAO();
-		List<BoardObject> daoList = dao.read();
-		for (BoardObject board: daoList) {			
+		List<BoardDTO> daoList = dao.read();
+		for (BoardDTO board: daoList) {
 			System.out.printf(""
 					+ "글번호:%d | "
 					+ "제목:%s | "

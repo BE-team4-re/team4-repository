@@ -13,7 +13,7 @@ public class Database {
 
                 "jdbc:mysql://localhost:3306/miniproject4",
                 "root",
-                "root"
+                "10041004"
 
             );
             System.out.println("데이터베이스 연결 성공");
