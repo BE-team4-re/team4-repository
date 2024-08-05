@@ -3,7 +3,7 @@ package src.admin.employment;
 import src.database.Database;
 import src.employment.board.BoardCategoryDTO;
 import src.employment.board.BoardDTO;
-import src.employment.recordVO.EmploymentBoardVO;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,32 +14,6 @@ import java.util.List;
 
 public class EmploymentService {
     private final Database db = new Database();
-
-    //전체 채용 카테고리 리스트로 가져오기
-    public List<BoardCategoryDTO> getCategoryList(){
-        List<BoardCategoryDTO> boardCategoryDTOList = new ArrayList<>();
-        try(Connection connection = db.connect();
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM employment_board_category");)
-        {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                BoardCategoryDTO boardCategoryDTO = new BoardCategoryDTO(
-                        rs.getInt("category_id"),
-                        rs.getInt("mainCategory_id"),
-                        rs.getInt("subCategory_id"),
-                        rs.getString("category_name")
-                );
-                boardCategoryDTOList.add(boardCategoryDTO);
-            }
-            rs.close();
-        }
-        catch (Exception e ){
-            e.printStackTrace();
-        }
-        return boardCategoryDTOList;
-    }
-
-
 
     //채용공고 추가
     public int insertEmpBoard(String companyName, String title, String jobtype, String career, String hiringProcess, String qualifications, String preferred, int location, int empNo){
@@ -149,10 +123,28 @@ public class EmploymentService {
         return 0;
     }
 
+    //채용 공고 삭제
+    public int deleteEmpBoard(int board_id){
+        try (Connection connection = db.connect();
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM employment_board WHERE employment_board_id = ?");
+        ){
+            ps.setInt(1, board_id);
+
+            int rows = ps.executeUpdate();
+            if (rows == 1){
+                return rows;
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     //채용공고 상세 검색
     public BoardDTO viewEmpBoard(int board_id) {
         try (Connection connection = db.connect();
-             PreparedStatement ps = connection.prepareStatement("SELECT eb.* , ebc1.category_name AS localName , ebc2.category_name AS jobName FROM employment_board AS eb inner join employment_board_category AS ebc1 ON eb.sub_category1_id = ebc1.subcategory_id inner join employment_board_category AS ebc2 ON eb.sub_category2_id = ebc2.subcategory_id WHERE employment_board_id = ?;;");) {
+             PreparedStatement ps = connection.prepareStatement("SELECT eb.* , ebc1.category_name AS localName , ebc2.category_name AS jobName FROM employment_board AS eb inner join employment_board_category AS ebc1 ON eb.sub_category1_id = ebc1.subcategory_id inner join employment_board_category AS ebc2 ON eb.sub_category2_id = ebc2.subcategory_id WHERE employment_board_id = ?");) {
             ps.setInt(1, board_id);
 
             ResultSet rs = ps.executeQuery();
@@ -182,27 +174,4 @@ public class EmploymentService {
         }
         return null;
     }
-
-
-    //채용정보 수정
-//    public int updateEmpBoard(String companyName, String title, String jobtype, String career, String hiringProcess, String qualifications, String preferred, int location, int empNo){
-//        try (Connection connection = db.connect();
-//             PreparedStatement ps = connection.prepareStatement("INSERT INTO employment_board (title, job_type, career, hiring_process, qualifications, preferred, main_category1_id,main_category2_id,sub_category1_id,sub_category2_id,company_name) " +
-//                     "VALUES (?,?,?,?,?,?,?,?,?,?,?)");)
-//        {
-//            ps.setString(1,title);
-//            ps.setString(2,jobtype);
-//            ps.setString(3,career);
-//            ps.setString(4,hiringProcess);
-//            ps.setString(5,qualifications);
-//            ps.setString(6,preferred);
-//            ps.setInt(7,1);
-//            ps.setInt(8,location);
-//            ps.setInt(9,19);
-//            ps.setInt(10,empNo);
-//            ps.setString(11,companyName);
-//
-//            int rows = ps.executeUpdate();
-//            return rows;
-//        }
 }

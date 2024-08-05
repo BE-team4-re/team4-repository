@@ -1,5 +1,6 @@
 package src.admin.employment;
 
+import src.admin.category.CategoryService;
 import src.employment.board.BoardCategoryDTO;
 import src.employment.board.BoardDTO;
 
@@ -9,6 +10,8 @@ import java.util.Scanner;
 
 public class EmploymentController {
     EmploymentService employmentService = new EmploymentService();
+    CategoryService categoryService = new CategoryService();
+
     Scanner scanner = new Scanner(System.in);
 
     public void askEmploymentMenu() {
@@ -36,7 +39,7 @@ public class EmploymentController {
                 String choose = scanner.nextLine();
                 switch (choose) {
                     case "1":
-                        System.out.println(" 채용공고의 번호를 입력해주세요");
+                        System.out.print(" 채용공고의 번호를 입력해주세요: ");
                         String strID = scanner.nextLine();
                         int board_id = Integer.parseInt(strID);
                         if (employmentService.containsEmploymentBoardId(empList,board_id)){
@@ -95,14 +98,14 @@ public class EmploymentController {
 
                                             break;
                                         case "7":
-                                            List<BoardCategoryDTO> dto = employmentService.getCategoryList();
+                                            List<BoardCategoryDTO> dto = categoryService.getCategoryList();
                                             printCategoryMenu(dto,1);
                                             System.out.print("지역을 선택해주세요:");
                                             updateContent = scanner.nextLine();
                                             columnName = "sub_category1_id";
                                             break;
                                         case "8":
-                                            List<BoardCategoryDTO> dto2 = employmentService.getCategoryList();
+                                            List<BoardCategoryDTO> dto2 = categoryService.getCategoryList();
                                             printCategoryMenu(dto2,19);
                                             System.out.print("직무를 선택해주세요:");
                                             updateContent = scanner.nextLine();;
@@ -114,7 +117,7 @@ public class EmploymentController {
                                             break;
                                     }
 
-                            if (columnName != null && updateContent != null) {
+                            if (!columnName.equals("") && !updateContent.equals("")) {
                                 employmentService.updateEmpBoard(columnName, updateContent, boardDTO.getEmploymentBoardId());
                             }
                         }else{
@@ -122,6 +125,15 @@ public class EmploymentController {
                         }
                         break;
                     case "2":
+                        System.out.println("삭제하실 채용 공고의 번호를 입력해주세요:");
+                        String strEmpNo = scanner.nextLine();
+                        int empNo = Integer.parseInt(strEmpNo);
+                        if (employmentService.containsEmploymentBoardId(empList,empNo)){
+                            employmentService.deleteEmpBoard(empNo);
+                        }
+                        else{
+                            System.out.println("검색하신 기업의 채용공고 번호가 아닙니다.");
+                        }
                         return;
                     case "3":
                         return;
@@ -150,7 +162,7 @@ public class EmploymentController {
                 System.out.print("우대사항 입력해주세요:");
                 String preferred = scanner.nextLine();
 
-                List<BoardCategoryDTO> dto = employmentService.getCategoryList();
+                List<BoardCategoryDTO> dto = categoryService.getCategoryList();
 
                 printCategoryMenu(dto,1);
                 System.out.print("해당하는 지역의 번호를 입력해주세요:");

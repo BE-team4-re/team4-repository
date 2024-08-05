@@ -1,5 +1,6 @@
 package src.admin;
 
+import src.admin.category.CategoryController;
 import src.admin.employment.EmploymentController;
 import src.admin.user.UserController;
 
@@ -9,6 +10,7 @@ public class AdminController {
     Scanner scanner = new Scanner(System.in);
     UserController userController = new UserController();
     EmploymentController employmentController = new EmploymentController();
+    CategoryController categoryController = new CategoryController();
 
     public void askAdminCategory(){
         printAdminCategory();
@@ -19,6 +21,11 @@ public class AdminController {
                 break;
             case "2":
                 employmentController.askEmploymentMenu();
+                break;
+            case "3":
+                categoryController.askCategoryMenu();
+            case "4":
+                //로그아웃하기
                 break;
             default:
                 System.out.println("잘못된 선택입니다.");
