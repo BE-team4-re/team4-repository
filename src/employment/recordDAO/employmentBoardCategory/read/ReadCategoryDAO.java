@@ -14,7 +14,7 @@ import src.database.Database;
 import src.employment.board.BoardCategoryDTO;
 
 
-public class DAO {
+public class ReadCategoryDAO {
 	
 	private Database db = new Database();
 	

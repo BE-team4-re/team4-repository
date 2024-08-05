@@ -5,6 +5,6 @@ import src.employment.frame.buttons.Button;
 public class CareerButton extends Button {
 	@Override
 	public void printButton() {
-		System.out.println("요구학력 (c)");
+		System.out.println("c. 요구학력");
 	}
 }

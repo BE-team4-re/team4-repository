@@ -1,4 +1,4 @@
-package src.employment.recordDAO.employmentBoard.delete;
+package src.employment.recordDAO.employmentBoardCategory.create;
 
 
 import java.sql.Statement;
@@ -9,34 +9,39 @@ import java.sql.PreparedStatement;
 import src.database.Database;
 
 
-public class DAO {
-
+public class CrateCategoryDAO {
+	
 	private Database db = new Database();
 	
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
-	
-	// delete
-	public int delete(int bno) {
+
+	// insert into employment_board_category ... values ...
+	public void create(int maincategoryId, int subcategoryId, String categoryName) {
 		
-		int responseCode = 0;
-		
-		String sql = "delete from employment_board where employment_board_id=?";
+		// employment_board_id -> 자동 증가 컬럼.
+		String sql = ""+
+		"insert into employment_board_category ("
+		+ "maincategory_id,"
+		+ "subcategory_id,"
+		+ "category_name"
+		+ ") values ("
+		+ "?, ?, ?"
+		+ ");";
 		
 		try {
 			
 			conn = db.connect();
 			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			
-			pstmt.setInt(1, bno);
+			pstmt.setInt(1, maincategoryId);
+			pstmt.setInt(2, subcategoryId);
+			pstmt.setString(3, categoryName);
 			
 			int rows = pstmt.executeUpdate();
-
 			if (rows == 1) {
-				// System.out.println("성공적으로 저장되었습니다.");
-				responseCode = 1;
+				System.out.println("성공적으로 저장되었습니다.");
 			} else {
-				// System.out.println("저장에 실패하였습니다.");
+				System.out.println("저장에 실패하였습니다.");
 			}
 			
 		} catch (SQLException e) {
@@ -53,6 +58,5 @@ public class DAO {
 				e.printStackTrace();
 			}
 		}
-	return responseCode;
 	}
 }

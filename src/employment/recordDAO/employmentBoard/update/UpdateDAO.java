@@ -13,7 +13,7 @@ import src.util.Response;
 import static src.employment.test.TestMain.BoardList;
 
 
-public class DAO {
+public class UpdateDAO {
 	
 private Database db = new Database();
 	// 업데이트 타겟 지정 시 여기서 그 타겟이 설정됨.
@@ -146,9 +146,11 @@ private Database db = new Database();
 				}
 				// System.out.println("성공적으로 저장되었습니다.");
 				response = new Response<BoardDTO>(true, "성공적으로 저장되었습니다.", resultBoardDTO);
+				System.out.println("변경에 성공하였습니다.");
 			} else {
 				// System.out.println("저장에 실패하였습니다.");
 				response = new Response<BoardDTO>(false, "저장에 실패하였습니다.", resultBoardDTO);
+				System.out.println("변경에 실패하였습니다.");
 			}
 			
 		} catch (SQLException e) {

@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import src.database.Database;
 
 
-public class DAO {
+public class UpdateCategoryDAO {
 	
 	private Database db = new Database();
 	

@@ -21,15 +21,15 @@ public class Frame {
 		return bf;
 	}
 	
-	// 메서드를 인자로 받음. -> 람다 형태로 주어져야 함.
+	// 메서드를 인자로 받음. -> 익명 형태로 주어져야 함.
 	public void printFrame(FrameSet frameSet) {
 		String frameTitle = frameSet.getTitle();
 		Callable callable = frameSet.getCallable();
 		List<Button> buttons = frameSet.getButtonList();
 		// 페이지 그리기.
-		System.out.println("#########################################################################");
-		System.out.printf("##########\t\t\t%s\t\t\t##########\n", frameTitle);
-		System.out.println("#########################################################################");
+		System.out.println("########################################################################");
+		System.out.printf("#################\t\t\t%s\t\t\t#################\n", frameTitle);
+		System.out.println("########################################################################");
 		System.out.println("-------------------------------------------------------------------------");
 		callable.execute();
 		System.out.println("-------------------------------------------------------------------------");

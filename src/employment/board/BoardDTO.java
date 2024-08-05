@@ -38,11 +38,11 @@ public class BoardDTO {
 	public int getMainCategory1Id() {
 		return mainCategory1Id;
 	}
-	public int getMainCategory2Id() {
-		return mainCategory2Id;
-	}
 	public int getSubCategory1Id() {
 		return subCategory1Id;
+	}
+	public int getMainCategory2Id() {
+		return mainCategory2Id;
 	}
 	public int getSubCategory2Id() {
 		return subCategory2Id;
@@ -97,15 +97,15 @@ public class BoardDTO {
 		}
 	}
 
-	public void setMainCategory2Id(int mainCategory2Id) {
-		if (mainCategory2Id != 0) {
-			this.mainCategory2Id = mainCategory2Id;
-		}
-	}
-
 	public void setSubCategory1Id(int subCategory1Id) {
 		if (subCategory1Id != 0) {
 			this.subCategory1Id = subCategory1Id;
+		}
+	}
+
+	public void setMainCategory2Id(int mainCategory2Id) {
+		if (mainCategory2Id != 0) {
+			this.mainCategory2Id = mainCategory2Id;
 		}
 	}
 

@@ -17,6 +17,7 @@ import src.util.Callable;
 
 public class TestMain {
 	public static List<BoardDTO> BoardList = null;
+	public static String allowedCommands = "uRJ";
 	public static void main(String[] args) {
 		CommandInterpreter commandInterpreter = CommandInterpreter.getInterpreter(); // 명령어 인터프리터 가져옴.
 		String userInputCommand = "";
@@ -29,34 +30,36 @@ public class TestMain {
 		Callable method = () -> ab.printAllBoards();
 		// 프레임 버튼 리스트.
 		List<Button> buttonList = new ArrayList<>();
-		ReadDetail rd = new ReadDetail();
-		Delete d = new Delete();
+
 		Update u = new Update();
-		Back b = new Back();
-		buttonList.add(rd);
+		ByRegion r = new ByRegion();
+		ByJob j = new ByJob();
+
 		buttonList.add(u);
-		buttonList.add(d);
-		buttonList.add(b);
+		buttonList.add(r);
+		buttonList.add(j);
 
 		FrameSet frameSet = new FrameSet(title, method, buttonList);
 		FrameSet initialFrameSet = frameSet;
-		Stack.pageStack.add(frameSet); // 맨 처음 페이지.
 
 		Scanner sc = new Scanner(System.in);
 
 		while (!userInputCommand.equals("Q")) {
 			FrameSet nextFrameSet = null;
 			bf.printFrame(frameSet);
-			System.out.print("입력하세요 (종료하기 Q): ");
+			System.out.print("입력하세요 (Q. 종료하기): ");
 			userInputCommand = sc.nextLine();
-			nextFrameSet = commandInterpreter.interpret(userInputCommand);
+			nextFrameSet = commandInterpreter.interpret(userInputCommand, allowedCommands);
 			if (nextFrameSet == null) {
-				System.out.println("잘못된 입력입니다.");
-				frameSet = initialFrameSet; // 잘못된 입력이 올 경우 첫 페이지로 이동.
+				if (userInputCommand.equals("Q")) {
+					break;
+				} else {
+					System.out.println("잘못된 입력입니다.");
+					frameSet = initialFrameSet; // 잘못된 입력이 올 경우 첫 페이지로 이동.
+				}
 			} else {
 				// 올바른 입력이라면 새로운 frameset 으로 교체하고 페이지 스택에 담음.
 				frameSet = nextFrameSet;
-				Stack.pageStack.add(frameSet);
 			}
 		}
 	}

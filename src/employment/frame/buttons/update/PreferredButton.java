@@ -5,6 +5,6 @@ import src.employment.frame.buttons.Button;
 public class PreferredButton extends Button {
 	@Override
 	public void printButton() {
-		System.out.println("우대사항 (p)");
+		System.out.println("p. 우대사항");
 	}
 }

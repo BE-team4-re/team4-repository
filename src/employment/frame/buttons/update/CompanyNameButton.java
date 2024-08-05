@@ -5,6 +5,6 @@ import src.employment.frame.buttons.Button;
 public class CompanyNameButton extends Button {
 	@Override
 	public void printButton() {
-		System.out.println("회사명 (n)");
+		System.out.println("n. 회사명");
 	}
 }

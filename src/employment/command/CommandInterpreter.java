@@ -23,14 +23,17 @@ public class CommandInterpreter {
 		return commandInterpreter;
 	}
 	
-	public FrameSet interpret(String userInputCommand) {
+	public FrameSet interpret(String userInputCommand, String allowedCommands) {
 		FrameSet frameSet = null;
 		// 커맨드가 들어오면, 명령어 사전에서 뒤져서 알맞은 명령어를 실행한다.
 		for (CommandEnum command: commands) {
 			String commandKey = command.getCommandKey();
 			if (userInputCommand.equals(commandKey)) {
-				System.out.println(command.getCommandName());
-				frameSet = command.execute();
+				if (allowedCommands.contains(userInputCommand)) {
+					frameSet = command.execute();
+				} else {
+					System.out.println("허용되지 않은 명령어입니다.");
+				}
 			}
 		}
 		return frameSet;

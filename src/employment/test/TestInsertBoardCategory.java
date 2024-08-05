@@ -9,11 +9,11 @@ public class TestInsertBoardCategory<T> {
 	
 	public static void main(String[] args) {
 		
-		DAO empCateDAO = new DAO();
+		CrateCategoryDAO empCateCrateCategoryDAO = new CrateCategoryDAO();
 		
 		BoardCategoryEnum[] values = BoardCategoryEnum.values();
 		for (BoardCategoryEnum value: values) {
-			empCateDAO.create(value.getMainId(), value.getSubId(), value.getCategoryName()); // 메인
+			empCateCrateCategoryDAO.create(value.getMainId(), value.getSubId(), value.getCategoryName()); // 메인
 		}
 	}
 }

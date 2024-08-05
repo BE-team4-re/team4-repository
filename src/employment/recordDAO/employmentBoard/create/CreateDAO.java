@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import src.database.Database;
 
 
-public class DAO {
+public class CreateDAO {
 
 	private Database db = new Database();
 	
@@ -20,7 +20,7 @@ public class DAO {
 	public void create(
 			String title, String jobType, String career,
 			String hiringProcess, String qualifications, String preferred,
-			int mainCategory1Id, int mainCategory2Id, int subCategory1Id,
+			int mainCategory1Id, int subCategory1Id, int mainCategory2Id,
 			int subCategory2Id, String companyName) {
 		// employment_board_id -> 자동 증가 컬럼.
 		String sql = ""+
@@ -32,8 +32,8 @@ public class DAO {
 		+ "qualifications,"
 		+ "preferred,"
 		+ "main_category1_id,"
-		+ "main_category2_id,"
 		+ "sub_category1_id,"
+		+ "main_category2_id,"
 		+ "sub_category2_id,"
 		+ "company_name"
 		+ ") values ("
@@ -52,8 +52,8 @@ public class DAO {
 			pstmt.setString(5, qualifications);
 			pstmt.setString(6, preferred);
 			pstmt.setInt(7, mainCategory1Id);
-			pstmt.setInt(8, mainCategory2Id);
-			pstmt.setInt(9, subCategory1Id);
+			pstmt.setInt(8, subCategory1Id);
+			pstmt.setInt(9, mainCategory2Id);
 			pstmt.setInt(10, subCategory2Id);
 			pstmt.setString(11, companyName);
 			
