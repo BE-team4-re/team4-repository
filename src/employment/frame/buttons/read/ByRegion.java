@@ -1,4 +1,6 @@
-package src.employment.frame.buttons;
+package src.employment.frame.buttons.read;
+
+import src.employment.frame.buttons.Button;
 
 public class ByRegion extends Button {
     @Override

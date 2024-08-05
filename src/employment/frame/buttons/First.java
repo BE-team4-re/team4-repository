@@ -1,8 +1,8 @@
 package src.employment.frame.buttons;
 
-public class Complete extends Button {
+public class First extends Button {
     @Override
     public void printButton() {
-        System.out.println("Enter. 확인");
+        System.out.println("f. 첫 페이지로");
     }
 }

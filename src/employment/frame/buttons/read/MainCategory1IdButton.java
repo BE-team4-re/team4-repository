@@ -1,4 +1,4 @@
-package src.employment.frame.buttons.update;
+package src.employment.frame.buttons.read;
 
 import src.employment.frame.buttons.Button;
 
