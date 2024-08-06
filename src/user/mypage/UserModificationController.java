@@ -75,6 +75,7 @@ public class UserModificationController {
         if (yn.equals("y")) {
             int result = umd.deleteUser(); // 로그인 탈퇴
             UserMain.loginId = null; // 로그아웃
+            UserMain.id = 0;
             System.out.println("탈퇴가 완료되었습니다.");
             return true;
         } else {

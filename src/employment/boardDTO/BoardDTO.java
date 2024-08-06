@@ -13,6 +13,8 @@ public class BoardDTO {
 	private int subCategory1Id;
 	private int subCategory2Id;
 	private String companyName;
+	private String localName;
+	private String jobName;
 
 	public int getEmploymentBoardId() {
 		return employmentBoardId;
@@ -50,6 +52,8 @@ public class BoardDTO {
 	public String getCompanyName() {
 		return companyName;
 	}
+	public String getLocalName() {return  localName;}
+	public String getJobName() {return jobName;}
 
 	public void setEmploymentBoardId(int employmentBoardId) {
 		this.employmentBoardId = employmentBoardId;
@@ -137,6 +141,25 @@ public class BoardDTO {
 		this.subCategory1Id = subCategory1Id;
 		this.subCategory2Id = subCategory2Id;
 		this.companyName = companyName;
+	}
+
+	public BoardDTO(int employmentBoardId, String title, String jobType, String career,
+					String hiringProcess, String qualifications, String preferred, int mainCategory1Id,
+					int mainCategory2Id, int subCategory1Id, int subCategory2Id, String companyName, String localName, String jobName) {
+		this.employmentBoardId = employmentBoardId;
+		this.title = title;
+		this.jobType = jobType;
+		this.career = career;
+		this.hiringProcess = hiringProcess;
+		this.qualifications = qualifications;
+		this.preferred = preferred;
+		this.mainCategory1Id = mainCategory1Id;
+		this.mainCategory2Id = mainCategory2Id;
+		this.subCategory1Id = subCategory1Id;
+		this.subCategory2Id = subCategory2Id;
+		this.companyName = companyName;
+		this.localName = localName;
+		this.jobName = jobName;
 	}
 	
 }

@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import src.employment.recordDAO.employmentBoard.ReadDetail;
 import src.employment.recordDAO.employmentBoardScrap.Scraper;
-import src.user.MainController;
 
 public class ScrapController {
 

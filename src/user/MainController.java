@@ -2,10 +2,10 @@ package src.user;
 
 import java.util.Scanner;
 
+import src.communication.communicationBoard.CommunicationBoardController;
 import src.employment.EmploymentBoardMain;
 import src.user.login.LoginController;
 import src.user.mypage.ScrapController;
-import src.user.mypage.ScrapDAO;
 import src.user.mypage.UserModificationController;
 import src.user.signup.SignUpController;
 
@@ -16,6 +16,7 @@ public class MainController {
     LoginController lc = new LoginController();
     UserModificationController umc = new UserModificationController();
     ScrapController scr = new ScrapController();
+    private final CommunicationBoardController communicationBoardController = new CommunicationBoardController();
 
     // 메인
     public void startMain() {
@@ -46,8 +47,7 @@ public class MainController {
 
     // 사용자 메인 화면
     public void userMain() {
-        boolean bool = true;
-        while (bool) {
+        while (true) {
             System.out.println("\n-------------------------------------------------------");
             System.out.println("------------------------- 메인 -------------------------");
             System.out.println("-------------------------------------------------------");
@@ -56,21 +56,20 @@ public class MainController {
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
-                    // 채용공고 게시판 이동
-                    EmploymentBoardMain.entrance();
+                    EmploymentBoardMain.entrance(); // 채용공고 게시판 이동
                     break;
                 case "2":
                     // 커뮤니티 이동
+                    communicationBoardController.searchCommunicationBoard(UserMain.id);
                     break;
                 case "3":
                     myPage(); // 마이페이지 이동
                     break;
                 case "4":
-                    bool = false;
                     UserMain.loginId = null; // 로그아웃
                     UserMain.id = 0;
                     System.out.println("로그아웃 되셨습니다.");
-                    break;
+                    return;
                 default:
                     System.out.println("잘못 입력하셨습니다.");
             }
@@ -79,8 +78,7 @@ public class MainController {
 
     // 마이페이지
     public void myPage() {
-        boolean bool = true;
-        while (bool) {
+        while (true) {
             System.out.println("\n-------------------------------------------------------");
             System.out.println("----------------------- 마이페이지 -----------------------");
             System.out.println("-------------------------------------------------------");
@@ -94,7 +92,6 @@ public class MainController {
                 case "2":
                     boolean isdelete = umc.deleteUser(); // 회원 탈퇴
                     if (isdelete) {
-                        bool = false;
                         startMain();
                     }
                     break;
@@ -102,8 +99,7 @@ public class MainController {
                     scr.scrapMain(); // 스크랩 이동
                     break;
                 case "4":
-                    bool = false; // 뒤로 가기
-                    break;
+                    return; // 뒤로 가기
                 default:
                     System.out.println("잘못 입력하셨습니다.");
             }
@@ -115,7 +111,7 @@ public class MainController {
         System.out.println("\n-------------------------------------------------");
         System.out.println("------------------ 회원 정보 수정 ------------------");
         System.out.println("-------------------------------------------------");
-        System.out.println("1. 비밀번호 | 2. 휴대폰 번호 | 3. 이메일");
+        System.out.println("1. 비밀번호 | 2. 휴대폰 번호 | 3. 이메일 | 4. 뒤로가기");
         System.out.print("수정 할 항목을 선택하세요 :");
         String menu = sc.nextLine();
         switch (menu) {
@@ -127,6 +123,8 @@ public class MainController {
                 break;
             case "3":
                 umc.emailUpdate(); // 이메일 수정
+                break;
+            case "4":
                 break;
             default:
                 System.out.println("잘못 입력하셨습니다.");

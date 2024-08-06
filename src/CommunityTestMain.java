@@ -19,7 +19,7 @@ public class CommunityTestMain {
         CommunicationBoardService cs = new CommunicationBoardService();
         CommunicationBoardCommentController ccm = new CommunicationBoardCommentController();
 //        cc.createBoard(id);
-//        cc.updateCommunicationBoard(2);
+        cc.updateCommunicationBoard(2);
 //        cc.deleteCommunicationBoard(4);
 
 
