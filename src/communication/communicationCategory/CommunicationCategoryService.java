@@ -31,7 +31,6 @@ public class CommunicationCategoryService {
                 throw new RuntimeException("커뮤니티 카테고리가 없습니다. 카테고리 추가해주세요.");
             }
             while(rs.next()){
-                System.out.println("asd");
                 int categoryId = rs.getInt("category_id");
                 String category = rs.getNString("category");
                 categoryList.add(new FindCommunicationBoardCategoryDto(categoryId,category));
