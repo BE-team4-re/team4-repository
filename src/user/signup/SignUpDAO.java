@@ -57,7 +57,7 @@ public class SignUpDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 // id 중복 체크
                 if (rs.next()) {
-                    System.out.println("이미 사용중인 아이디입니다 \n다시 입력하세요.1");
+                    System.out.println("이미 사용중인 아이디입니다 \n다시 입력하세요.");
                     return true; // 아이디 존재 시
                 }
             }

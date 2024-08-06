@@ -35,7 +35,7 @@ public class LoginDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("오류 발생1");
+            System.out.println("오류 발생");
         }
         // 결과 반환
         return null;

@@ -38,7 +38,7 @@ public class LoginController {
                     UserMain.id = result.getId();
                     return true;
                 } else {
-                    System.out.println("아이디 또는 비밀번호가 올바르지 않습니다. \n다시 입력하세요1");
+                    System.out.println("아이디 또는 비밀번호가 올바르지 않습니다. \n다시 입력하세요");
                 }
             }
         }

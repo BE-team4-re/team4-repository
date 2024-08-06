@@ -31,8 +31,8 @@ public class UserDTO {
         return id;
     }
 
-    public void setId(int id1) {
-        this.id = id1;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserId() {
