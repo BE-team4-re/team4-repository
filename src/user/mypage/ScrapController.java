@@ -12,7 +12,7 @@ public class ScrapController {
         System.out.println("------------------ 나의 스크랩 ------------------");
         System.out.println("----------------------------------------------");
         sd.printScrap();
-        System.out.print("보고싶은 공고번호를 입력하세요 :");
+        System.out.print("보고싶은 공고번호를 입력하세요 :1");
         String num = sc.nextLine();
 
     }

@@ -97,7 +97,7 @@ public class UserModificationDAO {
 
             return pstmt.executeUpdate(); // SQL문 실행
         } catch (SQLException e) {
-            System.out.println("오류 발생");
+            System.out.println("오류 발생1");
         }
         // 결과 반환
         return 0;

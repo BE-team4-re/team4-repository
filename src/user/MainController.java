@@ -18,7 +18,7 @@ public class MainController {
     // 메인
     public void startMain() {
         while (true) {
-            System.out.println("---------------------------------------------");
+            System.out.println("---------------------------------------------1");
             System.out.println("------------------ 메인 메뉴 ------------------");
             System.out.println("---------------------------------------------");
             System.out.println("1. 회원가입 | 2. 로그인 | 3. 종료");

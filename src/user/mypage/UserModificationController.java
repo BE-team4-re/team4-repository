@@ -15,7 +15,7 @@ public class UserModificationController {
         String pw;
         int result;
         while (true) {
-            System.out.print("수정할 비밀번호를 입력하세요:");
+            System.out.print("수정할 비밀번호를 입력하세요:1");
             pw = sc.nextLine();
             if (check.validationPw(pw)) { // 비밀번호 검증
                 result = umd.updatePw(check.encodingPwd(pw));

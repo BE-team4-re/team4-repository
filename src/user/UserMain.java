@@ -8,7 +8,7 @@ public class UserMain {
 
     public static void main(String[] args) {
         MainController controller = new MainController();
-
+        System.out.println();
         controller.startMain();
     }
 }

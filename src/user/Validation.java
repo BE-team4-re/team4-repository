@@ -63,7 +63,7 @@ public class Validation {
     // 이메일 예외 처리(@필수구분자가 있어야하며 50자 이내)
     public boolean validationEmail(String email) {
         if (!Pattern.matches("^[0-9a-zA-Z._+-=!@#$%^&*(){}:;'<>?/]+@[a-zA-Z.]+$", email)) {
-            System.out.println("이메일 형식이 잘못되었습니다.");
+            System.out.println("이메일 형식이 잘못되었습니다.1");
             return false;
         }
         return true;

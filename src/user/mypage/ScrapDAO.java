@@ -46,7 +46,7 @@ public class ScrapDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("스크랩 정보를 가져오는 중 오류가 발생했습니다.");
+            System.out.println("스크랩 정보를 가져오는 중 오류가 발생했습니다.1");
         }
     }
 

@@ -13,7 +13,7 @@ public class SignUpController {
     // 회원가입
     public void signUpMain() {
         String id, pw, name, gender, phone, birth, email;
-        System.out.println("\n---------------------------------------------");
+        System.out.println("\n---------------------------------------------1");
         System.out.println("------------------ 회원 가입 ------------------");
         System.out.println("---------------------------------------------");
         // 아이디 입력
