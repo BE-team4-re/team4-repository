@@ -438,7 +438,7 @@ public class CommunicationBoardController {
                         commnicationBoardCategotyList.getData().stream()
                             .forEach(category -> {
                                 count.getAndIncrement();
-                                System.out.print(" "+ category.communicationBoardCategoryId() + ". " +category.communicationBoardCategory());
+                                System.out.print(" "+ category.communicationBoardCategoryId() + ". " +category.communicationBoardCategory() + "-> ");
                             });
                         String SelectcategoryId = sc.nextLine();
                         CreateCommunicationBoardDto createCommunicationBoardDto = new CreateCommunicationBoardDto(title,content, id, Integer.valueOf(SelectcategoryId));
