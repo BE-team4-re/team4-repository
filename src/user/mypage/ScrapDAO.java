@@ -12,7 +12,7 @@ public class ScrapDAO {
     Database db = new Database();
 
     // 저장한 스크랩 가져오기
-    public void printScrap() {
+    public boolean printScrap() {
         // SQL 쿼리문
         String sql =
             "SELECT b.employment_Board_id AS employment_Board_id, c.title AS title "
@@ -43,11 +43,12 @@ public class ScrapDAO {
                 }
                 if (!boolScrap) {
                     System.out.println("스크랩된 항목이 없습니다.");
+                    return false;
                 }
             }
         } catch (SQLException e) {
             System.out.println("스크랩 정보를 가져오는 중 오류가 발생했습니다.");
         }
+        return true;
     }
-
 }
