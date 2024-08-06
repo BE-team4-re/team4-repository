@@ -51,7 +51,7 @@ public class Validation {
         return true;
     }
 
-    // 생년월일 예외 처리(숫자만 입력가능하며 8자만 허용)
+    // 생년월일 예외 처리(숫자만 입력가능하며 자만 허용)
     public boolean validationBirth(String birth) {
         if (!Pattern.matches("^\\d{8}$", birth)) {
             System.out.println("생년월일은 8자인 숫자만 입력가능합니다.");
