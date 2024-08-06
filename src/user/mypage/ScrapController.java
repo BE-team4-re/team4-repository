@@ -14,6 +14,7 @@ public class ScrapController {
         if (sd.printScrap()) {
             System.out.print("보고싶으면 채용게시물 번호를 입력하세요 :");
             String num = sc.nextLine();
+
         }
     }
 }
