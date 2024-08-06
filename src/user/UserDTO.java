@@ -4,6 +4,7 @@ package src.user;
 public class UserDTO {
 
     // 필드 선언
+    private int id;
     private String userId;
     private String userPw;
     private String userName;
@@ -22,6 +23,17 @@ public class UserDTO {
         this.userPhone = userPhone;
         this.userBirth = userBirth;
         this.userEmail = userEmail;
+    }
+
+    public UserDTO() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserId() {

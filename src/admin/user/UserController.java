@@ -1,5 +1,4 @@
 package src.admin.user;
-import src.user.Controller;
 
 import java.util.Scanner;
 
