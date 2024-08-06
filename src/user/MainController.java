@@ -47,8 +47,7 @@ public class MainController {
 
     // 사용자 메인 화면
     public void userMain() {
-        boolean bool = true;
-        while (bool) {
+        while (true) {
             System.out.println("\n-------------------------------------------------------");
             System.out.println("------------------------- 메인 -------------------------");
             System.out.println("-------------------------------------------------------");
@@ -67,11 +66,10 @@ public class MainController {
                     myPage(); // 마이페이지 이동
                     break;
                 case "4":
-                    bool = false;
                     UserMain.loginId = null; // 로그아웃
                     UserMain.id = 0;
                     System.out.println("로그아웃 되셨습니다.");
-                    break;
+                    return;
                 default:
                     System.out.println("잘못 입력하셨습니다.");
             }
@@ -80,8 +78,7 @@ public class MainController {
 
     // 마이페이지
     public void myPage() {
-        boolean bool = true;
-        while (bool) {
+        while (true) {
             System.out.println("\n-------------------------------------------------------");
             System.out.println("----------------------- 마이페이지 -----------------------");
             System.out.println("-------------------------------------------------------");
@@ -95,7 +92,6 @@ public class MainController {
                 case "2":
                     boolean isdelete = umc.deleteUser(); // 회원 탈퇴
                     if (isdelete) {
-                        bool = false;
                         startMain();
                     }
                     break;
@@ -103,8 +99,7 @@ public class MainController {
                     scr.scrapMain(); // 스크랩 이동
                     break;
                 case "4":
-                    bool = false; // 뒤로 가기
-                    break;
+                    return; // 뒤로 가기
                 default:
                     System.out.println("잘못 입력하셨습니다.");
             }

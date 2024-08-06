@@ -5,6 +5,8 @@ import src.admin.employment.EmploymentController;
 import src.admin.user.UserController;
 
 import java.util.Scanner;
+import src.user.MainController;
+import src.user.UserMain;
 
 public class AdminController {
     Scanner scanner = new Scanner(System.in);
@@ -28,7 +30,10 @@ public class AdminController {
                     categoryController.askCategoryMenu();
                     break;
                 case "4":
-                    //로그아웃하기
+                    // 로그아웃
+                    UserMain.loginId = null;
+                    UserMain.id = 0;
+                    System.out.println("로그아웃 되셨습니다.");
                     return;
                 case "5":
                     System.exit(0);
