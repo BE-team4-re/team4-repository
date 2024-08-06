@@ -1,6 +1,5 @@
 package src.user;
 
-import src.admin.User;
 
 public class UserDTO {
 
