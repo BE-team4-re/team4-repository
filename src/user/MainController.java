@@ -1,6 +1,8 @@
 package src.user;
 
 import java.util.Scanner;
+
+import src.employment.EmploymentBoardMain;
 import src.user.login.LoginController;
 import src.user.mypage.ScrapController;
 import src.user.mypage.ScrapDAO;
@@ -55,6 +57,7 @@ public class MainController {
             switch (menu) {
                 case "1":
                     // 채용공고 게시판 이동
+                    EmploymentBoardMain.entrance();
                     break;
                 case "2":
                     // 커뮤니티 이동
