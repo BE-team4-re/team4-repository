@@ -1,10 +1,9 @@
 package src.communication.communicationBoard;
 
-import src.communication.communicationBoard.dto.CreateCommunicationBoardDto;
-import src.communication.communicationBoard.dto.PagenationCommunicationBoardDto;
-import src.communication.communicationBoard.dto.SearchCommunicationBoardDto;
-import src.communication.communicationBoard.dto.UpdateCommunicationBoardDto;
+import src.communication.communicationBoard.dto.*;
 import src.communication.communicationBoard.repository.CommunicationBoardRepository;
+import src.communication.communicationComment.dto.FindCommunicationBoardCommentDto;
+import src.communication.communicationComment.repository.CommunicationBoardCommentRepository;
 import src.database.Database;
 import src.util.Response;
 
@@ -18,8 +17,9 @@ import java.util.List;
 public class CommunicationBoardService {
     private final Database database = new Database();
     private final CommunicationBoardRepository cbSQL = new CommunicationBoardRepository();
+    private final CommunicationBoardCommentRepository cbcSQL = new CommunicationBoardCommentRepository();
 
-
+    // 커뮤니티 게시물 생성
     public Response<Integer> create(CreateCommunicationBoardDto createCommunitionBoardDto) {
         boolean success = true;
         String message = "커뮤니케이션 게시물 등록 성공했습니다.";
@@ -39,6 +39,7 @@ public class CommunicationBoardService {
         }
         return new Response<>(success,message,1);
     }
+    // 커뮤니티 게시물 수정
     public  Response<Integer> updateCommunicationBoard(int communicationBoardId, String title, String content){
         boolean success = true;
         String message = "커뮤니케이션 게시물 수정을 성공했습니다.";
@@ -50,17 +51,19 @@ public class CommunicationBoardService {
             pstmt.setString(2,content);
             pstmt.setInt(3,communicationBoardId);
             int row = pstmt.executeUpdate();
-            if(row == 0) throw new SQLException();
+            if(row != 1) throw new SQLException();
         }catch (SQLException e){
             success = false;
             message = "커뮤니케이션 게시물의 수정을 실패했습니다.";
         }
         return new Response<>(success, message,1);
     }
-    public Response<UpdateCommunicationBoardDto> findCommunicationIdByCommunicationBoard(int communicationBoardId){
+    // 하나의 게시물 내용을 가져온다.
+    public Response<FindOneCommunicationBoardDto> findCommunicationIdByCommunicationBoard(int communicationBoardId){
         boolean success = true;
         String message = "커뮤니케이션 게시물 조회를 성공했습니다.";
-        UpdateCommunicationBoardDto updateCommunicationBoardDto = null;
+        FindOneCommunicationBoardDto findOneCommunicationBoardDto = null;
+        List<FindCommunicationBoardCommentDto> commentList = new ArrayList<>();
         try(
             Connection conn = database.connect();
             PreparedStatement pstmt = conn.prepareStatement(cbSQL.findOne());
@@ -69,19 +72,65 @@ public class CommunicationBoardService {
             try(ResultSet rs = pstmt.executeQuery()){
                 if(!rs.isBeforeFirst()) throw new SQLException();
                 while(rs.next()){
+                    int findCommunicationBoardId = rs.getInt("communicationboard_id");
                     String title = rs.getString("title");
                     String content = rs.getString("content");
-                    updateCommunicationBoardDto = new UpdateCommunicationBoardDto(title,content);
+                    String userId = rs.getString("userId");
+                    int id = rs.getInt("id");
+                    findOneCommunicationBoardDto = new FindOneCommunicationBoardDto(findCommunicationBoardId, title, content, userId, id);
                 }
             }
         }catch (SQLException e){
             message = "커뮤니티 게시물의 조회를 실패했습니다.";
-            System.out.println("없다면???");
             success = false;
         }
-        return new Response<>(success, message, updateCommunicationBoardDto);
+        FindOneCommnicationBoardNCommentDto findOneCommnicationBoardNCommentDto = new FindOneCommnicationBoardNCommentDto(findOneCommunicationBoardDto, commentList);
+        return new Response<>(success, message, findOneCommunicationBoardDto);
     }
 
+    // 하나의 게시물과 댓글과 대댓글을 가져온다.
+    public Response<FindOneCommnicationBoardNCommentDto> findOneCommunicationBoardIdByBoardComment(int communicationBoardId){
+        boolean success = true;
+        String message = "커뮤니케이션 게시물 조회를 성공했습니다.";
+        FindOneCommunicationBoardDto findOneCommunicationBoardDto = null;
+        List<FindCommunicationBoardCommentDto> commentList = new ArrayList<>();
+        try(
+            Connection conn = database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(cbSQL.findOne());
+            PreparedStatement pstmtComment = conn.prepareStatement(cbcSQL.findComment());
+        ){
+            pstmt.setInt(1,communicationBoardId);
+            pstmtComment.setInt(1, communicationBoardId);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(!rs.isBeforeFirst()) throw new SQLException();
+                while(rs.next()){
+                    int findCommunicationBoardId = rs.getInt("communicationboard_id");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    String userId = rs.getString("userId");
+                    int id = rs.getInt("id");
+                    findOneCommunicationBoardDto = new FindOneCommunicationBoardDto(findCommunicationBoardId, title, content, userId, id);
+                }
+            }
+            try(ResultSet rs = pstmtComment.executeQuery()){
+                while (rs.next()){
+                    int commentId = rs.getInt("comment_id");
+                    String comment = rs.getString("comment");
+                    String userId =rs.getString("userid");
+                    int parentId = rs.getInt("parent_id");
+                    int id = rs.getInt("id");
+                    commentList.add(new FindCommunicationBoardCommentDto(commentId,comment,userId, parentId, id));
+                }
+            }
+        }catch (SQLException e){
+            message = "커뮤니티 게시물의 조회를 실패했습니다.";
+            success = false;
+        }
+        FindOneCommnicationBoardNCommentDto findOneCommnicationBoardNCommentDto = new FindOneCommnicationBoardNCommentDto(findOneCommunicationBoardDto, commentList);
+        return new Response<>(success, message, findOneCommnicationBoardNCommentDto);
+    }
+
+    // 커뮤니티 게시물 삭제
     public Response<Integer> delete(int communicationBoardId) {
         boolean success = true;
         String message = "삭제 성공";
@@ -152,10 +201,6 @@ public class CommunicationBoardService {
             for(int i = 0; i < params.size(); i++){
                 pstmtS.setObject(i + 1, params.get(i));
             }
-            System.out.println(sql);
-            for(Object pp : params){
-                System.out.println( "파람 안 => " +pp);
-            }
             ResultSet rsS = pstmtS.executeQuery();
             if(!rsS.isBeforeFirst()) throw new SQLException();
             while(rsS.next()){
@@ -169,7 +214,6 @@ public class CommunicationBoardService {
         }catch (SQLException e){
             success = false;
             message = "검색실패";
-            e.printStackTrace();
         }
        return new Response<PagenationCommunicationBoardDto>(success, message, resultCommunicationBoard);
     }

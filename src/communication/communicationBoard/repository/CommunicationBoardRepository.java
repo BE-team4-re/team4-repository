@@ -6,7 +6,10 @@ public class CommunicationBoardRepository {
             "(?, ?, ?,?)";
     }
     public String findOne(){
-        return "select title, content from communication_board where communicationboard_id  = ?";
+        return "select communicationboard_id, title, content,u.userId, u.id " +
+            "from communication_board cb " +
+            "inner join `user` u on cb.id = u.id " +
+            "where communicationboard_id = ?";
     }
     public String update(){
         return "UPDATE communication_board SET title = ?, content = ? where communicationboard_id = ?";

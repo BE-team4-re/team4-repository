@@ -5,6 +5,7 @@ import src.communication.communicationBoard.CommunicationBoardService;
 import src.communication.communicationBoard.dto.CreateCommunicationBoardDto;
 import src.communication.communicationBoard.dto.UpdateCommunicationBoardDto;
 import src.communication.communicationCategory.CommunicationCategoryService;
+import src.communication.communicationComment.CommunicationBoardCommentController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class CommunityTestMain {
     public static void main(String[] args){
         CommunicationBoardController cc = new CommunicationBoardController();
         CommunicationBoardService cs = new CommunicationBoardService();
+        CommunicationBoardCommentController ccm = new CommunicationBoardCommentController();
 //        cc.createBoard(id);
 //        cc.updateCommunicationBoard(2);
 //        cc.deleteCommunicationBoard(4);
@@ -23,7 +25,9 @@ public class CommunityTestMain {
 
 
 //        cs.searchCommunicationBoard(1,2,"제목");
-        cc.searchCommunicationBoard();
+        cc.searchCommunicationBoard(1);
+//        cc.findOneCommunicationBoard(2,1);
+//        ccm.createCommunicationBoardComment(2,1);
 
     }
 }
