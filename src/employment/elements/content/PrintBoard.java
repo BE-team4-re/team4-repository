@@ -1,4 +1,4 @@
-package src.employment.elements.contents;
+package src.employment.elements.content;
 
 
 import src.employment.EmploymentBoardMain;

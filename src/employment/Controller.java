@@ -4,7 +4,7 @@ package src.employment;
 import src.employment.board.BoardCategoryEnum;
 import src.employment.elements.Buttons;
 import src.employment.elements.buttons.*;
-import src.employment.elements.contents.PrintBoard;
+import src.employment.elements.content.PrintBoard;
 
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Controller {
 
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     // 메인 페이지
     public void printMain() {
@@ -95,8 +95,8 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
-            buttonList.add(Buttons.byJob);
-            buttonList.add(Buttons.byJobDetail);
+//            buttonList.add(Buttons.byJob);
+//            buttonList.add(Buttons.byJobDetail);
             buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
@@ -109,14 +109,14 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
-                case "J" -> {
-                    breakFlag = true;
-                    printByJob();
-                }
-                case "D" -> {
-                    breakFlag = true;
-                    printByJobDetail();
-                }
+//                case "J" -> {
+//                    breakFlag = true;
+//                    printByJob();
+//                }
+//                case "D" -> {
+//                    breakFlag = true;
+//                    printByJobDetail();
+//                }
                 case "L" -> {
                     breakFlag = true;
                     printByRegionDetail();
@@ -169,8 +169,8 @@ public class Controller {
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
             buttonList.add(Buttons.byJobDetail);
-            buttonList.add(Buttons.byRegion);
-            buttonList.add(Buttons.byRegionDetail);
+//            buttonList.add(Buttons.byRegion);
+//            buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
             buttonList.add(Buttons.nextPage);
@@ -182,18 +182,18 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
-                case "R" -> {
-                    breakFlag = true;
-                    printByRegion();
-                }
+//                case "R" -> {
+//                    breakFlag = true;
+//                    printByRegion();
+//                }
                 case "D" -> {
                     breakFlag = true;
                     printByJobDetail();
                 }
-                case "L" -> {
-                    breakFlag = true;
-                    printByRegionDetail();
-                }
+//                case "L" -> {
+//                    breakFlag = true;
+//                    printByRegionDetail();
+//                }
                 case "S" -> {
                     breakFlag = true;
                     printByRegionDetailAndJobDetail();
@@ -250,9 +250,9 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
-            buttonList.add(Buttons.byJob);
-            buttonList.add(Buttons.byJobDetail);
-            buttonList.add(Buttons.byRegion);
+//            buttonList.add(Buttons.byJob);
+//            buttonList.add(Buttons.byJobDetail);
+//            buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
@@ -265,18 +265,18 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
-                case "J" -> {
-                    breakFlag = true;
-                    printByJob();
-                }
-                case "D" -> {
-                    breakFlag = true;
-                    printByJobDetail();
-                }
-                case "R" -> {
-                    breakFlag = true;
-                    printByRegion();
-                }
+//                case "J" -> {
+//                    breakFlag = true;
+//                    printByJob();
+//                }
+//                case "D" -> {
+//                    breakFlag = true;
+//                    printByJobDetail();
+//                }
+//                case "R" -> {
+//                    breakFlag = true;
+//                    printByRegion();
+//                }
                 case "L" -> {
                     breakFlag = true;
                     printByRegionDetail();
@@ -337,10 +337,10 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
-            buttonList.add(Buttons.byJob);
+//            buttonList.add(Buttons.byJob);
             buttonList.add(Buttons.byJobDetail);
-            buttonList.add(Buttons.byRegion);
-            buttonList.add(Buttons.byRegionDetail);
+//            buttonList.add(Buttons.byRegion);
+//            buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
             buttonList.add(Buttons.nextPage);
@@ -352,22 +352,22 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
-                case "J" -> {
-                    breakFlag = true;
-                    printByJob();
-                }
+//                case "J" -> {
+//                    breakFlag = true;
+//                    printByJob();
+//                }
                 case "D" -> {
                     breakFlag = true;
                     printByJobDetail();
                 }
-                case "R" -> {
-                    breakFlag = true;
-                    printByRegion();
-                }
-                case "L" -> {
-                    breakFlag = true;
-                    printByRegionDetail();
-                }
+//                case "R" -> {
+//                    breakFlag = true;
+//                    printByRegion();
+//                }
+//                case "L" -> {
+//                    breakFlag = true;
+//                    printByRegionDetail();
+//                }
                 case "S" -> {
                     breakFlag = true;
                     printByRegionDetailAndJobDetail();
@@ -431,10 +431,10 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
-            buttonList.add(Buttons.byJob);
-            buttonList.add(Buttons.byJobDetail);
-            buttonList.add(Buttons.byRegion);
-            buttonList.add(Buttons.byRegionDetail);
+//            buttonList.add(Buttons.byJob);
+//            buttonList.add(Buttons.byJobDetail);
+//            buttonList.add(Buttons.byRegion);
+//            buttonList.add(Buttons.byRegionDetail);
             buttonList.add(Buttons.byRegionDetailAndJobDetail);
             buttonList.add(Buttons.prevPage);
             buttonList.add(Buttons.nextPage);
@@ -446,26 +446,26 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
-                case "R" -> {
-                    breakFlag = true;
-                    printByRegion();
-                }
-                case "J" -> {
-                    breakFlag = true;
-                    printByJob();
-                }
-                case "L" -> {
-                    breakFlag = true;
-                    printByRegionDetail();
-                }
+//                case "R" -> {
+//                    breakFlag = true;
+//                    printByRegion();
+//                }
+//                case "J" -> {
+//                    breakFlag = true;
+//                    printByJob();
+//                }
+//                case "L" -> {
+//                    breakFlag = true;
+//                    printByRegionDetail();
+//                }
                 case "S" -> {
                     breakFlag = true;
                     printByRegionDetailAndJobDetail();
                 }
-                case "D" -> {
-                    breakFlag = true;
-                    printByJobDetail();
-                }
+//                case "D" -> {
+//                    breakFlag = true;
+//                    printByJobDetail();
+//                }
                 case ">" -> {
                     if (PrintBoard.maxPage > pageIdx) {
                         pageIdx++;

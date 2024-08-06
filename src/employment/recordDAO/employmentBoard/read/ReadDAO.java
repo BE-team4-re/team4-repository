@@ -30,7 +30,7 @@ public class ReadDAO {
 		Response<List<BoardDTO>> response = null;
 
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
-		String sql = "select * from employment_board";
+		String sql = "select * from employment_board order by employment_board_id desc";
 
 		try {
 			conn = db.connect();
@@ -92,7 +92,7 @@ public class ReadDAO {
 
 		Response<BoardDTO> response = null;
 
-		String sql = "select * from employment_board where employment_board_id=?";
+		String sql = "select * from employment_board where employment_board_id=? order by employment_board_id desc";
 
 		try {
 
@@ -156,7 +156,7 @@ public class ReadDAO {
 		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 
-		String sql = "select * from employment_board where main_category1_id=1";
+		String sql = "select * from employment_board where main_category1_id=1 order by employment_board_id desc";
 
 		try {
 
@@ -216,7 +216,7 @@ public class ReadDAO {
 		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 
-		String sql = "select * from employment_board where main_category2_id=19";
+		String sql = "select * from employment_board where main_category2_id=19 order by employment_board_id desc";
 
 		try {
 
@@ -276,7 +276,7 @@ public class ReadDAO {
 		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 
-		String sql = "select * from employment_board where main_category1_id=1 and sub_category1_id=?";
+		String sql = "select * from employment_board where main_category1_id=1 and sub_category1_id=? order by employment_board_id desc";
 
 		try {
 
@@ -337,7 +337,7 @@ public class ReadDAO {
 		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 
-		String sql = "select * from employment_board where sub_category1_id=? and sub_category2_id=?";
+		String sql = "select * from employment_board where sub_category1_id=? and sub_category2_id=? order by employment_board_id desc";
 
 		try {
 
@@ -399,7 +399,7 @@ public class ReadDAO {
 		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 
-		String sql = "select * from employment_board where main_category2_id=19 and sub_category2_id=?";
+		String sql = "select * from employment_board where main_category2_id=19 and sub_category2_id=? order by employment_board_id desc";
 
 		try {
 
