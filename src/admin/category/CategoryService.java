@@ -59,38 +59,32 @@ public class CategoryService {
     }
 
     //카테고리 추가
-    public int insertCategory(String categoryName, int mainCategoryId){
-        int newSubCategoryId = 0;
-
-        String selectAutoIncrementQuery = "SELECT AUTO_INCREMENT FROM information_schema.TABLES " +
-                "WHERE TABLE_SCHEMA = 'miniProject4' " +
-                "AND TABLE_NAME = 'employment_board_category'";
-
-        String insertQuery = "INSERT INTO employment_board_category (maincategory_id, subcategory_id, category_name) VALUES (?,?,?)";
+    public void insertCategory(String categoryName, int mainCategoryId) {
+        String maxCategoryIdQuery = "SELECT MAX(category_id) AS max_id FROM employment_board_category";
+        String insertQuery = "INSERT INTO employment_board_category (maincategory_id, subcategory_id, category_name) VALUES (?, ?, ?)";
+        int maxId = 0;
 
         try (Connection connection = db.connect();
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(selectAutoIncrementQuery)) {
+             PreparedStatement psMax = connection.prepareStatement(maxCategoryIdQuery);
+             ResultSet rs = psMax.executeQuery()) {
 
+            // Move cursor to the first row of the result set
             if (rs.next()) {
-                newSubCategoryId = rs.getInt("AUTO_INCREMENT");
+                maxId = rs.getInt("max_id") + 1;
             }
 
-            try (PreparedStatement ps = connection.prepareStatement(insertQuery)) {
-                ps.setInt(1, mainCategoryId);
-                ps.setInt(2, newSubCategoryId);
-                ps.setString(3, categoryName);
-
-                int rows = ps.executeUpdate();
-                if (rows == 1) {
-                    System.out.println("정상적으로 삽입되었습니다.");
-                }
-                return rows;
+            try (PreparedStatement psInsert = connection.prepareStatement(insertQuery)) {
+                psInsert.setInt(1, mainCategoryId);
+                psInsert.setInt(2, maxId);
+                psInsert.setString(3, categoryName);
+                psInsert.executeUpdate();
             }
+            System.out.println("카테고리 추가가 완료되었습니다.");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
     }
+
 
 }

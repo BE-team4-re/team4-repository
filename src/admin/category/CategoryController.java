@@ -66,17 +66,18 @@ public class CategoryController {
                             System.out.println("지역이름은 비어있을 수 없습니다.");
                         } else {
                             categoryService.insertCategory(localName, 1);
+                            ;
                             return;
                         }
                     }
                 case "2":
                     while (true) {
-                        System.out.println("추가하실 카테고리 직무이름을 작성해주세요: ");
+                        System.out.print("추가하실 카테고리 직무이름을 작성해주세요: ");
                         String jobName = scanner.nextLine();
                         if (jobName == null || jobName.trim().isEmpty()) {
                             System.out.println("직무이름은 비어있을 수 없습니다.");
                         }else{
-                            categoryService.insertCategory(jobName, 19);
+                            categoryService.insertCategory(jobName, 2);
                             return;
                         }
                     }
