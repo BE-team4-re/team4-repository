@@ -19,15 +19,19 @@ public enum BoardCategoryEnum {
 	CATEGORY_ID_15(1, 15, "경북"),
 	CATEGORY_ID_16(1, 16, "경남"),
 	CATEGORY_ID_17(1, 17, "제주"),
-	CATEGORY_ID_19(2, 18, "개발PM"),
-	CATEGORY_ID_20(2, 19, "게임개발"),
-	CATEGORY_ID_21(2, 20, "데이터분석가"),
-	CATEGORY_ID_22(2, 21, "백엔드"),
-	CATEGORY_ID_23(2, 22, "프론트엔드"),
-	CATEGORY_ID_24(2, 23, "정보보안"),
-	CATEGORY_ID_25(2, 24, "앱개발"),
-	CATEGORY_ID_26(2, 25, "풀스택");
-	
+	CATEGORY_ID_18(2, 18, "인공지능"),
+	CATEGORY_ID_19(2, 19, "게임개발"),
+	CATEGORY_ID_20(2, 20, "데이터분석가"),
+	CATEGORY_ID_21(2, 21, "백엔드"),
+	CATEGORY_ID_22(2, 22, "프론트엔드"),
+	CATEGORY_ID_23(2, 23, "정보보안"),
+	CATEGORY_ID_24(2, 24, "앱개발"),
+	CATEGORY_ID_25(2, 25, "풀스택"),
+	CATEGORY_ID_26(2, 26, "임베디드"),
+	CATEGORY_ID_27(2, 27, "devops"),
+	CATEGORY_ID_28(2, 28, "클라우드"),
+	CATEGORY_ID_29(2, 29, "네트워크");
+
 	private final int mainId;
 	private final int subId;
 	private final String categoryName;

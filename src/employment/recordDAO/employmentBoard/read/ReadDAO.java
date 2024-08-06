@@ -209,14 +209,14 @@ public class ReadDAO {
 		return response;
 	}
 
-	// select * from employment_board where main_category2_id=19";
+	// select * from employment_board where main_category2_id=2";
 	// -> 직무별 조회
 	public Response<List<BoardDTO>> readByJob() {
 
 		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 
-		String sql = "select * from employment_board where main_category2_id=19 order by employment_board_id desc";
+		String sql = "select * from employment_board where main_category2_id=2 order by employment_board_id desc";
 
 		try {
 
@@ -392,14 +392,14 @@ public class ReadDAO {
 		return response;
 	}
 
-	// select * from employment_board where main_category2_id=19 and sub_category2_id=?";
+	// select * from employment_board where main_category2_id=2 and sub_category2_id=?";
 	// -> 상세 직무별 조회
 	public Response<List<BoardDTO>> readByJobDetail(int jobCode) {
 
 		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
 
-		String sql = "select * from employment_board where main_category2_id=19 and sub_category2_id=? order by employment_board_id desc";
+		String sql = "select * from employment_board where main_category2_id=2 and sub_category2_id=? order by employment_board_id desc";
 
 		try {
 

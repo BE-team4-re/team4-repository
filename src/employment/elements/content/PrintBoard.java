@@ -65,10 +65,8 @@ public class PrintBoard {
 								+ "자격요건:%s | "
 								+ "우대사항:%s | "
 								+ "회사명:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 지역:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 직무:%s\n",
+								+ "지역:%s | "
+								+ "직무:%s\n",
 						board.getEmploymentBoardId(),
 						board.getTitle(),
 						board.getJobType(),
@@ -77,9 +75,7 @@ public class PrintBoard {
 						board.getQualifications(),
 						board.getPreferred(),
 						board.getCompanyName(),
-						convertCategoryIdToName(board.getMainCategory1Id()),
 						convertCategoryIdToName(board.getSubCategory1Id()),
-						convertCategoryIdToName(board.getMainCategory2Id()),
 						convertCategoryIdToName(board.getSubCategory2Id())
 				);
 			}
@@ -99,10 +95,8 @@ public class PrintBoard {
 						+ "자격요건:%s | "
 						+ "우대사항:%s | "
 						+ "회사명:%s | "
-						+ "메인카테고리:%s | "
-						+ "상세 지역:%s | "
-						+ "메인카테고리:%s | "
-						+ "상세 직무:%s\n",
+						+ "지역:%s | "
+						+ "직무:%s\n",
 				board.getEmploymentBoardId(),
 				board.getTitle(),
 				board.getJobType(),
@@ -111,9 +105,7 @@ public class PrintBoard {
 				board.getQualifications(),
 				board.getPreferred(),
 				board.getCompanyName(),
-				convertCategoryIdToName(board.getMainCategory1Id()),
 				convertCategoryIdToName(board.getSubCategory1Id()),
-				convertCategoryIdToName(board.getMainCategory2Id()),
 				convertCategoryIdToName(board.getSubCategory2Id())
 		);
 	}
@@ -136,10 +128,8 @@ public class PrintBoard {
 								+ "자격요건:%s | "
 								+ "우대사항:%s | "
 								+ "회사명:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 지역:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 직무:%s\n",
+								+ "지역:%s | "
+								+ "직무:%s\n",
 						board.getEmploymentBoardId(),
 						board.getTitle(),
 						board.getJobType(),
@@ -148,9 +138,7 @@ public class PrintBoard {
 						board.getQualifications(),
 						board.getPreferred(),
 						board.getCompanyName(),
-						convertCategoryIdToName(board.getMainCategory1Id()),
 						convertCategoryIdToName(board.getSubCategory1Id()),
-						convertCategoryIdToName(board.getMainCategory2Id()),
 						convertCategoryIdToName(board.getSubCategory2Id())
 				);
 			}
@@ -175,10 +163,8 @@ public class PrintBoard {
 								+ "자격요건:%s | "
 								+ "우대사항:%s | "
 								+ "회사명:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 지역:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 직무:%s\n",
+								+ "지역:%s | "
+								+ "직무:%s\n",
 						board.getEmploymentBoardId(),
 						board.getTitle(),
 						board.getJobType(),
@@ -187,9 +173,7 @@ public class PrintBoard {
 						board.getQualifications(),
 						board.getPreferred(),
 						board.getCompanyName(),
-						convertCategoryIdToName(board.getMainCategory1Id()),
 						convertCategoryIdToName(board.getSubCategory1Id()),
-						convertCategoryIdToName(board.getMainCategory2Id()),
 						convertCategoryIdToName(board.getSubCategory2Id())
 				);
 			}
@@ -214,10 +198,8 @@ public class PrintBoard {
 								+ "자격요건:%s | "
 								+ "우대사항:%s | "
 								+ "회사명:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 지역:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 직무:%s\n",
+								+ "지역:%s | "
+								+ "직무:%s\n",
 						board.getEmploymentBoardId(),
 						board.getTitle(),
 						board.getJobType(),
@@ -226,9 +208,7 @@ public class PrintBoard {
 						board.getQualifications(),
 						board.getPreferred(),
 						board.getCompanyName(),
-						convertCategoryIdToName(board.getMainCategory1Id()),
 						convertCategoryIdToName(board.getSubCategory1Id()),
-						convertCategoryIdToName(board.getMainCategory2Id()),
 						convertCategoryIdToName(board.getSubCategory2Id())
 				);
 			}
@@ -253,10 +233,8 @@ public class PrintBoard {
 								+ "자격요건:%s | "
 								+ "우대사항:%s | "
 								+ "회사명:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 지역:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 직무:%s\n",
+								+ "지역:%s | "
+								+ "직무:%s\n",
 						board.getEmploymentBoardId(),
 						board.getTitle(),
 						board.getJobType(),
@@ -265,9 +243,7 @@ public class PrintBoard {
 						board.getQualifications(),
 						board.getPreferred(),
 						board.getCompanyName(),
-						convertCategoryIdToName(board.getMainCategory1Id()),
 						convertCategoryIdToName(board.getSubCategory1Id()),
-						convertCategoryIdToName(board.getMainCategory2Id()),
 						convertCategoryIdToName(board.getSubCategory2Id())
 				);
 			}
@@ -292,10 +268,8 @@ public class PrintBoard {
 								+ "자격요건:%s | "
 								+ "우대사항:%s | "
 								+ "회사명:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 지역:%s | "
-								+ "메인카테고리:%s | "
-								+ "상세 직무:%s\n",
+								+ "지역:%s | "
+								+ "직무:%s\n",
 						board.getEmploymentBoardId(),
 						board.getTitle(),
 						board.getJobType(),
@@ -304,9 +278,7 @@ public class PrintBoard {
 						board.getQualifications(),
 						board.getPreferred(),
 						board.getCompanyName(),
-						convertCategoryIdToName(board.getMainCategory1Id()),
 						convertCategoryIdToName(board.getSubCategory1Id()),
-						convertCategoryIdToName(board.getMainCategory2Id()),
 						convertCategoryIdToName(board.getSubCategory2Id())
 				);
 			}
