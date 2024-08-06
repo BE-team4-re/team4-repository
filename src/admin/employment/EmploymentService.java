@@ -28,7 +28,7 @@ public class EmploymentService {
             ps.setString(5,qualifications);
             ps.setString(6,preferred);
             ps.setInt(7,1);
-            ps.setInt(8,19);
+            ps.setInt(8,2);
             ps.setInt(9,location);
             ps.setInt(10,empNo);
             ps.setString(11,companyName);
@@ -82,6 +82,8 @@ public class EmploymentService {
                 .anyMatch(dto -> dto.getEmploymentBoardId() == userInputId);
     }
 
+
+    //존재하는 컬럼인지 상수로 저장한 리스트
     private static final List<String> VALID_COLUMNS = Arrays.asList(
             "title", "job_type", "career", "hiring_process", "qualifications", "preferred", "sub_category1_id","sub_category2_id");
 
@@ -91,6 +93,7 @@ public class EmploymentService {
     }
 
 
+    //채용공고 업데이트
     public <T> int updateEmpBoard(String columnName, T updateContent, int emp_board_id ) {
         if (!isValidColumn(columnName)) {
             throw new IllegalArgumentException("Invalid column name: " + columnName);
