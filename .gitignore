@@ -22,3 +22,8 @@ out/
 *.zip
 *.tar.gz
 *.rar
+
+.project
+.classpath
+src/database/
+.idea/
