@@ -150,24 +150,43 @@ public class CommunicationBoardController {
                         AtomicInteger count = new AtomicInteger(0);
                         System.out.println("=====작성한 댓글 대댓글 ======");
                         // 내가 작성한 댓글과 대댓글을 보여주며 없다면 다시 게시물을 보여준다.
-                        response.getData().commentList().stream()
-                            .forEach(comment -> {
-                                if(comment.parentId() == 0){
-                                    if(comment.id() == id){
-                                        System.out.println(comment.commentId() + "번");
-                                        System.out.println("🐽"+comment.userId());
-                                        System.out.println("-> " + comment.comment());
-                                        count.getAndIncrement();
+                        if(id == 0){
+                            response.getData().commentList().stream()
+                                .forEach(comment -> {
+                                    if(comment.parentId() == 0){
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("🐽"+comment.userId());
+                                            System.out.println("-> " + comment.comment());
+                                            count.getAndIncrement();
+                                    }else{
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("    🐽"+comment.userId());
+                                            System.out.println("    -> " + comment.comment());
+                                            count.getAndIncrement();
                                     }
-                                }else{
-                                    if(comment.id() == id){
-                                        System.out.println(comment.commentId() + "번");
-                                        System.out.println("    🐽"+comment.userId());
-                                        System.out.println("    -> " + comment.comment());
-                                        count.getAndIncrement();
+                                });
+
+                        }else{
+                            response.getData().commentList().stream()
+                                .forEach(comment -> {
+                                    if(comment.parentId() == 0){
+                                        if(comment.id() == id){
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("🐽"+comment.userId());
+                                            System.out.println("-> " + comment.comment());
+                                            count.getAndIncrement();
+                                        }
+                                    }else{
+                                        if(comment.id() == id){
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("    🐽"+comment.userId());
+                                            System.out.println("    -> " + comment.comment());
+                                            count.getAndIncrement();
+                                        }
                                     }
-                                }
-                            });
+                                });
+                        }
+
                         System.out.println("======================");
                         // count를 통해 count가 0이 아니라면 내가 쓴 댓글이 있다는것이고 0이라면 내가 작성한 댓글과 대댓글이 없다.
                         if(Integer.valueOf(String.valueOf(count)) == 0) {
@@ -215,25 +234,47 @@ public class CommunicationBoardController {
                     while (true) {
                         AtomicInteger count = new AtomicInteger(0);
                         System.out.println("=====작성한 댓글 대댓글 ======");
-                        // 내가 작성한 댓글들을 보여준다.
-                        response.getData().commentList().stream()
-                            .forEach(comment -> {
-                                if (comment.parentId() == 0) {
-                                    if (comment.id() == id) {
-                                        System.out.println(comment.commentId() + "번");
-                                        System.out.println("🐽" + comment.userId());
-                                        System.out.println("-> " + comment.comment());
-                                        count.getAndIncrement();
+
+                        if(id ==0 ){
+                            // 내가 작성한 댓글들을 보여준다.
+                            response.getData().commentList().stream()
+                                .forEach(comment -> {
+                                    if (comment.parentId() == 0) {
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("🐽" + comment.userId());
+                                            System.out.println("-> " + comment.comment());
+                                            count.getAndIncrement();
+                                    } else {
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("    🐽" + comment.userId());
+                                            System.out.println("    -> " + comment.comment());
+                                            count.getAndIncrement();
                                     }
-                                } else {
-                                    if (comment.id() == id) {
-                                        System.out.println(comment.commentId() + "번");
-                                        System.out.println("    🐽" + comment.userId());
-                                        System.out.println("    -> " + comment.comment());
-                                        count.getAndIncrement();
+                                });
+
+                        }else{
+                            // 내가 작성한 댓글들을 보여준다.
+                            response.getData().commentList().stream()
+                                .forEach(comment -> {
+                                    if (comment.parentId() == 0) {
+                                        if (comment.id() == id) {
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("🐽" + comment.userId());
+                                            System.out.println("-> " + comment.comment());
+                                            count.getAndIncrement();
+                                        }
+                                    } else {
+                                        if (comment.id() == id) {
+                                            System.out.println(comment.commentId() + "번");
+                                            System.out.println("    🐽" + comment.userId());
+                                            System.out.println("    -> " + comment.comment());
+                                            count.getAndIncrement();
+                                        }
                                     }
-                                }
-                            });
+                                });
+
+                        }
+
                         System.out.println("======================");
                         // 내가 작성한 댓글이 있는지 체크
                         if (Integer.valueOf(String.valueOf(count)) == 0) {
@@ -423,9 +464,9 @@ public class CommunicationBoardController {
                     else if(i == page.get(0)) System.out.print("["+i+"], ");
                     else System.out.print(i+", ");
                 }
-                System.out.println("1. 다른 페이지 2. 검색 3. 게시물 선택 4. 나가기");
+                System.out.println("1. 다른 페이지 2. 검색 3. 게시물 선택 4. 게시물 작성 5. 나가기");
                 selectNum = Integer.valueOf(sc.nextLine());
-                if(selectNum == 4) break;
+                if(selectNum == 5) break;
                 // 다른 페이지를 볼 수 있다. 번호 입력해서
                 else if(selectNum == 1){
                     System.out.print("페이지를 번호를 입력해주세요.");
@@ -438,6 +479,8 @@ public class CommunicationBoardController {
                     System.out.print("보고 싶은 게시물을 선택해주세요.");
                     int communicationBoardId = Integer.valueOf(sc.nextLine());
                     findOneCommunicationBoard(communicationBoardId, id);
+                }else if(selectNum == 4){
+                    createCommunicationBoard(id);
                 }
             }
         }
