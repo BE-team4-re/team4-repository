@@ -2,7 +2,6 @@ package src.employment.recordDAO.employmentBoardScrap;
 
 
 import src.database.Database;
-import src.employment.boardDTO.BoardDTO;
 import src.util.Response;
 
 import java.sql.Connection;

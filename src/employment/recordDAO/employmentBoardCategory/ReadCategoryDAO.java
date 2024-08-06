@@ -11,7 +11,7 @@ import java.util.List;
 
 import src.database.Database;
 
-import src.employment.boardDTO.BoardCategoryDTO;
+import src.employment.board.BoardCategoryDTO;
 
 
 public class ReadCategoryDAO {

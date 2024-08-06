@@ -1,7 +1,7 @@
 package src.employment;
 
 
-import src.employment.boardDTO.BoardCategoryEnum;
+import src.employment.board.BoardCategoryEnum;
 import src.employment.elements.Buttons;
 import src.employment.elements.buttons.*;
 import src.employment.elements.content.PrintBoard;

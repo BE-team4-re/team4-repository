@@ -1,15 +1,13 @@
 package src.employment.recordDAO.employmentBoardScrap;
 
 import src.database.Database;
-import src.employment.boardDTO.BoardDTO;
+import src.employment.board.BoardDTO;
 import src.util.Response;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReadScrapDAO {
 

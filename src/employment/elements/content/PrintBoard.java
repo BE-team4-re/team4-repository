@@ -1,9 +1,8 @@
 package src.employment.elements.content;
 
 
-import src.employment.EmploymentBoardMain;
-import src.employment.boardDTO.BoardCategoryEnum;
-import src.employment.boardDTO.BoardDTO;
+import src.employment.board.BoardCategoryEnum;
+import src.employment.board.BoardDTO;
 import src.employment.recordDAO.employmentBoard.ReadDAO;
 import src.util.Response;
 
