@@ -5,7 +5,6 @@ import java.util.Scanner;
 import src.employment.EmploymentBoardMain;
 import src.user.login.LoginController;
 import src.user.mypage.ScrapController;
-import src.user.mypage.ScrapDAO;
 import src.user.mypage.UserModificationController;
 import src.user.signup.SignUpController;
 
@@ -56,8 +55,7 @@ public class MainController {
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
-                    // 채용공고 게시판 이동
-                    EmploymentBoardMain.entrance();
+                    EmploymentBoardMain.entrance(); // 채용공고 게시판 이동
                     break;
                 case "2":
                     // 커뮤니티 이동
@@ -115,7 +113,7 @@ public class MainController {
         System.out.println("\n-------------------------------------------------");
         System.out.println("------------------ 회원 정보 수정 ------------------");
         System.out.println("-------------------------------------------------");
-        System.out.println("1. 비밀번호 | 2. 휴대폰 번호 | 3. 이메일");
+        System.out.println("1. 비밀번호 | 2. 휴대폰 번호 | 3. 이메일 | 4. 뒤로가기");
         System.out.print("수정 할 항목을 선택하세요 :");
         String menu = sc.nextLine();
         switch (menu) {
@@ -127,6 +125,8 @@ public class MainController {
                 break;
             case "3":
                 umc.emailUpdate(); // 이메일 수정
+                break;
+            case "4":
                 break;
             default:
                 System.out.println("잘못 입력하셨습니다.");

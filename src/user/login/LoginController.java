@@ -1,7 +1,6 @@
 package src.user.login;
 
 import java.util.Scanner;
-import src.user.MainController;
 import src.user.UserDTO;
 import src.user.UserMain;
 import src.user.Validation;
@@ -28,8 +27,7 @@ public class LoginController {
             if (id.equals("admin") && pw.equals("admin")) {
                 UserMain.loginId = "admin";
                 UserMain.id = 0;
-
-                System.out.println("관리자 페이지 이동"); // 관리자 페이지 이동
+                // 관리자 페이지 이동
             } else {
                 pw = check.encodingPwd(pw); // 입력한 pw 암호화
                 if (result != null) {
