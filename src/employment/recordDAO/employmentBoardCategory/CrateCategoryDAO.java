@@ -1,4 +1,4 @@
-package src.employment.recordDAO.employmentBoardCategory.create;
+package src.employment.recordDAO.employmentBoardCategory;
 
 
 import java.sql.Statement;

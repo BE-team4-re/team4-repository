@@ -1,11 +1,20 @@
 package src.employment.dummyData;
 
-import src.employment.recordDAO.employmentBoard.create.CreateDAO;
+import src.employment.recordDAO.employmentBoard.CreateDAO;
 
 public class InsertEmploymentBoard {
 
     public static void main(String[] args) {
+        /*
+
+
+
         // 테스트용 더미 데이터를 넣는 코드.
+        // 채용 데이터를 넣기 전 반드시 카테고리 데이터를 먼저 넣어야 합니다.
+
+
+
+         */
         CreateDAO createDao = new CreateDAO();
         // 제목, 근무형태, 요구학력, 채용절차, 자격요건, 우대사항, 메인1, 서브1, 메인2, 서브2, 회사명
         createDao.create("제목입니다.", "정규직", "무관", "협의", "무관", "없음", 1, 1, 2, 21, "KOSA");
