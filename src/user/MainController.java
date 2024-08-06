@@ -2,6 +2,7 @@ package src.user;
 
 import java.util.Scanner;
 
+import src.communication.communicationBoard.CommunicationBoardController;
 import src.employment.EmploymentBoardMain;
 import src.user.login.LoginController;
 import src.user.mypage.ScrapController;
@@ -15,6 +16,7 @@ public class MainController {
     LoginController lc = new LoginController();
     UserModificationController umc = new UserModificationController();
     ScrapController scr = new ScrapController();
+    private final CommunicationBoardController communicationBoardController = new CommunicationBoardController();
 
     // 메인
     public void startMain() {
@@ -59,6 +61,7 @@ public class MainController {
                     break;
                 case "2":
                     // 커뮤니티 이동
+                    communicationBoardController.searchCommunicationBoard(UserMain.id);
                     break;
                 case "3":
                     myPage(); // 마이페이지 이동

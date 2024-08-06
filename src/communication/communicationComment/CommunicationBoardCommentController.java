@@ -11,7 +11,7 @@ public class CommunicationBoardCommentController {
     private final Scanner sc = new Scanner(System.in);
 
     // 댓글을 생성 시작
-    public void createCommunicationBoardComment(int communicationBoardId, int id) {
+    public boolean createCommunicationBoardComment(int communicationBoardId, int id) {
         System.out.println("=======================");
         System.out.print("댓글 -> ");
         String comment = sc.nextLine();
@@ -41,6 +41,7 @@ public class CommunicationBoardCommentController {
                 } else if (selectNum.equals("2")) break;
             }
         }
+        return response.isSuccess();
     }
 
     // 대댓글 생성 시작
