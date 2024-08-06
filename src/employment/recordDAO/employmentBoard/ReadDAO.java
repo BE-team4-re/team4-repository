@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.ArrayList;
 
-import src.employment.boardDTO.BoardDTO;
+import src.employment.board.BoardDTO;
 
 import src.database.Database;
 import src.util.Response;

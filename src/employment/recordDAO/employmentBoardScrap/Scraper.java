@@ -1,6 +1,6 @@
 package src.employment.recordDAO.employmentBoardScrap;
 
-import src.employment.boardDTO.BoardDTO;
+import src.employment.board.BoardDTO;
 import src.employment.recordDAO.employmentBoard.ReadDAO;
 import src.user.UserMain;
 import src.util.Response;
