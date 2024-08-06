@@ -18,6 +18,8 @@ public class CommunicationBoardController {
     private final CommunicationBoardService communicationBoardService = new CommunicationBoardService();
     private final CommunicationCategoryService communicationCategoryService = new CommunicationCategoryService();
     private final CommunicationBoardCommentController  communicationBoardCommentController = new CommunicationBoardCommentController();
+//    MainController mainController = new MainController();
+
 
     // 커뮤니케이션 게시물 생성
     public void createCommunicationBoard(int id){
@@ -104,7 +106,10 @@ public class CommunicationBoardController {
                 System.out.print("번호 -> ");
                 selectNum = sc.nextLine();
                 // 댓글 생성한다.
-                if(selectNum.equals("1")) communicationBoardCommentController.createCommunicationBoardComment(response.getData().communicationBoard().communicationBoardId(), id);
+                if(selectNum.equals("1")) {
+                    boolean checkCreateComment = communicationBoardCommentController.createCommunicationBoardComment(response.getData().communicationBoard().communicationBoardId(), id);
+                    if(checkCreateComment) findOneCommunicationBoard(communicaionBoardId, id);
+                }
                 // 먼저 게시글에 있는 댓글을 보여준다. 그 댓글 중 번호를 선택해 대댓글을 작성한다.
                 else if(selectNum.equals("2")){
                     while(true){
@@ -281,7 +286,7 @@ public class CommunicationBoardController {
         if(response.isSuccess()){ // 불러온 데이터가 있다면 true
             title = response.getData().title(); // 불러온 원본의 title
             content = response.getData().content(); // 불러온 원본의 content
-            System.out.println("나가려면 -> q를 입력해주세요.");
+            System.out.println("나가려면 -> 1번 이외의 아무 키를 입력해주세요.");
             System.out.print("제목을 수정하시려면 1번 -> ");
             selectNum = sc.nextLine();
             // 수정하려는 제목
@@ -293,7 +298,7 @@ public class CommunicationBoardController {
                     if(title.isBlank()){ // 수정할때 공백 체크
                         System.out.println("공백은 입력이 불가합니다.");
                         System.out.println("====================");
-                        System.out.println("다시 제목을 수정하시려면 1번을 눌러주세요. 아니라면 q를 입력해주세요.");
+                        System.out.println("다시 제목을 수정하시려면 1번을 눌러주세요. 아니라면 1번 이외의 아무 키를 입력해주세요.");
                         selectNum = sc.nextLine();
                         if(selectNum.equals("1")){
                             System.out.print("수정하려는 제목-> ");
@@ -302,7 +307,7 @@ public class CommunicationBoardController {
                     }else break;
                 }
             }
-            System.out.println("나가려면 -> q를 입력해주세요.");
+            System.out.println("나가려면 -> 2번 이외의 아무 키를 입력해주세요.");
             System.out.print("내용을 수정하시려면 2번 -> ");
             selectNum = sc.nextLine();
             // 수정하려는 내용
@@ -310,15 +315,16 @@ public class CommunicationBoardController {
                 System.out.println("수정 전 내용 -> " + content);
                 System.out.print("수정하려는 내용-> ");
                 content = sc.nextLine();
+                System.out.println("블랭크 ===>>" + content.isBlank());
                 while(true){
                     if(content.isBlank()){ // 수정하려는 내용 공백 체크
                         System.out.println("공백은 입력이 불가합니다.");
                         System.out.println("====================");
-                        System.out.println("다시 내용을 수정하시려면 1번을 눌러주세요. 아니라면 q를 입력해주세요.");
+                        System.out.println("다시 내용을 수정하시려면 1번을 눌러주세요. 1번 이외의 아무 키를 입력해주세요.");
                         selectNum = sc.nextLine();
                         if(selectNum.equals("1")){
+                            System.out.println("수정 전 내용 -> " + response.getData().content());
                             System.out.print("수정하려는 내용-> ");
-                            System.out.println("수정 전 내용 -> " + content);
                             content = sc.nextLine();
                         }else break;
                     }else break;
@@ -372,6 +378,32 @@ public class CommunicationBoardController {
                 // 선택된 카테고리의 게시물을 불러온다. 페이지 네이션을 사용해서 최대 5개의 게시물을 보여준다.
                 Response<PagenationCommunicationBoardDto> communicationBoard = communicationBoardService.searchCommunicationBoard(categoryId,selectPage,searchWord);
                 List<Integer> page = new ArrayList<>();
+                if(communicationBoard.getData() == null){
+                    System.out.println("등록된 게시물이 없습니다. 게시글 작성 하시겠습니까?");
+                    System.out.println("1. 게시글 작성 2. 메인 화면");
+                    selectNum = Integer.valueOf(sc.nextLine());
+                    if(selectNum == 1) {
+                        System.out.println("커뮤니케이션 글 작성");
+                        System.out.print("제목 -> ");
+                        String title = sc.nextLine();
+                        System.out.print("내용 -> ");
+                        String content = sc.nextLine();
+                        System.out.println("커뮤니티 게시물 카테고리");
+                        commnicationBoardCategotyList.getData().stream()
+                            .forEach(category -> {
+                                count.getAndIncrement();
+                                System.out.print(" "+ category.communicationBoardCategoryId() + ". " +category.communicationBoardCategory());
+                            });
+                        String SelectcategoryId = sc.nextLine();
+                        CreateCommunicationBoardDto createCommunicationBoardDto = new CreateCommunicationBoardDto(title,content, id, Integer.valueOf(SelectcategoryId));
+                        Response<Integer> response = communicationBoardService.create(createCommunicationBoardDto);
+                        if(response.isSuccess()) System.out.println(response.getMessage());
+                        else System.out.println(response.getMessage());
+                        searchCommunicationBoard(id);
+                    }else if(selectNum == 2){
+                        break;
+                    }
+                }
                 // 페이지 번호를 찍기위해서
                 for(int i = selectPage; i <= communicationBoard.getData().totalPage(); i++) page.add(i);
                 if(categoryId == 0) System.out.println("========= 전체 게시물 =========");
