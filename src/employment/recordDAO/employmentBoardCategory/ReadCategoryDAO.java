@@ -12,20 +12,23 @@ import java.util.List;
 import src.database.Database;
 
 import src.employment.board.BoardCategoryDTO;
+import src.util.Response;
 
 
 public class ReadCategoryDAO {
 	
-	private Database db = new Database();
+	private final Database db = new Database();
 	
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
 	// select * from employment_board_category
-	public List<BoardCategoryDTO> read() {
-		
+//	public Response<List<BoardCategoryDTO>> read() {
+	public void read() {
+
 		List<BoardCategoryDTO> employmentBoardCategoryDTOList = new ArrayList<>();
+		Response<List<BoardCategoryDTO>> response = new Response<>(false, "실패하였습니다.", employmentBoardCategoryDTOList);
 		String sql = "select * from employment_board_category";
 
 		try {
@@ -66,6 +69,6 @@ public class ReadCategoryDAO {
 				e.printStackTrace();
 			}
 		}
-		return employmentBoardCategoryDTOList;
+//		return employmentBoardCategoryDTOList;
 	}
 }

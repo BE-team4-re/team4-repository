@@ -35,7 +35,7 @@ public class Scraper {
         int userInputNumber = 0;
         boolean breakFlag = false;
         while (!breakFlag) {
-            System.out.print("스크랩 할 게시물 번호를 입력하세요 (Q. 돌아가기): ");
+            System.out.print("취소할 게시물 번호를 입력하세요 (Q. 돌아가기): ");
             userInput = sc.nextLine();
             if (userInput.equals("Q")) {
                 breakFlag = true;

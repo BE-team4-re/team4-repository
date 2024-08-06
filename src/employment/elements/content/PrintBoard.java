@@ -4,6 +4,7 @@ package src.employment.elements.content;
 import src.employment.board.BoardCategoryEnum;
 import src.employment.board.BoardDTO;
 import src.employment.recordDAO.employmentBoard.ReadDAO;
+import src.employment.recordDAO.employmentBoardCategory.ReadCategoryDAO;
 import src.util.Response;
 
 import java.util.*;
@@ -34,7 +35,12 @@ public class PrintBoard {
 		return page;
 	}
 
-	public String convertCategoryIdToName(int id) {
+	public String convertCategoryIdToCategoryName(int categoryId) {
+		ReadCategoryDAO readCategoryDAO = new ReadCategoryDAO();
+
+	}
+
+	public String convertCategoryNameToCategoryId(String categoryName) {
 		BoardCategoryEnum[] values = BoardCategoryEnum.values();
 		for (BoardCategoryEnum value: values) {
 			if (id == value.getSubId()) {
@@ -108,8 +114,8 @@ public class PrintBoard {
 					board.getQualifications(),
 					board.getPreferred(),
 					board.getCompanyName(),
-					convertCategoryIdToName(board.getSubCategory1Id()),
-					convertCategoryIdToName(board.getSubCategory2Id())
+					convertCategoryIdToCategoryName(board.getSubCategory1Id()),
+					convertCategoryIdToCategoryName(board.getSubCategory2Id())
 			);
 		} else {
 			System.out.println("불러오기 실패.");
