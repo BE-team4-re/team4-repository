@@ -1,8 +1,8 @@
 package src.employment.dummyData;
 
 
-import src.employment.board.BoardCategoryEnum;
-import src.employment.recordDAO.employmentBoardCategory.create.*;
+import src.employment.boardDTO.BoardCategoryEnum;
+import src.employment.recordDAO.employmentBoardCategory.CrateCategoryDAO;
 
 
 public class InsertBoardCategory {

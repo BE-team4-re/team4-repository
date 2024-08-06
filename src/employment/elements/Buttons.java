@@ -1,7 +1,6 @@
 package src.employment.elements;
 
 import src.employment.elements.buttons.*;
-import src.employment.elements.buttons.read.*;
 
 public class Buttons {
     public static ByJob byJob = new ByJob();
@@ -15,4 +14,7 @@ public class Buttons {
 
     public static Back back = new Back();
     public static First first = new First();
+
+    public static Scrap scrap = new Scrap();
+    public static Detail detail = new Detail();
 }

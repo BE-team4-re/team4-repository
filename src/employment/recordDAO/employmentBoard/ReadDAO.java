@@ -1,4 +1,4 @@
-package src.employment.recordDAO.employmentBoard.read;
+package src.employment.recordDAO.employmentBoard;
 
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.ArrayList;
 
-import src.employment.board.BoardDTO;
+import src.employment.boardDTO.BoardDTO;
 
 import src.database.Database;
 import src.util.Response;
@@ -27,9 +27,9 @@ public class ReadDAO {
 	// -> 전체 게시물 조회
 	public Response<List<BoardDTO>> readAll() {
 
-		Response<List<BoardDTO>> response = null;
-
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
+		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
+
 		String sql = "select * from employment_board order by employment_board_id desc";
 
 		try {
@@ -90,7 +90,7 @@ public class ReadDAO {
 	// -> 단일 게시물 조회
 	public Response<BoardDTO> read(int bid) {
 
-		Response<BoardDTO> response = null;
+		Response<BoardDTO> response = new Response<>(false, "실패하였습니다.", null);
 
 		String sql = "select * from employment_board where employment_board_id=? order by employment_board_id desc";
 
@@ -126,7 +126,7 @@ public class ReadDAO {
 				response = new Response<>(true, "성공적으로 가져왔습니다.", board);
 			} else {
 				// System.out.println("가져오는데 실패하였습니다.");
-				response = new Response<>(true, "가져오는데 실패하였습니다.", null);
+				response = new Response<>(false, "가져오는데 실패하였습니다.", null);
 			}
 
 		} catch (SQLException e) {
@@ -153,8 +153,8 @@ public class ReadDAO {
 	// -> 지역별 조회
 	public Response<List<BoardDTO>> readByRegion() {
 
-		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
+		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
 
 		String sql = "select * from employment_board where main_category1_id=1 order by employment_board_id desc";
 
@@ -213,8 +213,8 @@ public class ReadDAO {
 	// -> 직무별 조회
 	public Response<List<BoardDTO>> readByJob() {
 
-		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
+		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
 
 		String sql = "select * from employment_board where main_category2_id=2 order by employment_board_id desc";
 
@@ -273,8 +273,8 @@ public class ReadDAO {
 	// -> 상세 지역별 조회
 	public Response<List<BoardDTO>> readByRegionDetail(int regionCode) {
 
-		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
+		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
 
 		String sql = "select * from employment_board where main_category1_id=1 and sub_category1_id=? order by employment_board_id desc";
 
@@ -334,8 +334,8 @@ public class ReadDAO {
 	// -> 특정 지역 및 특정 직무 조회
 	public Response<List<BoardDTO>> readByRegionDetailAndJobDetail(int regionCode, int jobCode) {
 
-		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
+		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
 
 		String sql = "select * from employment_board where sub_category1_id=? and sub_category2_id=? order by employment_board_id desc";
 
@@ -396,8 +396,8 @@ public class ReadDAO {
 	// -> 상세 직무별 조회
 	public Response<List<BoardDTO>> readByJobDetail(int jobCode) {
 
-		Response<List<BoardDTO>> response = null;
 		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
+		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
 
 		String sql = "select * from employment_board where main_category2_id=2 and sub_category2_id=? order by employment_board_id desc";
 

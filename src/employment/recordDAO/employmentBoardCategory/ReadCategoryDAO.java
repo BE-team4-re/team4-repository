@@ -1,4 +1,4 @@
-package src.employment.recordDAO.employmentBoardCategory.read;
+package src.employment.recordDAO.employmentBoardCategory;
 
 
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import src.database.Database;
 
-import src.employment.board.BoardCategoryDTO;
+import src.employment.boardDTO.BoardCategoryDTO;
 
 
 public class ReadCategoryDAO {
@@ -26,8 +26,7 @@ public class ReadCategoryDAO {
 	public List<BoardCategoryDTO> read() {
 		
 		List<BoardCategoryDTO> employmentBoardCategoryDTOList = new ArrayList<>();
-		String sql = ""+
-		"select * from employment_board_category";
+		String sql = "select * from employment_board_category";
 
 		try {
 			

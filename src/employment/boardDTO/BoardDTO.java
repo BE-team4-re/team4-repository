@@ -1,4 +1,4 @@
-package src.employment.board;
+package src.employment.boardDTO;
 
 public class BoardDTO {
 	private int employmentBoardId;

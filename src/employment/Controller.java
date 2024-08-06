@@ -1,10 +1,12 @@
 package src.employment;
 
 
-import src.employment.board.BoardCategoryEnum;
+import src.employment.boardDTO.BoardCategoryEnum;
 import src.employment.elements.Buttons;
 import src.employment.elements.buttons.*;
 import src.employment.elements.content.PrintBoard;
+import src.employment.recordDAO.employmentBoard.ReadDetail;
+import src.employment.recordDAO.employmentBoardScrap.Scraper;
 
 
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.Scanner;
 public class Controller {
 
     private final Scanner sc = new Scanner(System.in);
+    private final Scraper scraper = new Scraper();
+    private final ReadDetail readDetail = new ReadDetail();
 
     // 메인 페이지
     public void printMain() {
@@ -33,6 +37,8 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
+            buttonList.add(Buttons.detail);
+            buttonList.add(Buttons.scrap);
             buttonList.add(Buttons.byJob);
             buttonList.add(Buttons.byRegion);
             buttonList.add(Buttons.prevPage);
@@ -45,6 +51,14 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
+                case "d" -> {
+                    // 자세히보기
+                    readDetail.selectTarget(sc);
+                }
+                case "s" -> {
+                    // 스크랩
+                    scraper.selectScrapTarget(sc);
+                }
                 case "R" -> {
                     breakFlag = true;
                     printByRegion();
@@ -95,6 +109,8 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
+            buttonList.add(Buttons.detail);
+            buttonList.add(Buttons.scrap);
 //            buttonList.add(Buttons.byJob);
 //            buttonList.add(Buttons.byJobDetail);
             buttonList.add(Buttons.byRegionDetail);
@@ -109,6 +125,14 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
+                case "d" -> {
+                    // 자세히보기
+                    readDetail.selectTarget(sc);
+                }
+                case "s" -> {
+                    // 스크랩
+                    scraper.selectScrapTarget(sc);
+                }
 //                case "J" -> {
 //                    breakFlag = true;
 //                    printByJob();
@@ -168,6 +192,8 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 구역.
             List<Button> buttonList = new ArrayList<>();
+            buttonList.add(Buttons.detail);
+            buttonList.add(Buttons.scrap);
             buttonList.add(Buttons.byJobDetail);
 //            buttonList.add(Buttons.byRegion);
 //            buttonList.add(Buttons.byRegionDetail);
@@ -182,6 +208,14 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
+                case "d" -> {
+                    // 자세히보기
+                    readDetail.selectTarget(sc);
+                }
+                case "s" -> {
+                    // 스크랩
+                    scraper.selectScrapTarget(sc);
+                }
 //                case "R" -> {
 //                    breakFlag = true;
 //                    printByRegion();
@@ -250,6 +284,8 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
+            buttonList.add(Buttons.detail);
+            buttonList.add(Buttons.scrap);
 //            buttonList.add(Buttons.byJob);
 //            buttonList.add(Buttons.byJobDetail);
 //            buttonList.add(Buttons.byRegion);
@@ -265,6 +301,14 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
+                case "d" -> {
+                    // 자세히보기
+                    readDetail.selectTarget(sc);
+                }
+                case "s" -> {
+                    // 스크랩
+                    scraper.selectScrapTarget(sc);
+                }
 //                case "J" -> {
 //                    breakFlag = true;
 //                    printByJob();
@@ -337,6 +381,8 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
+            buttonList.add(Buttons.detail);
+            buttonList.add(Buttons.scrap);
 //            buttonList.add(Buttons.byJob);
             buttonList.add(Buttons.byJobDetail);
 //            buttonList.add(Buttons.byRegion);
@@ -352,6 +398,14 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
+                case "d" -> {
+                    // 자세히보기
+                    readDetail.selectTarget(sc);
+                }
+                case "s" -> {
+                    // 스크랩
+                    scraper.selectScrapTarget(sc);
+                }
 //                case "J" -> {
 //                    breakFlag = true;
 //                    printByJob();
@@ -431,6 +485,8 @@ public class Controller {
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
             List<Button> buttonList = new ArrayList<>();
+            buttonList.add(Buttons.detail);
+            buttonList.add(Buttons.scrap);
 //            buttonList.add(Buttons.byJob);
 //            buttonList.add(Buttons.byJobDetail);
 //            buttonList.add(Buttons.byRegion);
@@ -446,6 +502,14 @@ public class Controller {
             System.out.print("입력하세요 (Q. 종료하기): ");
             userInput = sc.nextLine();
             switch (userInput) {
+                case "d" -> {
+                    // 자세히보기
+                    readDetail.selectTarget(sc);
+                }
+                case "s" -> {
+                    // 스크랩
+                    scraper.selectScrapTarget(sc);
+                }
 //                case "R" -> {
 //                    breakFlag = true;
 //                    printByRegion();
