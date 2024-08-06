@@ -75,6 +75,7 @@ public class CommunicationBoardController {
         // 가져온 데이터가 있다면 그 정보를 콘솔로 띄워준다.
         if(response.isSuccess()){
             int line = response.getData().communicationBoard().content().length();
+            boolean stop = true;
             System.out.println("===========================================");
             System.out.println("글번호 = > " + response.getData().communicationBoard().communicationBoardId());
             System.out.println("제목 => " + response.getData().communicationBoard().title());
@@ -96,7 +97,7 @@ public class CommunicationBoardController {
             System.out.print("1. 댓글 2. 나가기");
             // 작성한 게시물이 본인이라면 수정, 삭제 보여주기
             if(id == response.getData().communicationBoard().id() || id == 0){
-                System.out.println(" 3. 수정 4. 삭제");
+                System.out.println(" 3. 게시물 수정 4. 게시물 삭제");
             }
             System.out.print("번호 -> ");
             String selectNum = sc.nextLine();
@@ -125,7 +126,9 @@ public class CommunicationBoardController {
                         System.out.println("나가시려면 q를 입력해주세여. ");
                         System.out.print("대댓글을 달고 싶은 댓글의 번호를 입력해주세요. -> ");
                         selectNum = sc.nextLine();
-                        if(selectNum.equals("q")) break;
+                        if(selectNum.equals("q")){
+                            break;
+                        }
                         AtomicBoolean checkComment = new AtomicBoolean(false);
                         String finalSelectNum = selectNum;
                         // 여기서 내가 선택한 댓글의 아이디(commentId)와 selectNum이 같은지 한번 체크한다.
@@ -202,7 +205,7 @@ public class CommunicationBoardController {
                             // 여기서 댓글과 대댓글의 아이디를 선택한다.
                             System.out.print("수정을 원하시는 번호를 눌러주세요. 나가시려면 q를 입력해주세요. -> ");
                             String commentNum = sc.nextLine();
-                            if(commentNum.equals("q")) break;
+                            if(commentNum.equals("q")) findOneCommunicationBoard(communicaionBoardId, id);
                             AtomicInteger updateCount = new AtomicInteger(0);
                             // 내가 선택한 댓글의 아이디와 댓글의 아이디가 같은지 체크하여 맞다면 수정전 내용을 보여주고 수정을 시작한다.
                             response.getData().commentList().stream()
@@ -227,7 +230,6 @@ public class CommunicationBoardController {
                             // 선택한 번호가 틀릴 시
                             if(Integer.valueOf(String.valueOf(updateCount)) == 0) System.out.println("번호를 잘못 입력하셨습니다. 다시 입력해주세요.");
                         }
-
                     }
                     // 댓글과 대댓글을 삭제를 한다.
                 }else if(selectNum.equals("4")) {
@@ -282,8 +284,9 @@ public class CommunicationBoardController {
                             findOneCommunicationBoard(communicaionBoardId, id);
                             break;
                         }
-                        System.out.print("삭제하려는 댓글 대댓글의 번호를 입력해주세요. ->");
+                        System.out.print("삭제하려는 댓글 대댓글의 번호를 입력해주세요. 나가시려면 q를 입력해주세요. ->");
                         String deleteNum = sc.nextLine();
+                        if(deleteNum.equals("q")) findOneCommunicationBoard(communicaionBoardId, id);
                         AtomicInteger deleteCount = new AtomicInteger(0);
                         AtomicInteger deleteCommentId = new AtomicInteger();
                         // 선택한 번호와 댓글이 맞는지 한번더 체크
@@ -408,6 +411,7 @@ public class CommunicationBoardController {
                         count.getAndIncrement();
                         System.out.print(" "+ count+". " +category.communicationBoardCategory());
                     });
+            System.out.print(" 4. 메인화면");
             System.out.println();
             System.out.println("===================================");
             System.out.print("보고싶은 게시물을 선택해주세요. -> ");
@@ -415,6 +419,7 @@ public class CommunicationBoardController {
             if(selectNum == 1) categoryId = 0;
             else if(selectNum == 2) categoryId = 1;
             else if(selectNum == 3) categoryId = 2;
+            else if(selectNum == 4) return;
             while(true){
                 // 선택된 카테고리의 게시물을 불러온다. 페이지 네이션을 사용해서 최대 5개의 게시물을 보여준다.
                 Response<PagenationCommunicationBoardDto> communicationBoard = communicationBoardService.searchCommunicationBoard(categoryId,selectPage,searchWord);
