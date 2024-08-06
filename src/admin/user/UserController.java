@@ -7,37 +7,40 @@ public class UserController {
     UserService userService = new UserService();
     Scanner scanner = new Scanner(System.in);
 
+    //휴면계정 처리
     public void deactivateAccount(){
-        printSearchUserId();
-         String userID = scanner.nextLine();
-         if (userService.validationID(userID)){
-             System.out.println(userID + "는 존재하는 아이디입니다.");
-             if (askDeleteUser(scanner)){
-                 if(userService.deleteUser(userID) == 1){
-                     System.out.println("휴면계정으로 상태를 변경하였습니다.");
-                 }
-                 else{
-                     System.out.println("휴면계정으로 상태를 변경하지 못하였습니다.");
-                 }
-             }
-             else{
-                 System.out.println("잘못된 입력입니다.");
-             }
-         }else{
-             //유저 아이디를 찾을 수 없는 경우
-         }
+        while(true) {
+            printSearchUserId();
+            String userID = scanner.nextLine();
+            if (userService.validationID(userID)) {
+                System.out.println(userID + "는 존재하는 아이디입니다.");
+                if (askDeleteUser(scanner)) {
+                    if (userService.deleteUser(userID) == 1) {
+                        System.out.println("휴면계정으로 상태를 변경하였습니다.");
+
+                    }else {
+                        System.out.println("휴면계정으로 상태를 변경하지 못하였습니다.");
+                    }
+                } else {
+                    return;
+                }
+            } else {
+                System.out.println("존재하지 않는 아이디입니다.");
+                return;
+            }
+            return;
+        }
     }
 
+    //아이디 입력하도록 출력
     public void printSearchUserId(){
         System.out.println("--------------------------------------------------------");
         System.out.println("-----------------관리자 회원관리(삭제) 페이지------------------");
         System.out.println("--------------------------------------------------------");
-        System.out.println("회원의 아이디를 입력해주세요:");
+        System.out.print("회원의 아이디를 입력해주세요:");
     }
 
-
-
-
+    //삭제 메뉴
     public boolean askDeleteUser(Scanner scanner){
         System.out.println("1. 삭제하기 2.관리자 메뉴 이동");
         String index = scanner.nextLine();

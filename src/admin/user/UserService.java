@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 public class UserService {
     private final Database db = new Database();
 
+    //계정 존재 여부 (id와 status 검사)
     public Boolean validationID(String user_ID) {
         try (Connection connection = db.connect();
              PreparedStatement ps = connection.prepareStatement("SELECT * FROM user WHERE userId = ? ");)
@@ -21,8 +22,6 @@ public class UserService {
             if (rs.next()) {
                 userID = rs.getString("userId");
                 status = rs.getInt("userStatus");
-            } else {
-                System.out.println("존재하지 않는 유저입니다.");
             }
             rs.close();
             return (userID.equals(user_ID) && status == 1) ? true : false;
@@ -33,6 +32,7 @@ public class UserService {
         return false;
     }
 
+    //계정 휴면 업데이트
     public int deleteUser(String user_ID) {
         int result = 0;
         try (Connection connection = db.connect();
