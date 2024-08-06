@@ -24,11 +24,10 @@ public class ReadCategoryDAO {
 	private ResultSet rs = null;
 	
 	// select * from employment_board_category
-//	public Response<List<BoardCategoryDTO>> read() {
-	public void read() {
+	public Response<List<BoardCategoryDTO>> readAllCategories() {
 
 		List<BoardCategoryDTO> employmentBoardCategoryDTOList = new ArrayList<>();
-		Response<List<BoardCategoryDTO>> response = new Response<>(false, "실패하였습니다.", employmentBoardCategoryDTOList);
+		Response<List<BoardCategoryDTO>> response = new Response<>(false, "가져오는데 실패하였습니다.", employmentBoardCategoryDTOList);
 		String sql = "select * from employment_board_category";
 
 		try {
@@ -40,17 +39,19 @@ public class ReadCategoryDAO {
 			while (rs.next()) {
 				
 				int categoryId = rs.getInt("category_id");
-				int maincategoryId = rs.getInt("maincategory_id");
-				int subcategoryId = rs.getInt("subcategory_id");
+				int mainCategoryId = rs.getInt("maincategory_id");
+				int subCategoryId = rs.getInt("subcategory_id");
 				String categoryName = rs.getString("category_name");
 				
 				BoardCategoryDTO boardCategoryDTO = new BoardCategoryDTO(
-					categoryId, maincategoryId, subcategoryId, categoryName
+					categoryId, mainCategoryId, subCategoryId, categoryName
 				);
 				
 				employmentBoardCategoryDTOList.add(boardCategoryDTO);
 				
 			}
+
+			response = new Response<>(true, "성공적으로 가져왔습니다.", employmentBoardCategoryDTOList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,6 +70,6 @@ public class ReadCategoryDAO {
 				e.printStackTrace();
 			}
 		}
-//		return employmentBoardCategoryDTOList;
+		return response;
 	}
 }

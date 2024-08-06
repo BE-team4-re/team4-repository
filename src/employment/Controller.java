@@ -1,7 +1,6 @@
 package src.employment;
 
 
-import src.employment.board.BoardCategoryEnum;
 import src.employment.elements.Buttons;
 import src.employment.elements.buttons.*;
 import src.employment.elements.content.PrintBoard;
@@ -100,7 +99,7 @@ public class Controller {
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
-            System.out.println("#################\t\t\t지역별 조회 페이지\t\t\t#################");
+            System.out.println("#################\t\t\t지역별 조회\t\t\t#################");
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
@@ -183,7 +182,7 @@ public class Controller {
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
-            System.out.println("#################\t\t\t직무별 조회 페이지\t\t\t#################");
+            System.out.println("#################\t\t\t직무별 조회\t\t\t#################");
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역
@@ -263,23 +262,20 @@ public class Controller {
         String userInput = "";
         int pageIdx = 1;
         boolean breakFlag = false;
+        PrintBoard pb = new PrintBoard();
+        pb.printAllRegionList();
         System.out.print("조회할 지역을 입력하세요: ");
-        String UserInput = sc.nextLine();
-        BoardCategoryEnum[] values = BoardCategoryEnum.values();
-        int subId = 0;
-        for (BoardCategoryEnum value: values) {
-            if (value.getCategoryName().equals(UserInput)) {
-                subId = value.getSubId();
-            }
-        }
+        userInput = sc.nextLine();
+        // 문자열로 입력된 세부 지역을 db의 id로 변환하는 과정.
+        int subId = pb.convertCategoryNameToSubCategoryId(userInput);
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
-            System.out.println("#################\t\t\t세부 지역 조회 페이지\t\t\t#################");
+            System.out.println("#################\t\t\t세부 지역 조회\t\t\t#################");
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
-            PrintBoard pb = new PrintBoard();
+//            PrintBoard pb = new PrintBoard();
             pb.printAllBoardsByRegionDetail(pageIdx, subId);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
@@ -360,23 +356,20 @@ public class Controller {
         String userInput = "";
         int pageIdx = 1;
         boolean breakFlag = false;
+        PrintBoard pb = new PrintBoard();
+        pb.printAllJobList();
         System.out.print("조회할 직무를 입력하세요: ");
-        String UserInput = sc.nextLine();
-        BoardCategoryEnum[] values = BoardCategoryEnum.values();
-        int subId = 0;
-        for (BoardCategoryEnum value: values) {
-            if (value.getCategoryName().equals(UserInput)) {
-                subId = value.getSubId();
-            }
-        }
+        userInput = sc.nextLine();
+        // 문자열로 입력된 세부 지역을 db의 id로 변환하는 과정.
+        int subId = pb.convertCategoryNameToSubCategoryId(userInput);
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
-            System.out.println("#################\t\t\t세부 직무 조회 페이지\t\t\t#################");
+            System.out.println("#################\t\t\t세부 직무 조회\t\t\t#################");
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
-            PrintBoard pb = new PrintBoard();
+//            PrintBoard pb = new PrintBoard();
             pb.printAllBoardsByJobDetail(pageIdx, subId);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
@@ -455,32 +448,29 @@ public class Controller {
     // 세부 지역 + 세부 직무로 찾기 페이지.
     public void printByRegionDetailAndJobDetail() {
         String userInput = "";
+        String userInput1 = "";
+        String userInput2 = "";
         int pageIdx = 1;
         boolean breakFlag = false;
+        PrintBoard pb = new PrintBoard();
+        pb.printAllRegionList();
         System.out.print("조회할 지역을 입력하세요: ");
-        String UserInput1 = sc.nextLine();
+        userInput1 = sc.nextLine();
         System.out.println();
+        pb.printAllJobList();
         System.out.print("조회할 직무를 입력하세요: ");
-        String UserInput2 = sc.nextLine();
-        BoardCategoryEnum[] values = BoardCategoryEnum.values();
-        int subId1 = 1;
-        int subId2 = 19;
-        for (BoardCategoryEnum value: values) {
-            if (value.getCategoryName().equals(UserInput1)) {
-                subId1 = value.getSubId();
-            }
-            if (value.getCategoryName().equals(UserInput2)) {
-                subId2 = value.getSubId();
-            }
-        }
+        userInput2 = sc.nextLine();
+        // 문자열로 입력된 세부 지역을 db의 id로 변환하는 과정.
+        int subId1 = pb.convertCategoryNameToSubCategoryId(userInput1);
+        int subId2 = pb.convertCategoryNameToSubCategoryId(userInput2);
         while (!breakFlag) {
             // 페이지 타이틀.
             System.out.println("########################################################################");
-            System.out.println("#################\t\t\t세부 검색 페이지\t\t\t#################");
+            System.out.println("#################\t\t\t지역과 직무 조합 검색\t\t\t#################");
             System.out.println("########################################################################");
             System.out.println("-------------------------------------------------------------------------");
             // 내용 구역.
-            PrintBoard pb = new PrintBoard();
+//            PrintBoard pb = new PrintBoard();
             pb.printAllBoardsByRegionDetailAndJobDetail(pageIdx, subId1, subId2);
             System.out.println("-------------------------------------------------------------------------");
             // 버튼 리스트 정의.
