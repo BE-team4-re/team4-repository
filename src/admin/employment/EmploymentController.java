@@ -217,7 +217,6 @@ public class EmploymentController {
         System.out.printf("%-6s%-30s%-16s%-80s \n", "no", "제목", "기업명", "채용과정");
         System.out.println("--------------------------------------------------------------------------------");
         empList.stream()
-                .filter(emp -> !(emp.getEmploymentBoardId() == 1 || emp.getEmploymentBoardId() == 19))
                 .forEach(emp -> {
                     System.out.printf("%-6s%-30s%-16s%-80s \n",
                             emp.getEmploymentBoardId(),
