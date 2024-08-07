@@ -17,7 +17,10 @@ public class ScrapController {
         System.out.println("               ★ 나의 스크랩 ★                ");
         System.out.println("=============================================");
         if (sd.printScrap()) {
+            System.out.println("\n====================================================");
             System.out.println("1. 상세보기 | 2. 스크랩 해제");
+            System.out.println("====================================================");
+            System.out.println("메뉴를 선택하세요 -> ");
             String userInput = sc.nextLine();
             switch (userInput) {
                 case "1" -> {

@@ -22,11 +22,11 @@ public class MainController {
     public void startMain() {
         while (true) {
             System.out.println("\n=============================================");
-            System.out.println("                  ★ 잡아봐유 ★                   ");
+            System.out.println("                  ★ JOB아봐유 ★                   ");
             System.out.println("=============================================");
             System.out.println("   1. 회원가입    |    2. 로그인    |    3. 종료   ");
             System.out.println("=============================================");
-            System.out.print("메뉴를 선택하세요: ");
+            System.out.print("메뉴를 선택하세요 -> ");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -40,7 +40,7 @@ public class MainController {
                     break;
                 case "3":
                     System.out.println("프로그램을 종료합니다.");
-                    return;
+                    System.exit(0);
                 default:
                     System.out.println("잘못 입력하셨습니다.");
             }
@@ -51,12 +51,12 @@ public class MainController {
     public void userMain() {
         while (true) {
             System.out.println("\n====================================================");
-            System.out.println("                     ★ 메인 ★                        ");
+            System.out.println("                     ★ User Main ★                        ");
             System.out.println("====================================================");
             System.out.println("   1. 채용 공고 게시판    |    2. 커뮤니티    ");
             System.out.println("   3. 마이페이지         |    4. 로그아웃   ");
             System.out.println("====================================================");
-            System.out.print("메뉴를 선택하세요: ");
+            System.out.print("메뉴를 선택하세요 -> ");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -89,7 +89,7 @@ public class MainController {
             System.out.println("   1. 회원 정보 수정    |    2. 회원 탈퇴   ");
             System.out.println("   3. 스크랩 확인       |    4. 뒤로가기   ");
             System.out.println("====================================================");
-            System.out.print("메뉴를 선택하세요: ");
+            System.out.print("메뉴를 선택하세요 -> ");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -120,7 +120,7 @@ public class MainController {
         System.out.println("   1. 비밀번호 수정    |    2. 휴대폰 번호 수정  ");
         System.out.println("   3. 이메일 수정      |    4. 뒤로가기   ");
         System.out.println("=============================================");
-        System.out.print("수정 할 항목을 선택하세요: ");
+        System.out.print("수정 할 항목을 선택하세요 -> ");
         String menu = sc.nextLine();
         switch (menu) {
             case "1":
