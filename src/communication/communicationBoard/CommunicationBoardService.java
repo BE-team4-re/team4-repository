@@ -208,8 +208,6 @@ public class CommunicationBoardService {
                    rsS.getInt("communicationboard_id"), rsS.getString("title"), rsS.getString("userId")
                 ));
             }
-            searchCommunicationBoardDtoList
-                .forEach(list -> System.out.println(list.title()));
             resultCommunicationBoard = new PagenationCommunicationBoardDto(totalPage,searchCommunicationBoardDtoList);
         }catch (SQLException e){
             success = false;
