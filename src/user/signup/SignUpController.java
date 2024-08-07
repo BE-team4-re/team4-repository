@@ -1,6 +1,7 @@
 package src.user.signup;
 
 import java.util.Scanner;
+import src.user.MainController;
 import src.user.UserDTO;
 import src.user.Validation;
 
@@ -13,9 +14,9 @@ public class SignUpController {
     // 회원가입
     public void signUpMain() {
         String id, pw, name, gender, phone, birth, email;
-        System.out.println("\n---------------------------------------------");
-        System.out.println("------------------ 회원 가입 ------------------");
-        System.out.println("---------------------------------------------");
+        System.out.println("\n=============================================");
+        System.out.println("               ★ 회원 가입 ★                ");
+        System.out.println("=============================================");
         // 아이디 입력
         while (true) {
             System.out.print("아이디를 입력하세요 :");
@@ -29,6 +30,7 @@ public class SignUpController {
                 break;
             }
         }
+
         // 비밀번호 입력
         while (true) {
             System.out.print("비밀번호를 입력하세요 :");
@@ -39,6 +41,7 @@ public class SignUpController {
                 break;
             }
         }
+
         // 이름 입력
         while (true) {
             System.out.print("이름을 입력하세요 :");
@@ -48,6 +51,7 @@ public class SignUpController {
                 break;
             }
         }
+
         // 성별 입력
         while (true) {
             System.out.print("성별을 입력하세요(ex 남/여) :");
@@ -57,6 +61,7 @@ public class SignUpController {
                 break;
             }
         }
+
         // 휴대폰번호 입력
         while (true) {
             System.out.print("휴대폰번호를 입력하세요(ex 01012345678) :");
@@ -66,6 +71,7 @@ public class SignUpController {
                 break;
             }
         }
+
         // 생년월일 입력
         while (true) {
             System.out.print("생년월일을 입력하세요(ex 19920101) :");
@@ -75,6 +81,7 @@ public class SignUpController {
                 break;
             }
         }
+
         // 이메일 입력
         while (true) {
             System.out.print("이메일을 입력하세요 :");
@@ -84,6 +91,7 @@ public class SignUpController {
                 break;
             }
         }
+
         // 회원가입 정보 생성 및 추가
         UserDTO user = new UserDTO(id, pw, name, gender, phone, birth, email);
         int result = sd.signUp(user);
@@ -93,5 +101,4 @@ public class SignUpController {
             System.out.println("회원가입 실패");
         }
     }
-
 }

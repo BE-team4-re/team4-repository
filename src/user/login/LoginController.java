@@ -16,14 +16,20 @@ public class LoginController {
     // 로그인
     public boolean loginMain() {
         while (true) {
-            System.out.println("\n------------------------------------------");
-            System.out.println("------------------ 로그인 ------------------");
-            System.out.println("------------------------------------------");
-            System.out.print("아이디를 입력하세요 :");
+            System.out.println("\n=============================================");
+            System.out.println("               ★ 로그인 ★                ");
+            System.out.println("=============================================");
+            System.out.print("아이디를 입력하세요 (나가기 (q)):");
             String id = sc.nextLine();
+            if (id.equals("q")) {
+                break;
+            }
 
-            System.out.print("비밀번호를 입력하세요 :");
+            System.out.print("비밀번호를 입력하세요 (나가기 (q)):");
             String pw = sc.nextLine();
+            if (pw.equals("q")) {
+                break;
+            }
 
             if (id.equals("admin") && pw.equals("admin")) {
                 UserMain.loginId = "admin";
@@ -46,5 +52,6 @@ public class LoginController {
                 }
             }
         }
+        return false;
     }
 }

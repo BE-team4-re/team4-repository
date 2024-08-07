@@ -1,5 +1,11 @@
 package src.employment.board;
-
+/*
+	* InsertBoardCategory 에서는 초기화를 위해서 Enum이 사용됩니다.
+	* 위의 경우 외에는 사용하지 말 것.
+	* 대신, 변환이 필요한 경우 아래 두 개의 메서드를 사용하세요.
+	* src.employment.elements.content.PrintBoard.convertCategoryIdToCategoryName -> 정수형 아이디 to 문자열 이름.
+	* src.employment.elements.content.PrintBoard.convertCategoryNameToCategoryId -> 문자열 이름 to 정수형 아이디.
+*/
 public enum BoardCategoryEnum {
 	// CATEGORY_ID_category_id
 	CATEGORY_ID_1(1, 1, "서울"),

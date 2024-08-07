@@ -23,8 +23,7 @@ public class CreateDAO {
 			int mainCategory1Id, int subCategory1Id, int mainCategory2Id,
 			int subCategory2Id, String companyName) {
 		// employment_board_id -> 자동 증가 컬럼.
-		String sql = ""+
-		"insert into employment_board ("
+		String sql = "insert into employment_board ("
 		+ "title,"
 		+ "job_type,"
 		+ "career,"
