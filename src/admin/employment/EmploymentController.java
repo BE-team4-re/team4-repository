@@ -1,11 +1,10 @@
 package src.admin.employment;
 
 import src.admin.category.CategoryService;
+import java.util.Scanner;
 import src.employment.board.BoardCategoryDTO;
 import src.employment.board.BoardDTO;
-
 import java.util.List;
-import java.util.Scanner;
 
 public class EmploymentController {
     EmploymentService employmentService = new EmploymentService();
