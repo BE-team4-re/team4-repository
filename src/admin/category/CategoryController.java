@@ -97,7 +97,6 @@ public class CategoryController {
         System.out.println("---------------------------------------------------------------");
         List<BoardCategoryDTO> dtolist = categoryService.getCategoryList();
         dtolist.stream()
-                //.filter(categoryDTO -> !(categoryDTO.getCategoryId() == 1 || categoryDTO.getCategoryId() == 19))
                 .forEach(
                 categoryDTO -> {
                     System.out.printf("%-6s%-16s%-16s%-80s \n",
