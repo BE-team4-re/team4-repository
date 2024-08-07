@@ -140,24 +140,8 @@ public class PrintBoard {
 			for (BoardDTO board: onePage) {
 				System.out.printf("글번호: %d | "
 								+ "제목: %s\n",
-//								+ "근무형태:%s | "
-//								+ "요구학력:%s | "
-//								+ "채용절차:%s | "
-//								+ "자격요건:%s | "
-//								+ "우대사항:%s | "
-//								+ "회사명:%s | "
-//								+ "지역:%s | "
-//								+ "직무:%s\n",
 						board.getEmploymentBoardId(),
 						board.getTitle()
-//						board.getJobType(),
-//						board.getCareer(),
-//						board.getHiringProcess(),
-//						board.getQualifications(),
-//						board.getPreferred(),
-//						board.getCompanyName(),
-//						convertCategoryIdToName(board.getSubCategory1Id()),
-//						convertCategoryIdToName(board.getSubCategory2Id())
 				);
 			}
 		}
@@ -169,16 +153,16 @@ public class PrintBoard {
 		Response<BoardDTO> response = readDao.read(bid);
 		BoardDTO board = response.getData();
 		if (response.isSuccess()) {
-			System.out.printf("글번호: %d\n"
-							+ "제목: %s\n"
-							+ "근무형태: %s\n"
-							+ "요구학력: %s\n"
-							+ "채용절차: %s\n"
-							+ "자격요건: %s\n"
-							+ "우대사항: %s\n"
-							+ "회사명: %s\n"
-							+ "지역: %s\n"
-							+ "직무: %s\n",
+			System.out.printf("글번호:\t%d\n"
+							+ "제목:\t%s\n"
+							+ "근무형태:\t%s\n"
+							+ "요구학력:\t%s\n"
+							+ "채용절차:\t%s\n"
+							+ "자격요건:\t%s\n"
+							+ "우대사항:\t%s\n"
+							+ "회사명:\t%s\n"
+							+ "지역:\t%s\n"
+							+ "직무:\t%s\n",
 					board.getEmploymentBoardId(),
 					board.getTitle(),
 					board.getJobType(),
@@ -192,46 +176,6 @@ public class PrintBoard {
 			);
 		} else {
 			System.out.println("불러오기 실패.");
-		}
-	}
-
-	// `지역별` 선택시 조회.
-	public void printAllBoardsByRegion(int pageIdx) {
-		ReadDAO readDao = new ReadDAO();
-		Response<List<BoardDTO>> response = readDao.readByRegion();
-		List<BoardDTO> boardList = new ArrayList<>();
-		if (response.isSuccess()) {
-			boardList = response.getData();
-		} else {
-			System.out.println("불러오기 실패.");
-		}
-		if (boardList.isEmpty()) {
-			System.out.println("관련된 채용 게시물이 없습니다.");
-		} else {
-			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
-			for (BoardDTO board: onePage) {
-				System.out.printf("글번호: %d | "
-								+ "제목: %s\n",
-//								+ "근무형태:%s | "
-//								+ "요구학력:%s | "
-//								+ "채용절차:%s | "
-//								+ "자격요건:%s | "
-//								+ "우대사항:%s | "
-//								+ "회사명:%s | "
-//								+ "지역:%s | "
-//								+ "직무:%s\n",
-						board.getEmploymentBoardId(),
-						board.getTitle()
-//						board.getJobType(),
-//						board.getCareer(),
-//						board.getHiringProcess(),
-//						board.getQualifications(),
-//						board.getPreferred(),
-//						board.getCompanyName(),
-//						convertCategoryIdToName(board.getSubCategory1Id()),
-//						convertCategoryIdToName(board.getSubCategory2Id())
-				);
-			}
 		}
 	}
 
@@ -251,65 +195,11 @@ public class PrintBoard {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
 				System.out.printf("글번호: %d | "
-								+ "제목: %s\n",
-//								+ "근무형태:%s | "
-//								+ "요구학력:%s | "
-//								+ "채용절차:%s | "
-//								+ "자격요건:%s | "
-//								+ "우대사항:%s | "
-//								+ "회사명:%s | "
-//								+ "지역:%s | "
-//								+ "직무:%s\n",
+								+ "제목: %s | "
+								+ "지역: %s\n",
 						board.getEmploymentBoardId(),
-						board.getTitle()
-//						board.getJobType(),
-//						board.getCareer(),
-//						board.getHiringProcess(),
-//						board.getQualifications(),
-//						board.getPreferred(),
-//						board.getCompanyName(),
-//						convertCategoryIdToName(board.getSubCategory1Id()),
-//						convertCategoryIdToName(board.getSubCategory2Id())
-				);
-			}
-		}
-	}
-	
-	// `직무별` 선택시 조회.
-	public void printAllBoardsByJob(int pageIdx) {
-		ReadDAO readDao = new ReadDAO();
-		Response<List<BoardDTO>> response = readDao.readByJob();
-		List<BoardDTO> boardList = new ArrayList<>();
-		if (response.isSuccess()) {
-			boardList = response.getData();
-		} else {
-			System.out.println("불러오기 실패.");
-		}
-		if (boardList.isEmpty()) {
-			System.out.println("관련된 채용 게시물이 없습니다.");
-		} else {
-			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
-			for (BoardDTO board: onePage) {
-				System.out.printf("글번호: %d | "
-								+ "제목: %s\n",
-//								+ "근무형태:%s | "
-//								+ "요구학력:%s | "
-//								+ "채용절차:%s | "
-//								+ "자격요건:%s | "
-//								+ "우대사항:%s | "
-//								+ "회사명:%s | "
-//								+ "지역:%s | "
-//								+ "직무:%s\n",
-						board.getEmploymentBoardId(),
-						board.getTitle()
-//						board.getJobType(),
-//						board.getCareer(),
-//						board.getHiringProcess(),
-//						board.getQualifications(),
-//						board.getPreferred(),
-//						board.getCompanyName(),
-//						convertCategoryIdToName(board.getSubCategory1Id()),
-//						convertCategoryIdToName(board.getSubCategory2Id())
+						board.getTitle(),
+						convertCategoryIdToCategoryName(board.getSubCategory1Id())
 				);
 			}
 		}
@@ -331,25 +221,11 @@ public class PrintBoard {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
 				System.out.printf("글번호: %d | "
-								+ "제목: %s\n",
-//								+ "근무형태:%s | "
-//								+ "요구학력:%s | "
-//								+ "채용절차:%s | "
-//								+ "자격요건:%s | "
-//								+ "우대사항:%s | "
-//								+ "회사명:%s | "
-//								+ "지역:%s | "
-//								+ "직무:%s\n",
+								+ "제목: %s | "
+								+ "직무: %s\n",
 						board.getEmploymentBoardId(),
-						board.getTitle()
-//						board.getJobType(),
-//						board.getCareer(),
-//						board.getHiringProcess(),
-//						board.getQualifications(),
-//						board.getPreferred(),
-//						board.getCompanyName(),
-//						convertCategoryIdToName(board.getSubCategory1Id()),
-//						convertCategoryIdToName(board.getSubCategory2Id())
+						board.getTitle(),
+						convertCategoryIdToCategoryName(board.getSubCategory2Id())
 				);
 			}
 		}
@@ -371,25 +247,13 @@ public class PrintBoard {
 			List<BoardDTO> onePage = printBoardOnePage(pageIdx, boardList);
 			for (BoardDTO board: onePage) {
 				System.out.printf("글번호: %d | "
-								+ "제목: %s\n",
-//								+ "근무형태:%s | "
-//								+ "요구학력:%s | "
-//								+ "채용절차:%s | "
-//								+ "자격요건:%s | "
-//								+ "우대사항:%s | "
-//								+ "회사명:%s | "
-//								+ "지역:%s | "
-//								+ "직무:%s\n",
+								+ "제목: %s | "
+								+ "지역: %s | "
+								+ "직무: %s\n",
 						board.getEmploymentBoardId(),
-						board.getTitle()
-//						board.getJobType(),
-//						board.getCareer(),
-//						board.getHiringProcess(),
-//						board.getQualifications(),
-//						board.getPreferred(),
-//						board.getCompanyName(),
-//						convertCategoryIdToName(board.getSubCategory1Id()),
-//						convertCategoryIdToName(board.getSubCategory2Id())
+						board.getTitle(),
+						convertCategoryIdToCategoryName(board.getSubCategory1Id()),
+						convertCategoryIdToCategoryName(board.getSubCategory2Id())
 				);
 			}
 		}
