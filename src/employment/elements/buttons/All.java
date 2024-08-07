@@ -1,8 +1,8 @@
 package src.employment.elements.buttons;
 
-public class ByJob extends Button {
+public class All extends Button {
     @Override
     public void printButton() {
-        System.out.println("J. 직무별 조회");
+        System.out.print("전체 공고\t");
     }
 }

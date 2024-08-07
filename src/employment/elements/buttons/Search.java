@@ -1,8 +1,8 @@
 package src.employment.elements.buttons;
 
-public class ByRegion extends Button {
+public class Search extends Button {
     @Override
     public void printButton() {
-        System.out.println("R. 지역별 조회");
+        System.out.print("검색\t");
     }
 }
