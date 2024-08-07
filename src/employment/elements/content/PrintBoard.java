@@ -1,9 +1,10 @@
 package src.employment.elements.content;
 
 
-import src.employment.board.BoardCategoryEnum;
+import src.employment.board.BoardCategoryDTO;
 import src.employment.board.BoardDTO;
 import src.employment.recordDAO.employmentBoard.ReadDAO;
+import src.employment.recordDAO.employmentBoardCategory.ReadCategoryDAO;
 import src.util.Response;
 
 import java.util.*;
@@ -34,14 +35,92 @@ public class PrintBoard {
 		return page;
 	}
 
-	public String convertCategoryIdToName(int id) {
-		BoardCategoryEnum[] values = BoardCategoryEnum.values();
-		for (BoardCategoryEnum value: values) {
-			if (id == value.getSubId()) {
-				return value.getCategoryName();
+	public String convertCategoryIdToCategoryName(int userInputSubCategoryId) {
+		String convertedName = "";
+		ReadCategoryDAO readCategoryDAO = new ReadCategoryDAO();
+		List<BoardCategoryDTO> boardCategoryDTOList = new ArrayList<>();
+		Response<List<BoardCategoryDTO>> response = readCategoryDAO.readAllCategories();
+		if (response.isSuccess()) {
+			boardCategoryDTOList = response.getData();
+		}
+		if (boardCategoryDTOList.isEmpty()) {
+			System.out.println("카테고리 리스트가 비어있기 때문에 변환할 수 없습니다.");
+			// 이 경우 공백이 반환됨.
+		} else {
+			// 전체 리스트를 돌면서 id가 일치하는 요소를 찾아냄.
+			for (BoardCategoryDTO category: boardCategoryDTOList) {
+				if (userInputSubCategoryId == category.getSubCategoryId()) {
+					convertedName = category.getCategoryName();
+					break;
+				}
 			}
 		}
-		return null;
+		// 맞는게 없어도 공백이 반환됨.
+		return convertedName;
+	}
+
+	public void printAllRegionList() {
+		ReadCategoryDAO readCategoryDAO = new ReadCategoryDAO();
+		List<BoardCategoryDTO> boardCategoryDTOList = new ArrayList<>();
+		Response<List<BoardCategoryDTO>> response = readCategoryDAO.readAllCategories();
+		if (response.isSuccess()) {
+			boardCategoryDTOList = response.getData();
+		}
+		if (boardCategoryDTOList.isEmpty()) {
+			System.out.println("카테고리 리스트가 비어있습니다.");
+		} else {
+			System.out.println(":::검색 가능 지역 리스트:::");
+			for (BoardCategoryDTO category: boardCategoryDTOList) {
+				if (category.getMainCategoryId() == 1) {
+					System.out.print(category.getCategoryName()+"\t");
+				}
+			}
+			System.out.println();
+		}
+	}
+
+	public void printAllJobList() {
+		ReadCategoryDAO readCategoryDAO = new ReadCategoryDAO();
+		List<BoardCategoryDTO> boardCategoryDTOList = new ArrayList<>();
+		Response<List<BoardCategoryDTO>> response = readCategoryDAO.readAllCategories();
+		if (response.isSuccess()) {
+			boardCategoryDTOList = response.getData();
+		}
+		if (boardCategoryDTOList.isEmpty()) {
+			System.out.println("카테고리 리스트가 비어있습니다.");
+		} else {
+			System.out.println(":::검색 가능 직무 리스트:::");
+			for (BoardCategoryDTO category: boardCategoryDTOList) {
+				if (category.getMainCategoryId() == 2) {
+					System.out.print(category.getCategoryName()+"\t");
+				}
+			}
+			System.out.println();
+		}
+	}
+
+	public int convertCategoryNameToSubCategoryId(String userInputCategoryName) {
+		int convertedSubId = 0;
+		ReadCategoryDAO readCategoryDAO = new ReadCategoryDAO();
+		List<BoardCategoryDTO> boardCategoryDTOList = new ArrayList<>();
+		Response<List<BoardCategoryDTO>> response = readCategoryDAO.readAllCategories();
+		if (response.isSuccess()) {
+			boardCategoryDTOList = response.getData();
+		}
+		if (boardCategoryDTOList.isEmpty()) {
+			System.out.println("카테고리 리스트가 비어있기 때문에 변환할 수 없습니다.");
+			// 이 경우 0이 반환됨.
+		} else {
+			// 전체 리스트를 돌면서 id가 일치하는 요소를 찾아냄.
+			for (BoardCategoryDTO category: boardCategoryDTOList) {
+				if (userInputCategoryName.equals(category.getCategoryName())) {
+					convertedSubId = category.getSubCategoryId();
+					break;
+				}
+			}
+		}
+		// 맞는게 없으면 0이 반환됨.
+		return convertedSubId;
 	}
 
 	// 채용 공고를 조건없이 모두 보여줌
@@ -108,8 +187,8 @@ public class PrintBoard {
 					board.getQualifications(),
 					board.getPreferred(),
 					board.getCompanyName(),
-					convertCategoryIdToName(board.getSubCategory1Id()),
-					convertCategoryIdToName(board.getSubCategory2Id())
+					convertCategoryIdToCategoryName(board.getSubCategory1Id()),
+					convertCategoryIdToCategoryName(board.getSubCategory2Id())
 			);
 		} else {
 			System.out.println("불러오기 실패.");
