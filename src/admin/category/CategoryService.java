@@ -10,6 +10,32 @@ import java.util.List;
 public class CategoryService {
     private final Database db = new Database();
 
+
+    //채용 카테고리 리스트로 가져오기
+    public List<BoardCategoryDTO> getDetailCategoryList(int categoryNum){
+        List<BoardCategoryDTO> boardCategoryDTOList = new ArrayList<>();
+        try(Connection connection = db.connect();
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM employment_board_category WHERE mainCategory_id = ?");)
+        {
+            ps.setInt(1, categoryNum);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                BoardCategoryDTO boardCategoryDTO = new BoardCategoryDTO(
+                        rs.getInt("category_id"),
+                        rs.getInt("mainCategory_id"),
+                        rs.getInt("subCategory_id"),
+                        rs.getString("category_name")
+                );
+                boardCategoryDTOList.add(boardCategoryDTO);
+            }
+            rs.close();
+        }
+        catch (Exception e ){
+            e.printStackTrace();
+        }
+        return boardCategoryDTOList;
+    }
+
     //전체 채용 카테고리 리스트로 가져오기
     public List<BoardCategoryDTO> getCategoryList(){
         List<BoardCategoryDTO> boardCategoryDTOList = new ArrayList<>();

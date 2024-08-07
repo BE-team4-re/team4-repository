@@ -34,15 +34,19 @@ public class UserController {
 
     //아이디 입력하도록 출력
     public void printSearchUserId(){
-        System.out.println("--------------------------------------------------------");
-        System.out.println("-----------------관리자 회원관리(삭제) 페이지------------------");
-        System.out.println("--------------------------------------------------------");
+        System.out.println("\n \n \n");
+        System.out.println("+=============================================================================+");
+        System.out.println("                                관리자 회원관리 페이지                               ");
+        System.out.println("+=============================================================================+");
         System.out.print("회원의 아이디를 입력해주세요:");
     }
 
     //삭제 메뉴
     public boolean askDeleteUser(Scanner scanner){
-        System.out.println("1. 삭제하기 2.관리자 메뉴 이동");
+        System.out.println("+=============================================================================+");
+        System.out.println("|          1. 삭제하기                  |            2. 관리자 메뉴 이동            |");
+        System.out.println("+=============================================================================+");
+        System.out.print("번호를 입력해주세요: ");
         String index = scanner.nextLine();
         return index.equals("1");
     }
