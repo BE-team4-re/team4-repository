@@ -15,7 +15,7 @@ public class UserModificationController {
         String pw;
         int result;
         while (true) {
-            System.out.print("수정할 비밀번호를 입력하세요:");
+            System.out.print("수정할 비밀번호를 입력하세요 -> ");
             pw = sc.nextLine();
             if (check.validationPw(pw)) { // 비밀번호 검증
                 result = umd.updatePw(check.encodingPwd(pw));
@@ -34,7 +34,7 @@ public class UserModificationController {
         String phone;
         int result;
         while (true) {
-            System.out.print("수정할 휴대폰 번호를 입력하세요:");
+            System.out.print("수정할 휴대폰 번호를 입력하세요 -> ");
             phone = sc.nextLine();
             if (check.validationPhone(phone)) { // 휴대폰 번호 검증
                 result = umd.updatePhone(phone);
@@ -53,7 +53,7 @@ public class UserModificationController {
         String email;
         int result;
         while (true) {
-            System.out.print("수정할 이메일을 입력하세요:");
+            System.out.print("수정할 이메일을 입력하세요 -> ");
             email = sc.nextLine();
             if (check.validationEmail(email)) { // 이메일 검증
                 result = umd.updateEmail(email); // 이메일 수정
@@ -69,7 +69,7 @@ public class UserModificationController {
 
     // 회원 탈퇴
     public boolean deleteUser() {
-        System.out.print("정말 탈퇴하시겠습니까?(y or n) ");
+        System.out.print("정말 탈퇴하시겠습니까?(y or n) -> ");
         String yn = sc.nextLine();
 
         if (yn.equals("y")) {
