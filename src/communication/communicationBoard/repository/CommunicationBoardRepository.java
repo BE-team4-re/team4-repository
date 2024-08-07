@@ -6,9 +6,10 @@ public class CommunicationBoardRepository {
             "(?, ?, ?,?)";
     }
     public String findOne(){
-        return "select communicationboard_id, title, content,u.userId, u.id " +
+        return "select communicationboard_id, title, content, u.userId, u.id, cc.category_id " +
             "from communication_board cb " +
-            "inner join `user` u on cb.id = u.id " +
+            "inner join user u on cb.id = u.id " +
+            "inner join communication_category cc on cb.category_id = cc.category_id " +
             "where communicationboard_id = ?";
     }
     public String update(){

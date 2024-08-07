@@ -12,10 +12,10 @@ public class CommunicationBoardCommentController {
 
     // 댓글을 생성 시작
     public boolean createCommunicationBoardComment(int communicationBoardId, int id) {
-        System.out.println("=======================");
+        System.out.println("=============================================================================");
         System.out.print("댓글 -> ");
         String comment = sc.nextLine();
-        System.out.println("=======================");
+        System.out.println("=============================================================================");
         CreateCommunicationBoardCommentDto createCommunicationBoardCommentDto = new CreateCommunicationBoardCommentDto(comment, communicationBoardId, id);
         Response<Integer> response = communicationBoardCommentService.createComment(createCommunicationBoardCommentDto);
         // 댓글 생성 성공했다면
@@ -27,10 +27,10 @@ public class CommunicationBoardCommentController {
                 System.out.println("1. 다시 댓글을 작성하겠습니까? 2. 나가기");
                 String selectNum = sc.nextLine();
                 if (selectNum.equals("1")) {
-                    System.out.println("=======================");
+                    System.out.println("=============================================================================");
                     System.out.print("댓글 -> ");
                     comment = sc.nextLine();
-                    System.out.println("=======================");
+                    System.out.println("=============================================================================");
                     createCommunicationBoardCommentDto = new CreateCommunicationBoardCommentDto(comment, communicationBoardId, id);
                     response = communicationBoardCommentService.createComment(createCommunicationBoardCommentDto);
                     if (response.isSuccess()) {
@@ -47,10 +47,10 @@ public class CommunicationBoardCommentController {
     // 대댓글 생성 시작
     public void createCommunicationBoardReComment(int communicationBoardId, int id, int commentId) {
         while (true) {
-            System.out.println("=================");
+            System.out.println("=============================================================================");
             System.out.print("대댓글 => ");
             String reComment = sc.nextLine();
-            System.out.println("=================");
+            System.out.println("=============================================================================");
             CreateCommunicationBoardReCommentDto createCommunicationBoardReCommentDto = new CreateCommunicationBoardReCommentDto(reComment, commentId, communicationBoardId, id);
             Response<Integer> response = communicationBoardCommentService.createReComment(createCommunicationBoardReCommentDto);
             if (response.isSuccess()) {
