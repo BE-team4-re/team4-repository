@@ -317,7 +317,10 @@ public class CommunicationBoardController {
                 }
             }else if(selectNum.equals("2")) searchCommunicationBoard(id); // 나가기 뒤로가기 다시 카테고리 선택으로 간다.
             else if(selectNum.equals("3")){
-                updateCommunicationBoard(communicaionBoardId); // 커뮤니티 게시물 수정
+                if(updateCommunicationBoard(communicaionBoardId)) {
+                    System.out.println("여기는 수정이 성공한다면..~~");
+                    findOneCommunicationBoard(communicaionBoardId,id); // 커뮤니티 게시물 수정
+                }
             }else if(selectNum.equals("4")) {
                 if(deleteCommunicationBoard(communicaionBoardId)) searchCommunicationBoard(id); // 커뮤니티 게시물 삭제
             }
@@ -326,12 +329,13 @@ public class CommunicationBoardController {
     }
 
 
-    public void updateCommunicationBoard(int communicationBoardId){
+    public boolean updateCommunicationBoard(int communicationBoardId){
         // respose에는 communicationBoardId로 불러온 title과 content가 담기고 success에는 불러온 데이터의 상태가 담긴다.
         Response<FindOneCommunicationBoardDto> response = communicationBoardService.findCommunicationIdByCommunicationBoard(communicationBoardId);
         String title;
         String content;
         String selectNum;
+        boolean success = true;
         if(response.isSuccess()){ // 불러온 데이터가 있다면 true
             title = response.getData().title(); // 불러온 원본의 title
             content = response.getData().content(); // 불러온 원본의 content
@@ -364,7 +368,6 @@ public class CommunicationBoardController {
                 System.out.println("수정 전 내용 -> " + content);
                 System.out.print("수정하려는 내용-> ");
                 content = sc.nextLine();
-                System.out.println("블랭크 ===>>" + content.isBlank());
                 while(true){
                     if(content.isBlank()){ // 수정하려는 내용 공백 체크
                         System.out.println("공백은 입력이 불가합니다.");
@@ -383,11 +386,20 @@ public class CommunicationBoardController {
             if(!response.getData().title().equals(title) || !response.getData().content().equals(content)){
                 Response<Integer> updateResponse = communicationBoardService.updateCommunicationBoard(response.getData().communicationBoardId(), title, content);
                 // 수정에 성공했면
-                if(updateResponse.isSuccess()) System.out.println(updateResponse.getMessage());
-            }else System.out.println("수정 하지 않았습니다.");
+                if(updateResponse.isSuccess()) {
+                    System.out.println(updateResponse.getMessage());
+                    System.out.println("여기여기!!!" + true);
+                }
+            }else {
+                success =  false;
+                System.out.println("수정 하지 않았습니다.");
+            }
         }else{
             System.out.println(response.getMessage());
+            success =  false;
         }
+        return success;
+
 
     }
 
@@ -420,7 +432,7 @@ public class CommunicationBoardController {
             System.out.print(" 4. 메인화면");
             System.out.println();
             System.out.println("===================================");
-            System.out.print("보고싶은 게시물을 선택해주세요. -> ");
+            System.out.print("보고싶은 게시물의 카테고리를 선택해주세요. -> ");
             try {
                 int selectCategoryNum = Integer.valueOf(sc.nextLine());
                 if(selectCategoryNum == 1) categoryId = 0;
@@ -441,23 +453,24 @@ public class CommunicationBoardController {
                     try {
                         int selectNum = Integer.valueOf(sc.nextLine());
                         if(selectNum == 1) {
-                            System.out.println("커뮤니케이션 글 작성");
-                            System.out.print("제목 -> ");
-                            String title = sc.nextLine();
-                            System.out.print("내용 -> ");
-                            String content = sc.nextLine();
-                            System.out.println("커뮤니티 게시물 카테고리");
-                            commnicationBoardCategotyList.getData().stream()
-                                .forEach(category -> {
-                                    count.getAndIncrement();
-                                    System.out.print(" "+ category.communicationBoardCategoryId() + ". " +category.communicationBoardCategory());
-                                });
-                            System.out.print("-> ");
-                            String SelectcategoryId = sc.nextLine();
-                            CreateCommunicationBoardDto createCommunicationBoardDto = new CreateCommunicationBoardDto(title,content, id, Integer.valueOf(SelectcategoryId));
-                            Response<Integer> response = communicationBoardService.create(createCommunicationBoardDto);
-                            if(response.isSuccess()) System.out.println(response.getMessage());
-                            else System.out.println(response.getMessage());
+                            createCommunicationBoard(id);
+//                            System.out.println("커뮤니케이션 글 작성");
+//                            System.out.print("제목 -> ");
+//                            String title = sc.nextLine();
+//                            System.out.print("내용 -> ");
+//                            String content = sc.nextLine();
+//                            System.out.println("커뮤니티 게시물 카테고리");
+//                            commnicationBoardCategotyList.getData().stream()
+//                                .forEach(category -> {
+//                                    count.getAndIncrement();
+//                                    System.out.print(" "+ category.communicationBoardCategoryId() + ". " +category.communicationBoardCategory());
+//                                });
+//                            System.out.print("-> ");
+//                            String SelectcategoryId = sc.nextLine();
+//                            CreateCommunicationBoardDto createCommunicationBoardDto = new CreateCommunicationBoardDto(title,content, id, Integer.valueOf(SelectcategoryId));
+//                            Response<Integer> response = communicationBoardService.create(createCommunicationBoardDto);
+//                            if(response.isSuccess()) System.out.println(response.getMessage());
+//                            else System.out.println(response.getMessage());
                             break;
                         }else if(selectNum == 2) stop = false;
                         if(!stop) break;
@@ -489,10 +502,10 @@ public class CommunicationBoardController {
                     try{
                         int selectNums = Integer.parseInt(sc.nextLine());
                         if(selectNums == 5){
+//                            stop = false;
                             break;
-                        }
-                        // 다른 페이지를 볼 수 있다. 번호 입력해서
-                        if(selectNums == 1){
+                        }// 다른 페이지를 볼 수 있다. 번호 입력해서
+                         else if(selectNums == 1){
                             System.out.print("페이지를 번호를 입력해주세요.");
                             selectPage = Integer.valueOf(sc.nextLine());
                         }else if(selectNums == 2){ // 검색어를 입력해서 검색을 할 수 있다.
@@ -503,8 +516,12 @@ public class CommunicationBoardController {
                             System.out.print("보고 싶은 게시물을 선택해주세요. -> ");
                             int communicationBoardId = Integer.valueOf(sc.nextLine());
                             findOneCommunicationBoard(communicationBoardId, id);
+                            break;
                         }else if(selectNums == 4){
-                            if(createCommunicationBoard(id)) searchCommunicationBoard(id);
+                            if(createCommunicationBoard(id)) {
+                                searchCommunicationBoard(id);
+                                break;
+                            }
                             else throw new RuntimeException();
                         }
                     }catch (NumberFormatException e) {
