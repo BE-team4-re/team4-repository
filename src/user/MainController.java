@@ -21,10 +21,12 @@ public class MainController {
     // 메인
     public void startMain() {
         while (true) {
-            System.out.println("---------------------------------------------");
-            System.out.println("------------------ 메인 메뉴 ------------------");
-            System.out.println("---------------------------------------------");
-            System.out.println("1. 회원가입 | 2. 로그인 | 3. 종료");
+            System.out.println("\n=============================================");
+            System.out.println("                  ★ 잡아봐유 ★                   ");
+            System.out.println("=============================================");
+            System.out.println("   1. 회원가입    |    2. 로그인    |    3. 종료   ");
+            System.out.println("=============================================");
+            System.out.print("메뉴를 선택하세요: ");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -48,11 +50,13 @@ public class MainController {
     // 사용자 메인 화면
     public void userMain() {
         while (true) {
-            System.out.println("\n-------------------------------------------------------");
-            System.out.println("------------------------- 메인 -------------------------");
-            System.out.println("-------------------------------------------------------");
-            System.out.println("1. 채용 공고 게시판 | 2. 커뮤니티 | 3. 마이페이지 | 4. 로그아웃");
-            System.out.print("메뉴를 선택하세요 :");
+            System.out.println("\n====================================================");
+            System.out.println("                     ★ 메인 ★                        ");
+            System.out.println("====================================================");
+            System.out.println("   1. 채용 공고 게시판    |    2. 커뮤니티    ");
+            System.out.println("   3. 마이페이지         |    4. 로그아웃   ");
+            System.out.println("====================================================");
+            System.out.print("메뉴를 선택하세요: ");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -79,11 +83,13 @@ public class MainController {
     // 마이페이지
     public void myPage() {
         while (true) {
-            System.out.println("\n-------------------------------------------------------");
-            System.out.println("----------------------- 마이페이지 -----------------------");
-            System.out.println("-------------------------------------------------------");
-            System.out.println("1. 회원 정보 수정 | 2. 회원 탈퇴 | 3. 스크랩 확인 | 4. 뒤로가기");
-            System.out.print("메뉴를 선택하세요 :");
+            System.out.println("\n====================================================");
+            System.out.println("                   ★ 마이페이지 ★                    ");
+            System.out.println("====================================================");
+            System.out.println("   1. 회원 정보 수정    |    2. 회원 탈퇴   ");
+            System.out.println("   3. 스크랩 확인       |    4. 뒤로가기   ");
+            System.out.println("====================================================");
+            System.out.print("메뉴를 선택하세요: ");
             String menu = sc.nextLine();
             switch (menu) {
                 case "1":
@@ -108,11 +114,13 @@ public class MainController {
 
     // 회원 정보 수정
     public void updateUser() {
-        System.out.println("\n-------------------------------------------------");
-        System.out.println("------------------ 회원 정보 수정 ------------------");
-        System.out.println("-------------------------------------------------");
-        System.out.println("1. 비밀번호 | 2. 휴대폰 번호 | 3. 이메일 | 4. 뒤로가기");
-        System.out.print("수정 할 항목을 선택하세요 :");
+        System.out.println("\n=============================================");
+        System.out.println("               ★ 회원 정보 수정 ★               ");
+        System.out.println("=============================================");
+        System.out.println("   1. 비밀번호 수정    |    2. 휴대폰 번호 수정  ");
+        System.out.println("   3. 이메일 수정      |    4. 뒤로가기   ");
+        System.out.println("=============================================");
+        System.out.print("수정 할 항목을 선택하세요: ");
         String menu = sc.nextLine();
         switch (menu) {
             case "1":

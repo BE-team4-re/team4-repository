@@ -13,9 +13,9 @@ public class ScrapController {
     private final Scraper scraper = new Scraper();
 
     public void scrapMain() {
-        System.out.println("\n----------------------------------------------");
-        System.out.println("------------------ 나의 스크랩 ------------------");
-        System.out.println("----------------------------------------------");
+        System.out.println("\n=============================================");
+        System.out.println("               ★ 나의 스크랩 ★                ");
+        System.out.println("=============================================");
         if (sd.printScrap()) {
             System.out.println("1. 상세보기 | 2. 스크랩 해제");
             String userInput = sc.nextLine();
