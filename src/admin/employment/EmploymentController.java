@@ -34,6 +34,22 @@ public class EmploymentController {
         }
     }
 
+    public void printCompanyNameList() {
+        System.out.println("\n\n\n");
+        System.out.println(":::유저 리스트:::");
+        System.out.println("+=============================================================================+");
+        System.out.printf("%-30s\t\n", "회사명");
+        System.out.println("+=============================================================================+");
+
+        employmentService.searchEmplist().stream()
+                .forEach(user -> {
+                    System.out.printf("%-30s\t\n",
+                            user.getCompanyName()
+                    );
+                });
+        System.out.println("+=============================================================================+");
+    }
+
     private void printSearchEmployment() {
         System.out.println("\n \n \n");
         System.out.println("+=============================================================================+");
@@ -51,6 +67,7 @@ public class EmploymentController {
 
     //채용 공고 검색
     private void handleSearchEmployment() {
+        printCompanyNameList();
         printSearchEmployment();
         String companyName = scanner.nextLine();
         List<BoardDTO> empList = employmentService.searchEmpBoard(companyName);
