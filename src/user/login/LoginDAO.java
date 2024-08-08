@@ -29,7 +29,7 @@ public class LoginDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 // 사용자가 입력한 id와 pw가 일치하는 경우
                 if (rs.next()) {
-                    UserDTO user = new UserDTO();
+                    UserDTO user = new UserDTO(rs.getString("userId"), rs.getString("userStatus"));
                     user.setId(rs.getInt("id"));
                     return user; // 로그인 성공 설정
                 }

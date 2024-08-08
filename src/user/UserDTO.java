@@ -24,8 +24,6 @@ public class UserDTO {
         this.userEmail = userEmail;
     }
 
-    public UserDTO() {
-    }
 
     public int getId() {
         return id;
@@ -62,4 +60,24 @@ public class UserDTO {
     public String getUserEmail() {
         return userEmail;
     }
+
+
+    private String userStatus;
+    public UserDTO(String userId, String userPw, String userName, String userGender,
+                   String userPhone, String userBirth, String userEmail, String userStatus) {
+        this.userId = userId;
+        this.userPw = userPw;
+        this.userName = userName;
+        this.userGender = userGender;
+        this.userPhone = userPhone;
+        this.userBirth = userBirth;
+        this.userEmail = userEmail;
+        this.userStatus = userStatus;
+    }
+
+    public UserDTO(String userName, String userStatus) {
+        this.userName = userName;
+        this.userStatus = userStatus;
+    }
+    public String getUserStatus() { return  userStatus; }
 }
