@@ -175,6 +175,7 @@ public class CommunicationBoardController {
                         if(checkComment.get()) {
                             communicationBoardCommentController.createCommunicationBoardReComment(communicaionBoardId, id, Integer.valueOf(selectNum));
                             findOneCommunicationBoard(communicaionBoardId, id);
+                                break;
                         }
                         //false면 다시 시작
                         else System.out.println("없는 댓글입니다.");
@@ -257,7 +258,10 @@ public class CommunicationBoardController {
                                 int updateCommentId = Integer.valueOf(String.valueOf(commentId));
                                 boolean success = communicationBoardCommentController.updateComment(updateCommentId, updateComment.get());
                                 // 여기서 수정을 성공했다면 다시 게시물을 보여준다.
-                                if(success) findOneCommunicationBoard(communicaionBoardId, id);
+                                if(success) {
+                                    findOneCommunicationBoard(communicaionBoardId, id);
+                                    break;
+                                }
                             }
                             // 선택한 번호가 틀릴 시
                             if(Integer.valueOf(String.valueOf(updateCount)) == 0) System.out.println("번호를 잘못 입력하셨습니다. 다시 입력해주세요.");
@@ -556,7 +560,7 @@ public class CommunicationBoardController {
                         break;
                     }else if(selectNums == 4){
                         if(createCommunicationBoard(id)) {
-                            searchCommunicationBoard(id);
+                            aaa(id, selectPage, searchWord, selectCategoryId);
                             break;
                         }
                         else throw new RuntimeException();
