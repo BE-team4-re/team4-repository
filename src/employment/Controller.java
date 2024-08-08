@@ -30,16 +30,16 @@ public class Controller {
         buttonList.add(Buttons.search);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t채용 공고 게시판\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("              ★ 채용 공고 게시판 ★              ");
+            System.out.println("=============================================");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("----------------------------------------------");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -72,19 +72,19 @@ public class Controller {
         boolean breakFlag = false;
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t모든 채용공고\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("              ★ 모든 채용공고 ★              ");
+            System.out.println("=============================================");
             // 내용 구역.
             PrintBoard pb = new PrintBoard();
             pb.printAllBoards(pageIdx);
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             if (PrintBoard.allMaxPage == 0) {
                 System.out.printf("-----------\t\t\t%d 페이지 / 1 페이지\t\t\t-----------\n", pageIdx);
             } else {
                 System.out.printf("-----------\t\t\t%d 페이지 / %d 페이지\t\t\t-----------\n", pageIdx, PrintBoard.allMaxPage);
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 페이징 구역.
             System.out.print("<. ");
             Buttons.prevPage.printButton();
@@ -92,14 +92,14 @@ public class Controller {
             System.out.print(">. ");
             Buttons.nextPage.printButton();
             System.out.println();
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -185,19 +185,19 @@ public class Controller {
         buttonList.add(Buttons.back);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t자세히 보기\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("               ★ 자세히 보기 ★               ");
+            System.out.println("=============================================");
             // 내용 구역.
             pb.printDetailBoard(userInputNumber);
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -254,9 +254,9 @@ public class Controller {
         buttonList.add(Buttons.back);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t스크랩\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("                  ★ 스크랩 ★                   ");
+            System.out.println("=============================================");
             // 스크랩 구역.
             ReadDAO readDAO = new ReadDAO();
             Response<BoardDTO> readResponse = readDAO.read(userInputNumber);
@@ -279,14 +279,14 @@ public class Controller {
             } else {
                 System.out.println("채용공고가 더 이상 존재하지 않습니다.");
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("======================================================");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -338,9 +338,9 @@ public class Controller {
         buttonList.add(Buttons.back);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t스크랩 해제\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("                ★ 스크랩 해제 ★                ");
+            System.out.println("=============================================");
             // 스크랩 구역.
             ReadDAO readDAO = new ReadDAO();
             Response<BoardDTO> readResponse = readDAO.read(userInputNumber);
@@ -363,14 +363,14 @@ public class Controller {
             } else {
                 System.out.println("채용공고가 더 이상 존재하지 않습니다.");
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -425,16 +425,16 @@ public class Controller {
         buttonList.add(Buttons.back);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t검색\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("                   ★ 검색 ★                    ");
+            System.out.println("=============================================");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -490,18 +490,18 @@ public class Controller {
         String userInputKeyword = userInput;
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t키워드로 검색\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("            ★ 키워드로 검색 ★             ");
+            System.out.println("=============================================");
             // 내용 구역.
             pb.printAllBoardsByKeyword(pageIdx, userInputKeyword);
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             if (PrintBoard.keywordMaxPage == 0) {
                 System.out.printf("-----------\t\t\t%d 페이지 / 1 페이지\t\t\t-----------\n", pageIdx);
             } else {
                 System.out.printf("-----------\t\t\t%d 페이지 / %d 페이지\t\t\t-----------\n", pageIdx, PrintBoard.keywordMaxPage);
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 페이징 구역.
             System.out.print("<. ");
             Buttons.prevPage.printButton();
@@ -509,14 +509,14 @@ public class Controller {
             System.out.print(">. ");
             Buttons.nextPage.printButton();
             System.out.println();
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -577,18 +577,18 @@ public class Controller {
         int subId = pb.interpretUserInputCategoryValue(userInput);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t지역으로 검색\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("               ★ 지역으로 검색 ★               ");
+            System.out.println("=============================================");
             // 내용 구역.
             pb.printAllBoardsByRegionDetail(pageIdx, subId);
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             if (PrintBoard.regionMaxPage == 0) {
                 System.out.printf("-----------\t\t\t%d 페이지 / 1 페이지\t\t\t-----------\n", pageIdx);
             } else {
                 System.out.printf("-----------\t\t\t%d 페이지 / %d 페이지\t\t\t-----------\n", pageIdx, PrintBoard.regionMaxPage);
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 페이징 구역.
             System.out.print("<. ");
             Buttons.prevPage.printButton();
@@ -596,14 +596,14 @@ public class Controller {
             System.out.print(">. ");
             Buttons.nextPage.printButton();
             System.out.println();
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             // 입력 구역.
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
@@ -664,18 +664,18 @@ public class Controller {
         int subId = pb.interpretUserInputCategoryValue(userInput);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t직무로 검색\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("               ★ 직무로 검색 ★               ");
+            System.out.println("=============================================");
             // 내용 구역.
             pb.printAllBoardsByJobDetail(pageIdx, subId);
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             if (PrintBoard.jobMaxPage == 0) {
                 System.out.printf("-----------\t\t\t%d 페이지 / 1 페이지\t\t\t-----------\n", pageIdx);
             } else {
                 System.out.printf("-----------\t\t\t%d 페이지 / %d 페이지\t\t\t-----------\n", pageIdx, PrintBoard.jobMaxPage);
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 페이징 구역.
             System.out.print("<. ");
             Buttons.prevPage.printButton();
@@ -683,14 +683,14 @@ public class Controller {
             System.out.print(">. ");
             Buttons.nextPage.printButton();
             System.out.println();
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
             switch (userInput) {
@@ -761,18 +761,18 @@ public class Controller {
         int subId2 = pb.interpretUserInputCategoryValue(userInput2);
         while (!breakFlag) {
             // 페이지 타이틀.
-            System.out.println("#############################################################");
-            System.out.println("#################\t\t\t종합 검색\t\t\t#################");
-            System.out.println("#############################################################");
+            System.out.println("\n=============================================");
+            System.out.println("               ★ 종합 검색 ★               ");
+            System.out.println("=============================================");
             // 내용 구역.
             pb.printAllBoardsByRegionDetailAndJobDetail(pageIdx, subId1, subId2);
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             if (PrintBoard.mixMaxPage == 0) {
                 System.out.printf("-----------\t\t\t%d 페이지 / 1 페이지\t\t\t-----------\n", pageIdx);
             } else {
                 System.out.printf("-----------\t\t\t%d 페이지 / %d 페이지\t\t\t-----------\n", pageIdx, PrintBoard.mixMaxPage);
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 페이징 구역.
             System.out.print("<. ");
             Buttons.prevPage.printButton();
@@ -780,14 +780,14 @@ public class Controller {
             System.out.print(">. ");
             Buttons.nextPage.printButton();
             System.out.println();
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------");
             // 버튼 구역.
             for (int i = 0; i < buttonList.size(); i ++) {
                 System.out.printf("%d. ", i + 1);
                 buttonList.get(i).printButton();
             }
             System.out.println();
-            System.out.println("#############################################################");
+            System.out.println("-------------------------------------------------------");
             System.out.print("입력하세요 (M. 메인으로): ");
             userInput = sc.nextLine().strip();
             switch (userInput) {

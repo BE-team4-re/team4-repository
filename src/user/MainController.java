@@ -50,12 +50,12 @@ public class MainController {
     // 사용자 메인 화면
     public void userMain() {
         while (true) {
-            System.out.println("\n====================================================");
-            System.out.println("                     ★ User Main ★                        ");
-            System.out.println("====================================================");
+            System.out.println("\n=============================================");
+            System.out.println("                ★ User Main ★                  ");
+            System.out.println("=============================================");
             System.out.println("   1. 채용 공고 게시판    |    2. 커뮤니티    ");
             System.out.println("   3. 마이페이지         |    4. 로그아웃   ");
-            System.out.println("====================================================");
+            System.out.println("=============================================");
             System.out.print("메뉴를 선택하세요 -> ");
             String menu = sc.nextLine();
             switch (menu) {
@@ -83,12 +83,12 @@ public class MainController {
     // 마이페이지
     public void myPage() {
         while (true) {
-            System.out.println("\n====================================================");
-            System.out.println("                   ★ 마이페이지 ★                    ");
-            System.out.println("====================================================");
+            System.out.println("\n=============================================");
+            System.out.println("                  ★ 마이페이지 ★                   ");
+            System.out.println("=============================================");
             System.out.println("   1. 회원 정보 수정    |    2. 회원 탈퇴   ");
             System.out.println("   3. 스크랩 확인       |    4. 뒤로가기   ");
-            System.out.println("====================================================");
+            System.out.println("=============================================");
             System.out.print("메뉴를 선택하세요 -> ");
             String menu = sc.nextLine();
             switch (menu) {
