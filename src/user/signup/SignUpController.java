@@ -19,7 +19,7 @@ public class SignUpController {
         System.out.println("=============================================");
         // 아이디 입력
         while (true) {
-            System.out.print("아이디를 입력하세요 ->");
+            System.out.print("아이디를 입력하세요 -> ");
             id = sc.nextLine();
             // 아이디 중복 체크
             if (sd.duplicateId(id)) {

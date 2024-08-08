@@ -22,7 +22,7 @@ public class MainController {
     public void startMain() {
         while (true) {
             System.out.println("\n=============================================");
-            System.out.println("                  ★ JOB아봐유 ★                   ");
+            System.out.println("                  ★ JobabaYou ★                 ");
             System.out.println("=============================================");
             System.out.println("   1. 회원가입    |    2. 로그인    |    3. 종료   ");
             System.out.println("=============================================");
