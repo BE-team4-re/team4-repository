@@ -24,6 +24,10 @@ public class UserDTO {
         this.userEmail = userEmail;
     }
 
+    public UserDTO() {
+
+    }
+
 
     public int getId() {
         return id;
