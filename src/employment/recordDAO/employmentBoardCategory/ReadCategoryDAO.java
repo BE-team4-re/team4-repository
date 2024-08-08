@@ -16,9 +16,7 @@ import src.util.Response;
 
 
 public class ReadCategoryDAO {
-	
 	private final Database db = new Database();
-	
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -31,7 +29,6 @@ public class ReadCategoryDAO {
 		String sql = "select * from employment_board_category";
 
 		try {
-			
 			conn = db.connect();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();

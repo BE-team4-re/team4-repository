@@ -10,6 +10,7 @@ public class Buttons {
     public static List<Button> buttonList = new ArrayList<>();
 
     // 아래부터는 쓰여지는 개별 버튼들을 객체로 만들어두고 사용함.
+    public static ByKeyword byKeyword = new ByKeyword();
     public static ByJobDetail byJobDetail = new ByJobDetail();
     public static ByRegionDetail byRegionDetail = new ByRegionDetail();
     public static ByRegionDetailAndJobDetail byRegionDetailAndJobDetail = new ByRegionDetailAndJobDetail();
@@ -21,6 +22,7 @@ public class Buttons {
     public static First first = new First();
 
     public static Scrap scrap = new Scrap();
+    public static ScrapOff scrapOff = new ScrapOff();
     public static Detail detail = new Detail();
 
     public static Search search = new Search();
@@ -30,7 +32,6 @@ public class Buttons {
     public static void makeButtonList() {
         if (buttonList.isEmpty()) {
             buttonList.add(Buttons.detail);
-            buttonList.add(Buttons.scrap);
             buttonList.add(Buttons.first);
             buttonList.add(Buttons.back);
         }

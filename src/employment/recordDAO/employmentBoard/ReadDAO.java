@@ -15,13 +15,10 @@ import src.util.Response;
 
 
 public class ReadDAO {
-
 	private final Database db = new Database();
-	
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-
 
 	// select * from employment_board
 	// -> 전체 게시물 조회
@@ -128,126 +125,6 @@ public class ReadDAO {
 				// System.out.println("가져오는데 실패하였습니다.");
 				response = new Response<>(false, "가져오는데 실패하였습니다.", null);
 			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return response;
-	}
-
-	// select * from employment_board where main_category1_id=1";
-	// -> 지역별 조회
-	public Response<List<BoardDTO>> readByRegion() {
-
-		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
-		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
-
-		String sql = "select * from employment_board where main_category1_id=1 order by employment_board_id desc";
-
-		try {
-
-			conn = db.connect();
-			pstmt = conn.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// System.out.println("성공적으로 가져왔습니다.");
-				int employmentBoardId = rs.getInt("employment_board_id");
-				String title = rs.getString("title");
-				String jobType = rs.getString("job_type");
-				String career = rs.getString("career");
-				String hiringProcess = rs.getString("hiring_process");
-				String qualifications = rs.getString("qualifications");
-				String preferred = rs.getString("preferred");
-				int mainCategory1Id = rs.getInt("main_category1_id");
-				int subCategory1Id = rs.getInt("sub_category1_id");
-				int mainCategory2Id = rs.getInt("main_category2_id");
-				int subCategory2Id = rs.getInt("sub_category2_id");
-				String companyName = rs.getString("company_name");
-
-				BoardDTO board = new BoardDTO(
-						employmentBoardId, title, jobType, career, hiringProcess,
-						qualifications, preferred, mainCategory1Id, mainCategory2Id,
-						subCategory1Id, subCategory2Id, companyName
-				);
-				EmploymentBoardList.add(board);
-			}
-			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return response;
-	}
-
-	// select * from employment_board where main_category2_id=2";
-	// -> 직무별 조회
-	public Response<List<BoardDTO>> readByJob() {
-
-		List<BoardDTO> EmploymentBoardList = new ArrayList<>();
-		Response<List<BoardDTO>> response = new Response<>(false, "실패하였습니다.", EmploymentBoardList);
-
-		String sql = "select * from employment_board where main_category2_id=2 order by employment_board_id desc";
-
-		try {
-
-			conn = db.connect();
-			pstmt = conn.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// System.out.println("성공적으로 가져왔습니다.");
-				int employmentBoardId = rs.getInt("employment_board_id");
-				String title = rs.getString("title");
-				String jobType = rs.getString("job_type");
-				String career = rs.getString("career");
-				String hiringProcess = rs.getString("hiring_process");
-				String qualifications = rs.getString("qualifications");
-				String preferred = rs.getString("preferred");
-				int mainCategory1Id = rs.getInt("main_category1_id");
-				int subCategory1Id = rs.getInt("sub_category1_id");
-				int mainCategory2Id = rs.getInt("main_category2_id");
-				int subCategory2Id = rs.getInt("sub_category2_id");
-				String companyName = rs.getString("company_name");
-
-				BoardDTO board = new BoardDTO(
-						employmentBoardId, title, jobType, career, hiringProcess,
-						qualifications, preferred, mainCategory1Id, mainCategory2Id,
-						subCategory1Id, subCategory2Id, companyName
-				);
-				EmploymentBoardList.add(board);
-			}
-			response = new Response<>(true, "성공적으로 가져왔습니다.", EmploymentBoardList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

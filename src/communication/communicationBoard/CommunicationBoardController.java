@@ -1,6 +1,5 @@
 package src.communication.communicationBoard;
 
-import org.fusesource.jansi.Ansi;
 import src.communication.communicationBoard.dto.*;
 import src.communication.communicationCategory.CommunicationCategoryService;
 import src.communication.communicationCategory.dto.FindCommunicationBoardCategoryDto;
