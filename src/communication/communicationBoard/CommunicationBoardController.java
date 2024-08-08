@@ -18,13 +18,17 @@ public class CommunicationBoardController {
     private final CommunicationBoardService communicationBoardService = new CommunicationBoardService();
     private final CommunicationCategoryService communicationCategoryService = new CommunicationCategoryService();
     private final CommunicationBoardCommentController  communicationBoardCommentController = new CommunicationBoardCommentController();
+    private int selectCategoryId = 0;
+    private int selPage = 1;
+    private int selectPage = 1;
 //    MainController mainController = new MainController();
 
 
     // 커뮤니케이션 게시물 생성
-    public void createCommunicationBoard(int id){
+    public boolean createCommunicationBoard(int id){
         // 커뮤니케이션 카테고리를 가져온다.
         Response<List<FindCommunicationBoardCategoryDto>> category =  communicationCategoryService.findAll();
+        boolean result = true;
         // 카테고리 가져오는데 성공 했다면 카테고리 내용을 보여준다.
         if(category.isSuccess()){
             List<FindCommunicationBoardCategoryDto> categoryList = category.getData();
@@ -40,23 +44,26 @@ public class CommunicationBoardController {
             System.out.print("======");
             System.out.println();
             System.out.println("====================================");
-            System.out.print("카테고리 번호를 입력해주세요 -> ");
-            int selectCategory = Integer.valueOf(sc.nextLine()) - 1;
-            System.out.print("제목 --> ");
-            String title = sc.nextLine();
-            System.out.print("내용 --> ");
-            String content = sc.nextLine();
+
             try{
+                System.out.print("카테고리 번호를 입력해주세요 -> ");
+                int selectCategory = Integer.valueOf(sc.nextLine()) - 1;
+                System.out.print("제목 --> ");
+                String title = sc.nextLine();
+                System.out.print("내용 --> ");
+                String content = sc.nextLine();
                 // 커뮤니티 게시물 생성에 필요한 데이터를 담아준다.
                 CreateCommunicationBoardDto createCommunicationBoard = new CreateCommunicationBoardDto(title,content,id,categoryList.get(selectCategory).communicationBoardCategoryId());
                 // 커뮤니티 게시물을 저장한다.
                 Response<Integer> response = communicationBoardService.create(createCommunicationBoard);
                 if(response.isSuccess()){
                     System.out.println(response.getMessage());
+                    result = response.isSuccess();
                 }else{
                     System.out.println(response.getMessage());
+                    result =  response.isSuccess();
                 }
-            }catch (IndexOutOfBoundsException e){
+            }catch (IndexOutOfBoundsException | NumberFormatException e){
                 System.out.println("오류가 발생했습니다. 다시 시작합니다.");
                 createCommunicationBoard(id);
             }
@@ -64,9 +71,11 @@ public class CommunicationBoardController {
             try{
                 throw new Exception(category.getMessage());
             }catch (Exception e){
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                return false;
             }
         }
+        return result;
     }
     // 커뮤니티 게시글 하나를 선택해서 보여준다. 글번호, 제목, 작성자, 작성글, 댓글, 대댓글
     public void findOneCommunicationBoard(int communicaionBoardId, int id){
@@ -76,15 +85,21 @@ public class CommunicationBoardController {
         if(response.isSuccess()){
             int line = response.getData().communicationBoard().content().length();
             boolean stop = true;
-            System.out.println("===========================================");
+            System.out.println("=============================================================");
             System.out.println("글번호 = > " + response.getData().communicationBoard().communicationBoardId());
             System.out.println("제목 => " + response.getData().communicationBoard().title());
             System.out.println("작성자 => " + response.getData().communicationBoard().userId());
             System.out.println("작성글 = > " + response.getData().communicationBoard().content());
-            System.out.println("===========================================");
-            System.out.println("====================댓글===================");
-            response.getData().commentList().stream()
+            System.out.println("=============================================================");
+            if(response.getData().commentList().isEmpty()) {
+                System.out.println("등록된 댓글이 없습니다.");
+                System.out.println("=============================================================");
+            }
+            else{
+                System.out.println("=============================댓글=============================");
+                response.getData().commentList().stream()
                     .forEach(comment -> {
+                        System.out.println("asdasdsadasdsad" + comment.comment());
                         if(comment.parentId() == 0){
                             System.out.println("🐽"+comment.userId());
                             System.out.println("-> " + comment.comment());
@@ -93,40 +108,57 @@ public class CommunicationBoardController {
                             System.out.println("    -> " + comment.comment());
                         }
                     });
-            System.out.println("===========================================");
-            System.out.print("1. 댓글 2. 나가기");
+
+                System.out.println("===========================================================================================");
+            }
+
+
             // 작성한 게시물이 본인이라면 수정, 삭제 보여주기
             if(id == response.getData().communicationBoard().id() || id == 0){
-                System.out.println(" 3. 게시물 수정 4. 게시물 삭제");
+                System.out.println("|  1. 댓글  |  2. 뒤로가기  |  3. 게시물 수정 |  4. 게시물 삭제  |");
+            }else{
+                System.out.println("|  1. 댓글  |  2. 뒤로가기  |");
             }
+            System.out.println("===========================================================================================");
             System.out.print("번호 -> ");
             String selectNum = sc.nextLine();
             // 1번을 눌러 댓글 관련으로 들어간다.
             if(selectNum.equals("1")){
-                System.out.println("1. 댓글 쓰기 2. 대댓글 작성하기 3. 댓글 대댓글 수정 4. 댓글 대댓글 삭제");
+                System.out.println("===========================================================================================");
+                System.out.println("|  1. 댓글 쓰기  |  2. 대댓글 작성하기  |  3. 댓글, 대댓글 수정  |  4. 댓글, 대댓글 삭제  | 5. 뒤로가기  |");
+                System.out.println("===========================================================================================");
                 System.out.print("번호 -> ");
                 selectNum = sc.nextLine();
                 // 댓글 생성한다.
                 if(selectNum.equals("1")) {
                     boolean checkCreateComment = communicationBoardCommentController.createCommunicationBoardComment(response.getData().communicationBoard().communicationBoardId(), id);
-                    if(checkCreateComment) findOneCommunicationBoard(communicaionBoardId, id);
+                    if(checkCreateComment) {
+                        findOneCommunicationBoard(communicaionBoardId, id);
+                    }
                 }
                 // 먼저 게시글에 있는 댓글을 보여준다. 그 댓글 중 번호를 선택해 대댓글을 작성한다.
                 else if(selectNum.equals("2")){
                     while(true){
                         // 게시글에 있는 댓글을 번호와 함께 보여준다.
+                        System.out.println("게시물의 댓글 목록");
+                        final String RESET = "\033[0m";      // 색상 초기화
+                        final String YELLOW = "\033[33m";    // 노란색
                         response.getData().commentList().stream()
                             .forEach(comment -> {
                                 if(comment.parentId() == 0){
-                                    System.out.println(comment.commentId()+"번");
-                                    System.out.println("🐽"+comment.userId());
+                                    System.out.println("\033[1;34m 댓글 번호: \033[0m" + comment.commentId());
+                                    System.out.println("🐽 " + comment.userId());
                                     System.out.println("-> " + comment.comment());
                                 }
                             });
-                        System.out.println("나가시려면 q를 입력해주세여. ");
-                        System.out.print("대댓글을 달고 싶은 댓글의 번호를 입력해주세요. -> ");
+                        System.out.println("===========================================");
+                        System.out.println("|         나가시려면 'q'를 입력해 주세요.        |");
+                        System.out.println("|   대댓글을 달고 싶은 댓글의 번호를 입력해 주세요. |");
+                        System.out.println("===========================================");
+                        System.out.print("번호 입력-> ");
                         selectNum = sc.nextLine();
                         if(selectNum.equals("q")){
+                            findOneCommunicationBoard(communicaionBoardId, id);
                             break;
                         }
                         AtomicBoolean checkComment = new AtomicBoolean(false);
@@ -143,6 +175,7 @@ public class CommunicationBoardController {
                         if(checkComment.get()) {
                             communicationBoardCommentController.createCommunicationBoardReComment(communicaionBoardId, id, Integer.valueOf(selectNum));
                             findOneCommunicationBoard(communicaionBoardId, id);
+                                break;
                         }
                         //false면 다시 시작
                         else System.out.println("없는 댓글입니다.");
@@ -225,7 +258,10 @@ public class CommunicationBoardController {
                                 int updateCommentId = Integer.valueOf(String.valueOf(commentId));
                                 boolean success = communicationBoardCommentController.updateComment(updateCommentId, updateComment.get());
                                 // 여기서 수정을 성공했다면 다시 게시물을 보여준다.
-                                if(success) findOneCommunicationBoard(communicaionBoardId, id);
+                                if(success) {
+                                    findOneCommunicationBoard(communicaionBoardId, id);
+                                    break;
+                                }
                             }
                             // 선택한 번호가 틀릴 시
                             if(Integer.valueOf(String.valueOf(updateCount)) == 0) System.out.println("번호를 잘못 입력하셨습니다. 다시 입력해주세요.");
@@ -253,7 +289,6 @@ public class CommunicationBoardController {
                                             count.getAndIncrement();
                                     }
                                 });
-
                         }else{
                             // 내가 작성한 댓글들을 보여준다.
                             response.getData().commentList().stream()
@@ -274,9 +309,7 @@ public class CommunicationBoardController {
                                         }
                                     }
                                 });
-
                         }
-
                         System.out.println("======================");
                         // 내가 작성한 댓글이 있는지 체크
                         if (Integer.valueOf(String.valueOf(count)) == 0) {
@@ -311,22 +344,32 @@ public class CommunicationBoardController {
                             break;
                         }
                     }
+                }else if(selectNum.equals("5")){
+                    findOneCommunicationBoard(communicaionBoardId, id);
                 }
-            }else if(selectNum.equals("2")) searchCommunicationBoard(id); // 나가기 뒤로가기 다시 카테고리 선택으로 간다.
+            }else if(selectNum.equals("2")) {
+                aaa(id, 1, "", selectCategoryId);
+//                searchCommunicationBoard(id); //2뒤 나가기 뒤로가기 다시 카테고리 선택으로 간다.
+            }
             else if(selectNum.equals("3")){
-                updateCommunicationBoard(communicaionBoardId); // 커뮤니티 게시물 수정
-            }else if(selectNum.equals("4")) deleteCommunicationBoard(communicaionBoardId); // 커뮤니티 게시물 삭제
+                if(updateCommunicationBoard(communicaionBoardId)) {
+                    findOneCommunicationBoard(communicaionBoardId,id); // 커뮤니티 게시물 수정
+                }
+            }else if(selectNum.equals("4")) {
+                if(deleteCommunicationBoard(communicaionBoardId)) searchCommunicationBoard(id); // 커뮤니티 게시물 삭제
+            }
         }else System.out.println("조회에 실패했습니다.");
 
     }
 
 
-    public void updateCommunicationBoard(int communicationBoardId){
+    public boolean updateCommunicationBoard(int communicationBoardId){
         // respose에는 communicationBoardId로 불러온 title과 content가 담기고 success에는 불러온 데이터의 상태가 담긴다.
         Response<FindOneCommunicationBoardDto> response = communicationBoardService.findCommunicationIdByCommunicationBoard(communicationBoardId);
         String title;
         String content;
         String selectNum;
+        boolean success = true;
         if(response.isSuccess()){ // 불러온 데이터가 있다면 true
             title = response.getData().title(); // 불러온 원본의 title
             content = response.getData().content(); // 불러온 원본의 content
@@ -359,7 +402,6 @@ public class CommunicationBoardController {
                 System.out.println("수정 전 내용 -> " + content);
                 System.out.print("수정하려는 내용-> ");
                 content = sc.nextLine();
-                System.out.println("블랭크 ===>>" + content.isBlank());
                 while(true){
                     if(content.isBlank()){ // 수정하려는 내용 공백 체크
                         System.out.println("공백은 입력이 불가합니다.");
@@ -378,20 +420,29 @@ public class CommunicationBoardController {
             if(!response.getData().title().equals(title) || !response.getData().content().equals(content)){
                 Response<Integer> updateResponse = communicationBoardService.updateCommunicationBoard(response.getData().communicationBoardId(), title, content);
                 // 수정에 성공했면
-                if(updateResponse.isSuccess()) System.out.println(updateResponse.getMessage());
-            }else System.out.println("수정 하지 않았습니다.");
+                if(updateResponse.isSuccess()) {
+                    System.out.println(updateResponse.getMessage());
+                }
+            }else {
+                success =  false;
+                System.out.println("수정 하지 않았습니다.");
+            }
         }else{
             System.out.println(response.getMessage());
+            success =  false;
         }
+        return success;
+
 
     }
 
     // 게시물 삭제
-    public void deleteCommunicationBoard(int communicationBoardId){
+    public boolean deleteCommunicationBoard(int communicationBoardId){
         Response<Integer> response = communicationBoardService.delete(communicationBoardId);
         // 게시물 삭제 성공확인
         if(response.isSuccess()) System.out.println(response.getMessage());
         else System.out.println(response.getMessage());
+        return response.isSuccess();
     }
 
     // 커뮤니티 게시물 카테고리로 검색
@@ -400,11 +451,11 @@ public class CommunicationBoardController {
         Response<List<FindCommunicationBoardCategoryDto>> commnicationBoardCategotyList = communicationCategoryService.findAll();
         AtomicInteger count = new AtomicInteger(1);
         int categoryId = 0;
-        int selectPage = 1;
+//        int selectPage = 1;
         String searchWord = "";
         // 커뮤니티 카테고리 보여준다.
         if(commnicationBoardCategotyList.isSuccess()){
-            System.out.println("===================================");
+            System.out.println("==============================================");
             System.out.print("1. 전체게시물");
             commnicationBoardCategotyList.getData().stream()
                     .forEach(category -> {
@@ -413,79 +464,114 @@ public class CommunicationBoardController {
                     });
             System.out.print(" 4. 메인화면");
             System.out.println();
-            System.out.println("===================================");
-            System.out.print("보고싶은 게시물을 선택해주세요. -> ");
-            int selectNum = Integer.valueOf(sc.nextLine());
-            if(selectNum == 1) categoryId = 0;
-            else if(selectNum == 2) categoryId = 1;
-            else if(selectNum == 3) categoryId = 2;
-            else if(selectNum == 4) return;
-            while(true){
-                // 선택된 카테고리의 게시물을 불러온다. 페이지 네이션을 사용해서 최대 5개의 게시물을 보여준다.
-                Response<PagenationCommunicationBoardDto> communicationBoard = communicationBoardService.searchCommunicationBoard(categoryId,selectPage,searchWord);
-                List<Integer> page = new ArrayList<>();
-                if(communicationBoard.getData() == null){
-                    System.out.println("등록된 게시물이 없습니다. 게시글 작성 하시겠습니까?");
-                    System.out.println("1. 게시글 작성 2. 메인 화면");
-                    selectNum = Integer.valueOf(sc.nextLine());
+            System.out.println("==============================================");
+            System.out.print("보고싶은 게시물의 카테고리를 선택해주세요. -> ");
+            try {
+                int selectCategoryNum = Integer.valueOf(sc.nextLine());
+                if(selectCategoryNum == 1) selectCategoryId = 0;
+                else if(selectCategoryNum == 2) selectCategoryId = 1;
+                else if(selectCategoryNum == 3) selectCategoryId = 2;
+                else if(selectCategoryNum == 4) return;
+            }catch (NumberFormatException e){
+                searchCommunicationBoard(id);
+            }
+            // 선택된 카테고리의 게시물을 불러온다. 페이지 네이션을 사용해서 최대 5개의 게시물을 보여준다.
+            aaa(id,selectPage,searchWord, selectCategoryId);
+        }
+    }
+
+    public void aaa(int id, int selectPage, String searchWord, int selectCategoryId){
+        // 선택된 카테고리의 게시물을 불러온다. 페이지 네이션을 사용해서 최대 5개의 게시물을 보여준다.
+        boolean stop = true;
+        while(true){
+            List<Integer> page = new ArrayList<>();
+            Response<PagenationCommunicationBoardDto> communicationBoard = communicationBoardService.searchCommunicationBoard(selectCategoryId,selectPage,searchWord);
+            if(communicationBoard.getData() == null && selectPage == 1 && searchWord.equals("")){
+                System.out.println("등록된 게시물이 없습니다. 게시글 작성 하시겠습니까?");
+                System.out.println("1. 게시글 작성 2. 메인 화면");
+                try {
+                    int selectNum = Integer.valueOf(sc.nextLine());
                     if(selectNum == 1) {
-                        System.out.println("커뮤니케이션 글 작성");
-                        System.out.print("제목 -> ");
-                        String title = sc.nextLine();
-                        System.out.print("내용 -> ");
-                        String content = sc.nextLine();
-                        System.out.println("커뮤니티 게시물 카테고리");
-                        commnicationBoardCategotyList.getData().stream()
-                            .forEach(category -> {
-                                count.getAndIncrement();
-                                System.out.print(" "+ category.communicationBoardCategoryId() + ". " +category.communicationBoardCategory() + "-> ");
-                            });
-                        String SelectcategoryId = sc.nextLine();
-                        CreateCommunicationBoardDto createCommunicationBoardDto = new CreateCommunicationBoardDto(title,content, id, Integer.valueOf(SelectcategoryId));
-                        Response<Integer> response = communicationBoardService.create(createCommunicationBoardDto);
-                        if(response.isSuccess()) System.out.println(response.getMessage());
-                        else System.out.println(response.getMessage());
-                        searchCommunicationBoard(id);
-                    }else if(selectNum == 2){
+                        createCommunicationBoard(id);
                         break;
-                    }
+                    }else if(selectNum == 2) stop = false;
+                    if(!stop) break;
+                }catch (NumberFormatException e){
+                    System.out.println("숫자를 입력해주세요. 뒤로 갑니다.");
+                    searchCommunicationBoard(id);
                 }
+            }else{
                 // 페이지 번호를 찍기위해서
-                for(int i = selectPage; i <= communicationBoard.getData().totalPage(); i++) page.add(i);
-                if(categoryId == 0) System.out.println("========= 전체 게시물 =========");
-                else System.out.println("=====" + commnicationBoardCategotyList.getData().get(categoryId - 1).communicationBoardCategory() + "=========");
-                System.out.println("번호       내용           작성자 ");
-                // 받아온 게시물을 보여준다.
-                communicationBoard.getData().communicationBoardList().stream()
-                    .forEach(commu -> System.out.println(commu.communicationBoardId()+". "+ commu.title() + "  " + commu.userId()));
-                int pageCount = 0;
-                for(int i = page.get(0); i <= page.size(); i++){
-                    pageCount++;
-                    if(pageCount == 5) {
-                        System.out.println(i + "   [다음]");
-                        break;
+                try{
+                    System.out.println("total page ==><> "+ communicationBoard.getData().totalPage());
+                    System.out.println("selectPage ==><> "+ selectPage);
+                    for(int i = selectPage; i <= communicationBoard.getData().totalPage(); i++) {
+//                        System.out.println("i??? +===>>"+i);
+                        page.add(i);
                     }
-                    if(i == page.size()) System.out.println(i);
-                    else if(i == page.get(0)) System.out.print("["+i+"], ");
-                    else System.out.print(i+", ");
+                    if(selectCategoryId == 0) System.out.println("===================== 전체 게시물 =====================");
+                    else if(selectCategoryId == 1) System.out.println("===================== 기업평가 =====================");
+                    else if(selectCategoryId == 2) System.out.println("===================== 현직자 인터뷰 =====================");
+                    System.out.printf("%-10s %-30s %-10s%n", "번호", "내용", "작성자");
+                    // 받아온 게시물을 보여준다.
+                    communicationBoard.getData().communicationBoardList().stream()
+                        .forEach(commu -> {
+                            System.out.printf("%-5d |%-30s| %-10s%n", commu.communicationBoardId(), commu.title(), commu.userId());
+//                            System.out.println(commu.communicationBoardId()+". "+ commu.title() + "  " + commu.userId());
+                        });
+                    int pageCount = 0;
+                    System.out.print("페이지 번호 -> ");
+                    for(int i = page.get(0); i <= communicationBoard.getData().totalPage(); i++){
+                        pageCount++;
+                        if(pageCount == 5) {
+                            if(!((selectPage + 5) >  communicationBoard.getData().totalPage())){
+                                System.out.println(i + "   [다음]");
+                                break;
+                            }
+                        }
+                        if(i == communicationBoard.getData().totalPage()) System.out.println(i);
+                        else if(i == page.get(0)) System.out.print("["+i+"], ");
+                        else System.out.print(i+", ");
+
+                    }
+                }catch(NullPointerException err){
+                    System.out.println("페이지가 존재하지 않습니다.");
+                    aaa(id, 1,  "", selectCategoryId);
+                    break;
                 }
-                System.out.println("1. 다른 페이지 2. 검색 3. 게시물 선택 4. 게시물 작성 5. 나가기");
-                selectNum = Integer.valueOf(sc.nextLine());
-                if(selectNum == 5) break;
-                // 다른 페이지를 볼 수 있다. 번호 입력해서
-                else if(selectNum == 1){
-                    System.out.print("페이지를 번호를 입력해주세요.");
-                    selectPage = Integer.valueOf(sc.nextLine());
-                }else if(selectNum == 2){ // 검색어를 입력해서 검색을 할 수 있다.
-                    selectPage = 1;
-                    System.out.print("검색하실 단어를 입력해주세요. -> ");
-                    searchWord = sc.nextLine();
-                }else if(selectNum == 3){ // 게시물 선택하여 볼 수있다.
-                    System.out.print("보고 싶은 게시물을 선택해주세요.");
-                    int communicationBoardId = Integer.valueOf(sc.nextLine());
-                    findOneCommunicationBoard(communicationBoardId, id);
-                }else if(selectNum == 4){
-                    createCommunicationBoard(id);
+                System.out.println("1. 다른 페이지 2. 검색 3. 게시물 선택 4. 게시물 작성 5. 뒤로가기");
+                try{
+                    int selectNums = Integer.parseInt(sc.nextLine());
+                    if(selectNums == 5){
+                        searchCommunicationBoard(id);
+                        break;
+                    }// 다른 페이지를 볼 수 있다. 번호 입력해서
+                    else if(selectNums == 1){
+                        System.out.print("페이지를 번호를 입력해주세요.");
+                        selectPage = Integer.valueOf(sc.nextLine());
+                    }else if(selectNums == 2){ // 검색어를 입력해서 검색을 할 수 있다.
+                        selectPage = 1;
+                        System.out.print("검색하실 단어를 입력해주세요. -> ");
+                        searchWord = sc.nextLine();
+                    }else if(selectNums == 3){ // 게시물 선택하여 볼 수있다.
+                        System.out.print("보고 싶은 게시물을 선택해주세요. -> ");
+                        int communicationBoardId = Integer.valueOf(sc.nextLine());
+                        findOneCommunicationBoard(communicationBoardId, id);
+                        break;
+                    }else if(selectNums == 4){
+                        if(createCommunicationBoard(id)) {
+                            aaa(id, selectPage, searchWord, selectCategoryId);
+                            break;
+                        }
+                        else throw new RuntimeException();
+                    }
+                }catch (NumberFormatException e) {
+                    System.out.println("숫자를 입력해주세요. 뒤로갑니다.");
+                    searchCommunicationBoard(id);
+                    break;
+                }catch (RuntimeException e){
+                    System.out.println("게시물 등록에 실패했습니다. 뒤로갑니다.");
+                    break;
                 }
             }
         }

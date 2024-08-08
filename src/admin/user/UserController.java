@@ -1,5 +1,8 @@
 package src.admin.user;
 
+import src.user.UserDTO;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class UserController {
@@ -7,9 +10,27 @@ public class UserController {
     UserService userService = new UserService();
     Scanner scanner = new Scanner(System.in);
 
+    public void printUserList() {
+        System.out.println("\n\n\n");
+        System.out.println(":::유저 리스트:::");
+        System.out.println("+=============================================================================+");
+        System.out.printf("%-30s\t%-16s\n", "아이디", "상태");
+        System.out.println("+=============================================================================+");
+
+        userService.searchUserlist().stream()
+                .forEach(user -> {
+                    System.out.printf("%-30s\t%-16s\n",
+                            user.getUserName(),  // Assuming user.getUserName() returns the userId or a user-readable name.
+                            user.getUserStatus()
+                    );
+                });
+    }
+
+
     //휴면계정 처리
-    public void deactivateAccount(){
-        while(true) {
+    public void deactivateAccount() {
+        while (true) {
+            printUserList();
             printSearchUserId();
             String userID = scanner.nextLine();
             if (userService.validationID(userID)) {
@@ -18,7 +39,7 @@ public class UserController {
                     if (userService.deleteUser(userID) == 1) {
                         System.out.println("휴면계정으로 상태를 변경하였습니다.");
 
-                    }else {
+                    } else {
                         System.out.println("휴면계정으로 상태를 변경하지 못하였습니다.");
                     }
                 } else {
@@ -33,16 +54,20 @@ public class UserController {
     }
 
     //아이디 입력하도록 출력
-    public void printSearchUserId(){
-        System.out.println("--------------------------------------------------------");
-        System.out.println("-----------------관리자 회원관리(삭제) 페이지------------------");
-        System.out.println("--------------------------------------------------------");
+    public void printSearchUserId() {
+        System.out.println("\n \n \n");
+        System.out.println("+=============================================================================+");
+        System.out.println("                                관리자 회원관리 페이지                               ");
+        System.out.println("+=============================================================================+");
         System.out.print("회원의 아이디를 입력해주세요:");
     }
 
     //삭제 메뉴
-    public boolean askDeleteUser(Scanner scanner){
-        System.out.println("1. 삭제하기 2.관리자 메뉴 이동");
+    public boolean askDeleteUser(Scanner scanner) {
+        System.out.println("+=============================================================================+");
+        System.out.println("|          1. 삭제하기                  |            2. 관리자 메뉴 이동            |");
+        System.out.println("+=============================================================================+");
+        System.out.print("번호를 입력해주세요: ");
         String index = scanner.nextLine();
         return index.equals("1");
     }

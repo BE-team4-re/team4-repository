@@ -77,7 +77,8 @@ public class CommunicationBoardService {
                     String content = rs.getString("content");
                     String userId = rs.getString("userId");
                     int id = rs.getInt("id");
-                    findOneCommunicationBoardDto = new FindOneCommunicationBoardDto(findCommunicationBoardId, title, content, userId, id);
+                    int categoryId = rs.getInt("category_id");
+                    findOneCommunicationBoardDto = new FindOneCommunicationBoardDto(findCommunicationBoardId, title, content, userId, id, categoryId);
                 }
             }
         }catch (SQLException e){
@@ -109,7 +110,8 @@ public class CommunicationBoardService {
                     String content = rs.getString("content");
                     String userId = rs.getString("userId");
                     int id = rs.getInt("id");
-                    findOneCommunicationBoardDto = new FindOneCommunicationBoardDto(findCommunicationBoardId, title, content, userId, id);
+                    int categoryId = rs.getInt("category_id");
+                    findOneCommunicationBoardDto = new FindOneCommunicationBoardDto(findCommunicationBoardId, title, content, userId, id, categoryId);
                 }
             }
             try(ResultSet rs = pstmtComment.executeQuery()){
@@ -208,8 +210,6 @@ public class CommunicationBoardService {
                    rsS.getInt("communicationboard_id"), rsS.getString("title"), rsS.getString("userId")
                 ));
             }
-            searchCommunicationBoardDtoList
-                .forEach(list -> System.out.println(list.title()));
             resultCommunicationBoard = new PagenationCommunicationBoardDto(totalPage,searchCommunicationBoardDtoList);
         }catch (SQLException e){
             success = false;

@@ -161,5 +161,9 @@ public class BoardDTO {
 		this.localName = localName;
 		this.jobName = jobName;
 	}
-	
+
+
+	public BoardDTO (String companyName){
+		this.companyName = companyName;
+	}
 }

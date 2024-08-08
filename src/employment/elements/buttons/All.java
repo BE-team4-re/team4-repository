@@ -1,8 +1,8 @@
 package src.employment.elements.buttons;
 
-public class PrevPage extends Button {
+public class All extends Button {
     @Override
     public void printButton() {
-        System.out.print("이전 페이지\t");
+        System.out.print("전체 공고 조회\t");
     }
 }

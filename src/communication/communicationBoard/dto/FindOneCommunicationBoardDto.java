@@ -9,6 +9,7 @@ public record FindOneCommunicationBoardDto(
     String title,
     String content,
     String userId,
-    int id
+    int id,
+    int categoryId
 ) {
 }

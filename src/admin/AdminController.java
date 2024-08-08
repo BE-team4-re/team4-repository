@@ -5,7 +5,6 @@ import src.admin.employment.EmploymentController;
 import src.admin.user.UserController;
 
 import java.util.Scanner;
-import src.user.MainController;
 import src.user.UserMain;
 
 public class AdminController {
@@ -43,14 +42,15 @@ public class AdminController {
                     break;
             }
         }
-
     }
 
     public void printAdminCategory(){
-        System.out.println("---------------------------------------------------------------");
-        System.out.println("---------------------------관리자페이지---------------------------");
-        System.out.println("1.회원관리(삭제)  2. 기업관리  3.카테고리관리  4.로그아웃  5.종료");
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("\n \n \n");
+        System.out.println("+=============================================================================+");
+        System.out.println("                                   관리자 페이지                               ");
+        System.out.println("+=============================================================================+");
+        System.out.println("|  1. 회원 관리 (삭제)  |  2. 기업 관리  |  3. 카테고리 관리  |  4. 로그아웃  |  5. 종료  |");
+        System.out.println("+=============================================================================+");
         System.out.print("이동할 번호를 눌러주세요: ");
     }
 }

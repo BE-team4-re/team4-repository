@@ -2,6 +2,7 @@ package src.admin.employment;
 
 import src.database.Database;
 import src.employment.board.BoardDTO;
+import src.user.UserDTO;
 
 
 import java.sql.Connection;
@@ -13,6 +14,30 @@ import java.util.List;
 
 public class EmploymentService {
     private final Database db = new Database();
+
+    public List<BoardDTO> searchEmplist() {
+        List<BoardDTO> boardDTOlist = new ArrayList<>();
+        try (
+                Connection connection = db.connect();
+                PreparedStatement ps = connection.prepareStatement(
+                        "SELECT DISTINCT company_name FROM employment_board;"
+                );
+        ) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BoardDTO boardDTO = new BoardDTO(
+                        rs.getString("company_name")
+                );
+                boardDTOlist.add(boardDTO);
+            }
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return boardDTOlist;
+    }
+
 
     //채용공고 추가
     public int insertEmpBoard(String companyName, String title, String jobtype, String career, String hiringProcess, String qualifications, String preferred, int location, int empNo){
